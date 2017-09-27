@@ -1,0 +1,51 @@
+<!-- 产品总览 -->
+<div class="mgTop20 mgBottom10 bkColor contentShadow pos-re">
+    <div class="forStar borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 330px;overflow: inherit;">
+                <label>产品名称：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="conf.productName" ng-change="getFile()"
+                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
+                        <option value=""></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>产品名称</th>
+                    <th>初始起算日期</th>
+                    <th>产品设立日</th>
+                    <th>法定到期日</th>
+                    <th>规模(亿元)</th>
+                    <th>已回收金额</th>
+                    <th>已存续时间(日)</th>
+                    <th>产品状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>
+                        <a class="button button-blue operationButton">资产统计</a>
+                        <a class="button button-yellow operationButton">结束产品</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>

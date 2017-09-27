@@ -1,0 +1,124 @@
+<div class="wrap propertyPosition">
+    当前位置：<a href="#/projectManage">项目</a> > <a href="#/projectManage">项目管理</a> > <a href="javascript:void(0);">项目详情</a>
+</div>
+<div class="wrap mgBottom10 bkColor contentShadow">
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{true:'active',false:''}[isNow == 1]">
+            <a href="javaScript:void(0);" ng-click="getActive(1)">项目信息</a>
+        </li>
+    </ul>
+    <div class="forStar ass-Content-bor clearFix">
+        <ul class="fl mm-c clearFix" style="width: 36%">
+            <li class="form-group">
+                <label class="addStar">项目类型：</label>
+                <input class="label4-width" ng-model="project.init_date" bs-datepicker validator="[requiredSubmit]" validator-group="group_name" readonly>
+            </li>
+            <li class="form-group">
+                <label class="addStar">项目名称：</label>
+                <input class="label4-width" ng-model="project.project_name" validator="[requiredSubmit]" validator-group="group_name">
+            </li>
+            <li class="form-group">
+                <label class="addStar">初始起算日：</label>
+                <input class="label6-width" ng-model="project.expire_time" bs-datepicker validator="[requiredSubmit]" validator-group="group_name" readonly>
+            </li>
+            <li class="form-group">
+                <label class="addStar">产品设立日：</label>
+                <input class="label6-width" ng-model="project.expire_time" bs-datepicker validator="[requiredSubmit]" validator-group="group_name" readonly>
+            </li>
+            <li class="form-group">
+                <label class="addStar">发起机构：</label>
+                <input class="label6-width"  ng-model="project.coupon_payments" >
+            </li>
+            <li class="form-group">
+                <label class="addStar">资产服务机构：</label>
+                <input class="label6-width"  ng-model="project.coupon_payments" >
+            </li>
+        </ul>
+        <ul class="fl clearFix" style="width: 36%">
+            <li class="form-group">
+                <label class="addStar">项目规模(亿元)：</label>
+                <input class="label7-width"  ng-model="project.init_amount" validator="[requiredSubmit]" validator-group="group_name" onkeyup="this.value=this.value.match(/^(0|[1-9]\d{0,17})(\.\d{0,12})?$/g)">
+            </li>
+            <li class="form-group">
+                <label class="addStar">法定到期日：</label>
+                <input class="label7-width" ng-model="project.expire_time" bs-datepicker validator="[requiredSubmit]" validator-group="group_name" readonly>
+            </li>
+            <li class="form-group">
+                <label class="addStar">SPV：</label>
+                <input class="label7-width"  ng-model="project.init_amount" validator="[requiredSubmit]" validator-group="group_name" onkeyup="this.value=this.value.match(/^(0|[1-9]\d{0,17})(\.\d{0,12})?$/g)">
+            </li>
+            <li class="form-group">
+                <label class="addStar">交易场所：</label>
+                <input class="label7-width"  ng-model="project.init_amount" validator="[requiredSubmit]" validator-group="group_name" onkeyup="this.value=this.value.match(/^(0|[1-9]\d{0,17})(\.\d{0,12})?$/g)">
+            </li>
+        </ul>
+    </div>
+    <a class="button button-blue" style="margin: 2% 0 0 45%;">确定修改</a>
+</div>
+<div class="wrap bkColor contentShadow mgTop20">
+    <div class="borderB mgBottom20 clearFix">
+        <h3 class="displayIn mgTop20">项目通讯录</h3>
+        <a class="button button-blue fr mgBottom10" ng-click="addOneMsg()">增加一行</a>
+    </div>
+    <div class="commonTable">
+        <table>
+            <thead>
+            <tr class="custom">
+                <th>机构类型</th>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>手机号码</th>
+                <th>用户操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="formmater" ng-if="isShowPlan">
+                <td>
+                    <input class="wOver textC" ng-model="One.pname">
+                </td>
+                <td>
+                    <input class="wOver textC" ng-model="One.pname">
+                </td>
+                <td>
+                    <input class="wOver textC" ng-model="One.email">
+                </td>
+                <td>
+                    <input class="wOver textC" ng-model="One.telephone">
+                </td>
+                <td class="textC">
+                    <a class="button button-lightBlue operationButton" ng-click="savePlan()">保存</a>
+                    <a class="button button-yellow operationButton" ng-click="closeDoor()">关闭</a>
+                </td>
+            </tr>
+            <tr class="formmater" ng-repeat="item in myArr">
+                <td ng-if="conf.showPlan[$index]==false">{{item.pname}}</td>
+                <td ng-if="conf.showPlan[$index]==true"><input class="wOver textC" ng-model="conf.pname[$index]"></td>
+                <td ng-if="conf.showPlan[$index]==false">{{item.telephone}}</td>
+                <td ng-if="conf.showPlan[$index]==true"><input class="wOver textC" ng-model="conf.telephone[$index]"></td>
+                <td ng-if="conf.showPlan[$index]==false">{{item.company}}</td>
+                <td ng-if="conf.showPlan[$index]==true"><input class="wOver textC" ng-model="conf.company[$index]"></td>
+                <td ng-if="conf.showPlan[$index]==false">{{item.email}}</td>
+                <td ng-if="conf.showPlan[$index]==true"><input class="wOver textC" ng-model="conf.email[$index]"></td>
+                <td ng-if="conf.showPlan[$index]==false">
+                    <a class="button button-green operationButton" ng-click="modifyPlan($index)">修改</a>
+                    <a class="button button-yellow operationButton" ng-click="deletePlan($index)">删除</a>
+                </td>
+                <td ng-if="conf.showPlan[$index]==true">
+                    <a class="button button-lightBlue operationButton" ng-click="modifyPlanSure($index)">保存</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="wrap bkColor contentShadow mgTop20">
+    <div class="borderB mgBottom20 clearFix">
+        <h3 class="displayIn mgTop20 mgBottom10">项目初始资产数据</h3>
+    </div>
+    <div>
+        <span>初始资产数据：</span>
+        <input type="file" class="displayIn">
+        <a class="button button-lightBlue operationButton">上传</a>
+        <a href="javascript:;" class="ml5">下载数据模板</a>
+    </div>
+</div>

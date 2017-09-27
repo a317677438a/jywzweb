@@ -1,0 +1,48 @@
+<!-- 工作台 -->
+<div class="wrap mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 330px;overflow: inherit;">
+                <label>项目名称：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="conf.productName" ng-change="getFile()"
+                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
+                        <option value=""></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+        <a class="button button-blue">设置</a>
+    </div>
+    <div class="container mgTop20 clearFix">
+        <div class="clearFix" style="margin: 10% 0 2% 32%;">
+            <div class="fl">
+                <div class="fl" style="width: 20px;height: 20px;background-color: blue;"></div>
+                <span class="margin10">待处理</span>
+            </div>
+            <div class="fl">
+                <div class="fl" style="width: 20px;height: 20px;background-color: red;"></div>
+                <span class="margin10">失败</span>
+            </div>
+            <div class="fl">
+                <div class="fl" style="width: 20px;height: 20px;background-color: gray;"></div>
+                <span class="margin10">完成</span>
+            </div>
+        </div>
+        <div class="content" style="width: 100%;">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box">
+                        <div class="box-head">
+                            <h3>日历提醒</h3>
+                        </div>
+                        <div class="box-content box-nomargin">
+                            <div class="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

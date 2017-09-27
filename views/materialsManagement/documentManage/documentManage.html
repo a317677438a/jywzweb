@@ -1,0 +1,81 @@
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 330px;overflow: inherit;">
+                <label>项目名称：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="conf.productName" ng-change="getFile()"
+                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
+                        <option value=""></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+        <a class="button button-blue" ng-click="forUpload()">上传</a>
+    </div>
+    <div>
+        <ul class="nav nav-tabs clearFix">
+            <li role="presentation" ng-class="{true:'active',false:''}[isNow == 1]">
+                <a href="javaScript:void(0);" ng-click="getActive(1)">项目文档</a>
+            </li>
+            <!--<li role="presentation" ng-class="{true:'active',false:''}[isNow == 2]">-->
+                <!--<a href="javaScript:void(0);" ng-click="getActive(2)">上传资产记录</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <div class="ass-Content-bor padding10 clearFix" ng-if="isNow == 1">
+        <div class="commonTable clearFix">
+            <table>
+                <thead>
+                <tr>
+                    <th>文件类别</th>
+                    <th>文件名</th>
+                    <th>发布日期</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>发行说明书</td>
+                    <td>发行说明书</td>
+                    <td>发行说明书</td>
+                    <td>
+                        <a class="button button-green operationButton" href="">下载</a>
+                        <a class="button button-yellow operationButton" href="">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ass-Content-bor padding10 clearFix" ng-if="isNow == 2">
+        <div class="commonTable clearFix">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>文件名</th>
+                        <th>上传入口</th>
+                        <th>上传状态</th>
+                        <th>上传日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>发行说明书</td>
+                        <td>发行说明书</td>
+                        <td>发行说明书</td>
+                        <td>发行说明书</td>
+                        <td>发行说明书</td>
+                        <td>
+                            <a class="button button-green operationButton" href="">下载</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="add-overlay" ng-include="'views/common/importFor.html'" ng-if="showLoad"></div>

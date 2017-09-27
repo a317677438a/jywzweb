@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../libs/angular.js"></script>
+</head>
+<body ng-controller="aController">
+    <table>
+        <tr ng-click="find($event)" ng-repeat="data in form">
+            <td>{{data.aa}}
+                <div>fdgfdg</div>
+            </td>
+            <td>{{data.bb}}</td>
+        </tr>
+    </table>
+<script>
+    angular.module('myapp',[])
+            .controller('aController',function($scope){
+                $scope.form = [{aa:1,bb:1},{aa:2,bb:2}];
+                $scope.find = function(event){
+                    console.log(event.target);
+                    console.log(angular.element(event));
+                }
+            })
+</script>
+</body>
+</html>

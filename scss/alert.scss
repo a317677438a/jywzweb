@@ -1,0 +1,132 @@
+.alert .ngdialog-content,.alert-error .ngdialog-content{
+  position:absolute;
+  top:35%;
+  left:0;
+  right:0;
+  width:300px;
+  margin:0 auto;
+  border-radius:5px;
+  overflow:hidden;
+}
+.alert .ngdialog-content h2,.alert-error .ngdialog-content h2{
+  height:40px;
+  line-height:40px;
+  background:#44a1e3;
+  padding-left:10px;
+  text-align:left;
+  margin:0;
+  color:#fff;
+  font-size:16px;
+}
+.alert-error .ngdialog-content h2{
+  background-color: #ff5858;
+}
+.alert .ngdialog-content .msg,
+.alert-error .ngdialog-content .msg{
+  font-size:16px;
+  padding:30px 10px;
+  text-align:center;
+}
+
+.alert .ngdialog-close:before,
+.alert-error .ngdialog-close:before{
+  color:#fff !important;
+  cursor: pointer;
+}
+
+/*alertButton*/
+
+/** confirm **/
+.confirm .ngdialog-content,
+.alertButton .ngdialog-content,
+.alertButton-error .ngdialog-content,
+.fileImportAlert .ngdialog-content{
+  position:absolute;
+  top:35%;
+  left:0;
+  right:0;
+  width:300px;
+  margin:0 auto;
+  border-radius:5px;
+  overflow:hidden;
+}
+.confirm .ngdialog-content h2,
+.alertButton .ngdialog-content h2,
+.fileImportAlert .ngdialog-content h2{
+  height:40px;
+  line-height:40px;
+  background:#44a1e3;
+  padding-left:10px;
+  text-align:left;
+  margin:0;
+  color:#fff;
+  font-size:16px;
+}
+.alertButton-error .ngdialog-content h2{
+  height:40px;
+  line-height:40px;
+  background:#ff5858;
+  padding-left:10px;
+  text-align:left;
+  margin:0;
+  color:#fff;
+  font-size:16px;
+}
+.confirm .ngdialog-content .msg,
+.alertButton .ngdialog-content .msg,
+.alertButton-error .ngdialog-content .msg,
+.fileImportAlert .ngdialog-content .msg{
+  font-size:16px;
+  padding-top:15px;
+  text-align:center;
+}
+.fileImportAlert .ngdialog-content .msg{
+  line-height:28px;
+  padding:15px;
+}
+.confirm .ngdialog-content .button-p,
+.alertButton .ngdialog-content .button-p,
+.alertButton-error .ngdialog-content .button-p
+{
+  margin:20px auto;
+  text-align:center;
+}
+.confirm .ngdialog-content .button-btn,
+.alertButton .ngdialog-content .button-btn
+{
+  display:inline-block;
+  border: 0px none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  font-family:"microsoft yahei";
+  width:80px;
+  height:35px;
+  text-align:center;
+  color:#fff;
+  background:none;
+  border-radius:5px;
+  background-color:#44a1e3;
+}
+.alertButton-error .ngdialog-content .button-btn{
+  display:inline-block;
+  border: 0px none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  font-family:"microsoft yahei";
+  width:80px;
+  height:35px;
+  text-align:center;
+  color:#fff;
+  background:none;
+  border-radius:5px;
+  background-color:#ff5858;
+}
+.confirm .ngdialog-content .button-btn:first-child{
+  margin-right:50px;
+}
+.fileImportAlert .ngdialog-close:before{
+  color:#fff !important;
+  cursor: pointer;
+}

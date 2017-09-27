@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="securityManageLogin">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="securityManager">
+
+    <link rel="icon" type="image/png" href="../img/favicon/favicon-32x32.png" sizes="32x32">
+
+    <link rel="shortcut icon" href="../img/favicon/favicon.ico">
+
+    <title>资产证券化管理平台-登录</title>
+    <link rel="shortcut icon" href="../img/logo3_ico.ico"/>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link href="../css/common.css" rel="stylesheet"/>
+    <link href="../scss/login.css" rel="stylesheet">
+</head>
+<body ng-controller="loginController" class="login-page"
+      cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+<div class="page-bg">
+    <img class="bg-img" src="../img/bg.png"/>
+
+    <div class="bg-bottom">
+        <div class="bottom-box">
+            <img class="ice ice-01" src="../img/ice-01.png"/>
+            <img class="ice ice-02" src="../img/ice-02.png"/>
+            <img class="ice ice-03" src="../img/ice-03.png"/>
+        </div>
+    </div>
+</div>
+<div class="login-table">
+    <div class="login-center">
+        <div class="login-banner">
+            <img class="plane" src="../img/plane.png"/>
+        </div>
+        <div class="login-form">
+            <form>
+                <div class="errInfo" ng-bind="conf.errInfo"></div>
+                <div class="input-group">
+                    <label for="username" class="login-label iconfont icon-yonhuming"></label>
+                    <input type="text" id="username" placeholder="用户名" ng-model="loginname" ng-focus="conf.errInfo=''"
+                           required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="login-label iconfont icon-mima"></label>
+                    <input class="" type="password" id="password" placeholder="密码" ng-model="passwd" maxlength="16"
+                           ng-focus="conf.errInfo=''" required>
+                </div>
+                <div class="code-group">
+                    <input class="login-code" id="loginCode" placeholder="请输入验证码" maxlength="4"
+                           ng-focus="conf.errCode=''" ng-keyup="checkLogin($event)" required>
+                    <span ng-click="createCode()"></span>
+                    <input type="text" class="code-img" id="checkCode" ng-click="createCode()" readonly="readonly"/>
+                    <a href="" class="change-img" ng-click="createCode()">换一张</a>
+                </div>
+                <div class="errCode" ng-bind="conf.errCode"></div>
+                <div class="button-group">
+                    <a href="javascript:;" class="login-btn" ng-click="doLogin()">登录</a>
+                </div>
+                <div class="forget-pwd">
+                    <!-- <a href="" ng-click="show()">忘记密码？</a>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script charset="utf-8" src="../libs/jquery.min.js"></script>
+<script charset="utf-8" src="../libs/angular.min.js"></script>
+<script charset="utf-8" src="../libs/angular-ui-router.js"></script>
+<script charset="utf-8" src="../js/app.constants.js"></script>
+<script type="text/javascript">
+    var app = angular.module('securityManageLogin', ['app.constants', 'ui.router'])
+    app.service('loginSerive', ['$http', 'API_ENDPOINT', 'WITH_CREDENTIALS', function ($http, API_ENDPOINT, WITH_CREDENTIALS) {
+        return {
+            login: function (data) {
+                return $http.post(API_ENDPOINT.url + 'abslogin.json', data, WITH_CREDENTIALS);
+            }
+        }
+    }])
+    app.controller('loginController', ['$scope', 'loginSerive', '$rootScope', function ($scope, loginSerive, $rootScope) {
+
+        //验证码
+        var code; //在全局 定义验证码
+        var checkCode = document.getElementById("checkCode");
+
+        function createCode() {
+            code = new Array();
+            var codeLength = 4;//验证码的长度
+            checkCode.value = "";
+
+            var selectChar = new Array(2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+
+            for (var i = 0; i < codeLength; i++) {
+                var charIndex = Math.floor(Math.random() * 32);
+                code += selectChar[charIndex];
+            }
+            if (code.length != codeLength) {
+                createCode();
+            }
+            checkCode.value = code;
+        }
+
+        createCode();
+        $scope.createCode = function () {
+            createCode();
+        }
+
+
+        //点击登录
+        $scope.conf = {
+            errCode: '',
+            errInfo: ''
+        }
+        $scope.doLogin = function () {
+            $scope.login();
+        }
+        $scope.checkLogin = function ($event) {
+            if ($event.keyCode == 13) {
+                $scope.login();
+            }
+        }
+        $scope.login = function () {
+            var userInfo = {
+                loginname: $scope.loginname,
+                passwd: $scope.passwd
+            }
+            //console.log(userInfo)
+            var loginCode = document.getElementById("loginCode").value.toUpperCase();
+            if (userInfo.loginname == undefined || userInfo.loginname == '') {
+                $scope.conf.errInfo = "用户名不能为空";
+                return false;
+            }
+            if (userInfo.passwd == undefined || userInfo.passwd == '') {
+                $scope.conf.errInfo = "密码不能为空";
+                return false;
+            }
+            if (loginCode.length <= 0) {
+                $scope.conf.errCode = "验证码不能为空！";
+                return false;false
+            } else if (loginCode != code) {
+                $scope.conf.errCode = "验证码错误！";
+                createCode();
+                return false;
+            }
+            loginSerive.login(userInfo).success(function (data) {
+                if (data.success == "true") {
+                    sessionStorage.setItem("loginname", $scope.loginname);
+
+                    window.location.href = '../index.html'
+
+
+                } else if (data.success == "false") {
+                    alert(data.returnmsg);
+                }
+            }).error(function () {
+                //alert(data.returnmsg);
+            })
+        }
+    }])
+
+</script>
+</body>
+</html>

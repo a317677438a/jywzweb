@@ -1,0 +1,30 @@
+<!-- 资产导入 -->
+<div class="mgTop20 mgBottom10 bkColor contentShadow clearFix">
+    <div class="forStar borderB ">
+        <ul class="clearFix">
+            <li style="width: 330px;overflow: inherit;">
+                <label>产品名称：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="conf.productName" ng-change="getFile()"
+                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
+                        <option value=""></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ul class="fileU">
+        <li>
+            <label>选择文件：</label>
+            <input id="file" type="file" uploader="uploader" nv-file-select="" class="reset-file-import">
+            <a class="text-info">下载模板</a>
+        </li>
+        <li>
+            <a class="button button-blue" ng-click="importAsset()">导入</a>
+        </li>
+    </ul>
+    <div class="padding10">
+        <p class="ft14 text-danger">提示：多次上传，提取日相同时，以最新上传为准</p>
+    </div>
+</div>

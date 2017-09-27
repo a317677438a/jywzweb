@@ -1,0 +1,52 @@
+<div class="uploadFiles fileImportContent">
+    <h3 class="fH">上传项目文档</h3>
+    <span style="margin-left: 16px">附件：</span>
+    <input class="reset-file-import" id="file" type="file" nv-file-select="" uploader="uploader" ng-click="clearItems()">
+    <div class="forStar clearFix">
+        <ul class="clearFix">
+            <li>
+                <label>文件类别：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="conf.productName" ng-change="getFile()"
+                        ng-options="o.key as o.value for o in productName" style="width: 250px;">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li>
+                <label>发布日期：</label>
+                <input ng-model="date" bs-datepicker>
+            </li>
+        </ul>
+    </div>
+    <button class="button button-blue" ng-click="UP()" style="margin: 3% 0 0 38%;">确定导入</button>
+        <!--<button ng-show="showOnGoing==true" class="button button-gray btn btn-success btn-s unable-click">-->
+            <!--<span class="button-text">导入中</span>-->
+            <!--&lt;!&ndash;<span class="progress" ng-style="{ 'width': uploader.queue[0].progress + '%'}"style="padding-top: 12px;transition: width 2s ease;background-color: #428bca"></span>&ndash;&gt;-->
+        <!--</button>-->
+    <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeFileForm()"></div>
+</div>
+<!--<div class="forStar">-->
+    <!--<h2>上传项目文档</h2>-->
+    <!--<ul class="clearFix">-->
+        <!--<li>-->
+            <!--<label>附件：</label>-->
+            <!--<input class="reset-file-import" id="file" type="file" nv-file-select="" uploader="uploader" ng-click="clearItems()">-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<label>文件类别：</label>-->
+            <!--<div class="styled-select label4-width">-->
+                <!--<select ng-model="conf.productName" ng-change="getFile()"-->
+                        <!--ng-options="o.key as o.value for o in productName" style="width: 250px;">-->
+                    <!--<option value=""></option>-->
+                <!--</select>-->
+                <!--<i class="arrow"></i>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<label>发布日期：</label>-->
+            <!--<input ng-model="date" bs-datepicker>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<a class="button button-blue">确定</a>-->
+<!--</div>-->

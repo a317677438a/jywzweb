@@ -1,0 +1,32 @@
+<!--分页—— 当列表数小于设置的每页列表数量时，隐藏 -->
+<div class="pagination" >
+    <pagination total-items="totalItems" ng-model="page.pagenum" max-size="5" items-per-page="pagesize"
+                    class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"
+                    previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页">
+    </pagination>
+    <div class="form-group">
+        <label>跳转到</label>
+        <input type="text" class="form-control" ng-model="page.pagenum" ng-keyup="checkPageNum(page.pagenum,numPages)">
+    </div>
+    <button type="submit" class="btn btn-default" id="nub" ng-click="spageselect(page.pagenum)">前往</button>
+    <!--<span style="padding-top: 26px;display: block;padding-left: 25px;float: left;">共{{totalItems}}条记录</span>-->
+</div>
+<style>
+    .form-group{
+        width: 100px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 17px 0 16px 15px;
+    }
+    .form-group input{
+        min-width: 60px;
+        width: 60px;
+        background: none;
+        border: 1px solid #ddd;
+        display: inline-block;
+        text-align: center;
+    }
+    #nub{
+        border: 1px solid #ddd;
+    }
+</style>

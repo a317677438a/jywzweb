@@ -1,0 +1,6 @@
+<!-- 工作台-->
+<div class="subNav wrap topNav">
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">工作台</a>
+</div>
+<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/workbench/work/work.html'" ng-controller="workController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+
