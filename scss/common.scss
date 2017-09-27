@@ -27,7 +27,7 @@ img,fieldset{
 input,textarea,img,select,label{
   vertical-align: middle;
 }
-select[disabled]{
+select[disabled],input[readonly]{
   cursor: not-allowed;
 }
 input::-webkit-outer-spin-button,

@@ -1,8 +1,8 @@
-<!-- 资产管理-->
+<!-- 物资管理-->
 <div class="subNav wrap topNav">
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" href="#/materialsManagement" ng-click="set(1)">物资类型</a>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" href="#/materialType" ng-click="set(1)">物资类型</a>
     <div class="dashed"></div>
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" href="#/materialsManagement" ng-click="set(2)">物资维护</a>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" href="#/materielMaintenance" ng-click="set(2)">物资维护</a>
 </div>
-<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/materialsManagement/project/project.html'" ng-controller="projectController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/materialsManagement/documentManage/documentManage.html'" ng-controller="documentManageController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/materialsManagement/materialType/materialType.html'" ng-controller="materialTypeController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/materialsManagement/materielMaintenance/materielMaintenance.html'" ng-controller="materielMaintenanceController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>

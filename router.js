@@ -37,17 +37,17 @@ define(['app'],function(app){
                             }]
                     }
                 })
-                .state('propertyManage', {
-                    url: '/propertyManage',
-                    templateUrl: 'views/propertyManage/propertyManage.html',//资产管理
-                    controller: 'propertyManageController',
+                .state('storageManage', {
+                    url: '/storageManage',
+                    templateUrl: 'views/storageManage/storageManage.html',//入库管理
+                    controller: 'storageManageController',
                     resolve: {
                         loadCtrl: ['$q',
                             function ($q) {
                                 var deferred = $q.defer();
                                 //异步加载controller／directive/filter/service
                                 require([
-                                    'module/propertyManage/controller/propertyManageController.js'
+                                    'module/storageManage/controller/storageManageController.js'
                                 ], function () {
                                     deferred.resolve();
                                 });

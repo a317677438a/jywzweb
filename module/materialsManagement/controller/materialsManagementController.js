@@ -1,7 +1,7 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','projectController','documentManageController'],function(app){
+define(['app','materialTypeController','materielMaintenanceController'],function(app){
     app.register.controller('materialsManagementController',
     [
         '$scope',

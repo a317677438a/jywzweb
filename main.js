@@ -23,6 +23,7 @@
 
             "router": 'router',
             "appConstants" : 'js/app.constants',
+            "commonQuery" : 'js/service/commonQuery',
             "menuTabs": 'js/directives/menuTabs',
             "filter": 'js/filter',
             "fullcalendar" : 'libs/fullcalendar.min', //全日历
@@ -33,14 +34,11 @@
 
             //项目管理
             "materialsManagement" : 'module/materialsManagement/materialsManagementApp',
-            "projectController": 'module/materialsManagement/controller/project/projectController',
-            "documentManageController": 'module/materialsManagement/controller/documentManage/documentManageController',
+            "materialTypeController": 'module/materialsManagement/controller/materialType/materialTypeController',
+            "materielMaintenanceController": 'module/materialsManagement/controller/materielMaintenance/materielMaintenanceController',
             //资产池管理
-            "dataImportController": 'module/propertyManage/controller/dataImport/dataImportController',
-            "assetsStatisticsController": 'module/propertyManage/controller/assetsStatistics/assetsStatisticsController',
-            "productsController": 'module/propertyManage/controller/products/productsController',
-            "serviceReportController": 'module/propertyManage/controller/serviceReport/serviceReportController',
-            "trialReportController": 'module/propertyManage/controller/trialReport/trialReportController',
+            "procurementStorageController": 'module/storageManage/controller/procurementStorage/procurementStorageController',
+            "storageQueryController": 'module/storageManage/controller/storageQuery/storageQueryController',
             //工作台
             "workController": 'module/workbench/controller/work/workController',
             //业务参数
@@ -100,7 +98,7 @@
     };
     require.config(config);
 
-    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','filter','jquery_ui','fullcalendar','materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
+    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','filter','jquery_ui','fullcalendar','materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
         angular.bootstrap(document,['securityManage']);
     });
 

@@ -9,7 +9,7 @@ angular.module('app.constants',[])
         //url:'http://192.168.4.115:8086/workbench_bs'   //huangyao linux
         //url:'http://192.168.6.19:8080/workbench_bs/' //panli
         //url:'http://localhost:8080/workbench_bs/'   //huangyao
-        url:'http://192.168.6.244:8089/workbench_bs/' //服务器
+        url:'http://localhost:8081/jywz/' //本地
         //url:'http://192.168.6.15:8080/workbench_bs/'    //fandx
         //url:'http://192.168.6.22:8080/workbench_bs/'   //yangfei
         //url:'http://192.168.6.20:8080/workbench_bs/'   //chengzh

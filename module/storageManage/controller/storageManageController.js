@@ -1,8 +1,8 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','dataImportController','assetsStatisticsController','productsController','serviceReportController','trialReportController'],function(app){
-    app.register.controller('propertyManageController',
+define(['app','procurementStorageController','storageQueryController'],function(app){
+    app.register.controller('storageManageController',
     [
         '$scope',
         function($scope){

@@ -1,0 +1,60 @@
+<!-- 物资类型 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li>
+                <label>物资类型编码：</label>
+                <input class="projectName label6-width" placeholder="物资类型编码">
+            </li>
+            <li>
+                <label>物资类型名称：</label>
+                <input class="projectName label6-width" placeholder="物资类型名称">
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue">查询</a>
+            <a class="button button-blue" ng-click="addMeterialType()">新增物资类型</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>物资类型编码</th>
+                    <th>物资类型名称</th>
+                    <th style="width: 315px">用户操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.code}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <a class="button button-lightBlue operationButton" ng-click="modify($index,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-click="delete($index)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-if="showAdd">
+    <div class="uploadFiles fileImportContent">
+        <div class="forStar">
+            <ul class="mgTop20 clearFix">
+                <li>
+                    <label>物资类型编码</label>
+                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资类型编码">
+                </li>
+                <li>
+                    <label>物资类型名称</label>
+                    <input class="projectName label6-width" ng-model="conf.name" placeholder="物资类型名称">
+                </li>
+            </ul>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSure()" ng-if="nowAdd==true">新增</a>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="modifySure()" ng-if="nowAdd==false">修改</a>
+        </div>
+        <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeFileForm()"></div>
+    </div>
+</div>

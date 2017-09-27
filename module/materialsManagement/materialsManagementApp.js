@@ -7,7 +7,7 @@ define(['angular'],function(){
             $stateProvider
                 .state('addProject',{
                     url : '/addProject',
-                    templateUrl : 'views/materialsManagement/project/addProject.html',  //新增项目
+                    templateUrl : 'views/materialsManagement/materialType/addProject.html',  //新增项目
                     controller : 'addProjectController',
                     resolve : {
                         loadCtrl : ['$q',
@@ -15,7 +15,7 @@ define(['angular'],function(){
                                 var deferred = $q.defer();
                                 //异步加载controller/directive/filter/service
                                 require([
-                                    'module/materialsManagement/controller/project/addProjectController.js'
+                                    'module/materialsManagement/controller/materialType/addProjectController.js'
                                 ],function(){deferred.resolve();});
                                 return deferred.promise;
                             }
@@ -24,7 +24,7 @@ define(['angular'],function(){
                 })
                 .state('projectDetail',{
                     url : '/projectDetail',
-                    templateUrl : 'views/materialsManagement/project/projectDetail.html',  //项目详情
+                    templateUrl : 'views/materialsManagement/materialType/projectDetail.html',  //项目详情
                     controller : 'projectDetailController',
                     resolve : {
                         loadCtrl : ['$q',
@@ -32,7 +32,7 @@ define(['angular'],function(){
                                 var deferred = $q.defer();
                                 //异步加载controller/directive/filter/service
                                 require([
-                                    'module/materialsManagement/controller/project/projectDetailController.js'
+                                    'module/materialsManagement/controller/materialType/projectDetailController.js'
                                 ],function(){deferred.resolve();});
                                 return deferred.promise;
                             }

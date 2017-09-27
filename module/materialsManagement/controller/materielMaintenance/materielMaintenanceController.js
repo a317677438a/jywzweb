@@ -3,7 +3,7 @@
  * Created by huangyao on 2017/5/16.
  */
 define(['app'],function(app){
-    app.register.controller('documentManageController',
+    app.register.controller('materielMaintenanceController',
     [
         '$scope',
         'ngDialog',
@@ -32,7 +32,7 @@ define(['app'],function(app){
                     url: API_ENDPOINT.url + 'business/externalDataImport.json',
                     withCredentials: true,
                     removeAfterUpload: true
-                    //formData: [{ts_project_info_id: $scope.dataImport.project_name}]
+                    //formData: [{ts_project_info_id: $scope.procurementStorage.project_name}]
                 }
             );
             $scope.forUpload = function(){

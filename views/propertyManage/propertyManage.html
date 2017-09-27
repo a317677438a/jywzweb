@@ -1,9 +1,0 @@
-<!-- 资产管理-->
-<div class="subNav wrap topNav">
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">物资类型</a>
-    <div class="dashed"></div>
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">物资维护</a>
-</div>
-<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/propertyManage/products/products.html'" ng-controller="productsController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/propertyManage/dataImport/dataImport.html'" ng-controller="dataImportController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-
