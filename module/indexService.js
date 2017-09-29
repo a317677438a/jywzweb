@@ -30,6 +30,22 @@ define(['app'],function(app){
                     //首页  查询系统提示--标记为已读
                     setRead : function(data){
                         return $http.post(API_ENDPOINT.url+'sysConfig/setRead.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增物资类型
+                    addType : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/addType.json',data,WITH_CREDENTIALS);
+                    },
+                    //查询物资类型
+                    getAllType : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getAllType.json',data,WITH_CREDENTIALS);
+                    },
+                    //获取物资类型编码最大值
+                    getMaterialType : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getMaterialType.json',data,WITH_CREDENTIALS);
+                    },
+                    //修改物资类型
+                    modifyType : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/modifyType.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

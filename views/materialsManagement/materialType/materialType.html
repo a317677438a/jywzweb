@@ -4,15 +4,15 @@
         <ul class="fl clearFix" style="width: 70%">
             <li>
                 <label>物资类型编码：</label>
-                <input class="projectName label6-width" placeholder="物资类型编码">
+                <input class="projectName label6-width" ng-model="conf.searchCode" placeholder="物资类型编码">
             </li>
             <li>
                 <label>物资类型名称：</label>
-                <input class="projectName label6-width" placeholder="物资类型名称">
+                <input class="projectName label6-width" ng-model="conf.searchName" placeholder="物资类型名称">
             </li>
         </ul>
         <div class="fl">
-            <a class="button button-blue">查询</a>
+            <a class="button button-blue" ng-click="search()">查询</a>
             <a class="button button-blue" ng-click="addMeterialType()">新增物资类型</a>
         </div>
     </div>
@@ -30,7 +30,7 @@
                     <td>{{item.code}}</td>
                     <td>{{item.name}}</td>
                     <td>
-                        <a class="button button-lightBlue operationButton" ng-click="modify($index,item)">修改</a>
+                        <a class="button button-lightBlue operationButton" ng-click="modify(item.id,item)">修改</a>
                         <a class="button button-yellow operationButton" ng-click="delete($index)">删除</a>
                     </td>
                 </tr>
@@ -45,7 +45,7 @@
             <ul class="mgTop20 clearFix">
                 <li>
                     <label>物资类型编码</label>
-                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资类型编码">
+                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资类型编码" disabled>
                 </li>
                 <li>
                     <label>物资类型名称</label>
