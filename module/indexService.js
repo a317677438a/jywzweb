@@ -46,6 +46,10 @@ define(['app'],function(app){
                     //修改物资类型
                     modifyType : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialsType/modifyType.json',data,WITH_CREDENTIALS);
+                    },
+                    //删除物资类型
+                    deleteType : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/deleteType.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

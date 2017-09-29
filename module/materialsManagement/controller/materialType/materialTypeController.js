@@ -178,19 +178,31 @@ define(['app'],function(app){
             };
             //确定删除
             $scope.BeSure = function(){
-                $scope.data.splice($scope.id,1);
-                ngDialog.open({
-                    template: 'views/common/alert.html',
-                    className: 'alert',
-                    showClose: true,
-                    scope: $scope,
-                    controller: ['$scope', function ($scope) {
-                        $scope.response = "删除物资类型成功！";
-                        setTimeout(function(){
-                            ngDialog.close();
-                        },2000)
-                    }]
-                })
+                $scope.promise = indexService.deleteType({id:$scope.id}).success(function(data){
+                    if(data.success=="true"){
+                        ngDialog.close();
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                $scope.getEmployeesPage();
+                            }]
+                        })
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
             };
             //取消删除
             $scope.BeCancel = function(){
