@@ -8,7 +8,8 @@ define(['app'],function(app){
         '$state',
         'ngDialog',
         'indexService',
-        function($scope,$state,ngDialog,indexService){
+        '$validator',
+        function($scope,$state,ngDialog,indexService,$validator){
 
             $scope.conf = {};
             $scope.data = [];
@@ -19,7 +20,7 @@ define(['app'],function(app){
             $scope.page.pagenum = 1;
             $scope.spageselect=function(page){
                 $scope.getEmployeesPage(page);
-            }
+            };
 
             //检测输入页数是否合法
             $scope.checkPageNum=function(pageNum,numPages){
@@ -36,7 +37,7 @@ define(['app'],function(app){
                         return false;
                     }
                 }
-            }
+            };
             $scope.pageChanged = function() {
                 $scope.getEmployeesPage();
             };
@@ -64,10 +65,11 @@ define(['app'],function(app){
                             }]
                         })
                     }
-                }).error(function(){
-                    window.location.href = 'views/common/error.html'
-                })
-            }
+                });
+                //    .error(function(){
+                //    window.location.href = 'views/common/error.html'
+                //})
+            };
             //默认查询页面数据
             $scope.getEmployeesPage();
             //查询
@@ -88,38 +90,40 @@ define(['app'],function(app){
             };
             //确定新增
             $scope.addSure = function(){
-                $scope.promise =indexService.addType({code:$scope.conf.code,name:$scope.conf.name}).success(function(data){
-                    if(data.success=="true"){
-                        $scope.showAdd = false;
-                        $scope.conf = {};
-                        $scope.getEmployeesPage();
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                                setTimeout(function(){
-                                    ngDialog.close();
-                                },2000)
-                            }]
-                        })
-                    }else{
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert-error',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                                setTimeout(function(){
-                                    ngDialog.close();
-                                },2000)
-                            }]
-                        })
-                    }
-                });
+                $validator.validate($scope,'group_name').success(function() {
+                    $scope.promise =indexService.addType({code:$scope.conf.code,name:$scope.conf.name}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.showAdd = false;
+                            $scope.conf = {};
+                            $scope.getEmployeesPage();
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    setTimeout(function(){
+                                        ngDialog.close();
+                                    },2000)
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    setTimeout(function(){
+                                        ngDialog.close();
+                                    },2000)
+                                }]
+                            })
+                        }
+                    });
+                })
             };
             //关闭新增
             $scope.closeFileForm = function(){
@@ -139,28 +143,30 @@ define(['app'],function(app){
                     id:$scope.id,
                     name:$scope.conf.name
                 };
-                $scope.promise = indexService.modifyType(type).success(function(data){
-                    if(data.success=="true"){
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                            }]
-                        })
-                    }else{
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert-error',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                            }]
-                        })
-                    }
+                $validator.validate($scope,'group_name').success(function() {
+                    $scope.promise = indexService.modifyType(type).success(function(data){
+                        if(data.success=="true"){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    })
                 })
             };
             //删除

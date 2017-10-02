@@ -2,81 +2,77 @@
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
         <ul class="fl clearFix" style="width: 70%">
-            <li style="width: 330px;overflow: inherit;">
-                <label>项目名称：</label>
-                <div class="styled-select label4-width">
-                    <select ng-model="conf.productName" ng-change="getFile()"
-                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
-                        <option value=""></option>
-                    </select>
-                    <i class="arrow"></i>
-                </div>
+            <li>
+                <label>物资编码：</label>
+                <input class="projectName label6-width" ng-model="conf.searchCode" placeholder="物资类型编码">
+            </li>
+            <li>
+                <label>物资名称：</label>
+                <input class="projectName label6-width" ng-model="conf.searchName" placeholder="物资类型名称">
             </li>
         </ul>
-        <a class="button button-blue" ng-click="forUpload()">上传</a>
+        <div class="fl">
+            <a class="button button-blue" ng-click="search()">查询</a>
+            <a class="button button-blue" ng-click="addMateriel()">新增物资</a>
+        </div>
     </div>
-    <div>
-        <ul class="nav nav-tabs clearFix">
-            <li role="presentation" ng-class="{true:'active',false:''}[isNow == 1]">
-                <a href="javaScript:void(0);" ng-click="getActive(1)">项目文档</a>
-            </li>
-            <!--<li role="presentation" ng-class="{true:'active',false:''}[isNow == 2]">-->
-                <!--<a href="javaScript:void(0);" ng-click="getActive(2)">上传资产记录</a>-->
-            <!--</li>-->
-        </ul>
-    </div>
-    <div class="ass-Content-bor padding10 clearFix" ng-if="isNow == 1">
-        <div class="commonTable clearFix">
-            <table>
-                <thead>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
                 <tr>
-                    <th>文件类别</th>
-                    <th>文件名</th>
-                    <th>发布日期</th>
+                    <th>物资编码</th>
+                    <th>物资名称</th>
+                    <th>物资类型</th>
+                    <th>规格型号</th>
+                    <th>供应商（厂家）</th>
                     <th>操作</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>发行说明书</td>
-                    <td>发行说明书</td>
-                    <td>发行说明书</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.code}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.codeName}}</td>
+                    <td>{{item.model}}</td>
+                    <td>{{item.supplier}}</td>
                     <td>
-                        <a class="button button-green operationButton" href="">下载</a>
-                        <a class="button button-yellow operationButton" href="">删除</a>
+                        <a class="button button-green operationButton" ng-click="modifyMateriel()">修改</a>
+                        <a class="button button-yellow operationButton" ng-click="deleteMateriel()">删除</a>
                     </td>
                 </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="ass-Content-bor padding10 clearFix" ng-if="isNow == 2">
-        <div class="commonTable clearFix">
-            <table>
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>文件名</th>
-                        <th>上传入口</th>
-                        <th>上传状态</th>
-                        <th>上传日期</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>发行说明书</td>
-                        <td>发行说明书</td>
-                        <td>发行说明书</td>
-                        <td>发行说明书</td>
-                        <td>发行说明书</td>
-                        <td>
-                            <a class="button button-green operationButton" href="">下载</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
     </div>
 </div>
-<div class="add-overlay" ng-include="'views/common/importFor.html'" ng-if="showLoad"></div>
+<div class="add-overlay" ng-if="showAdd">
+    <div class="uploadFiles fileImportContent">
+        <div class="forStar">
+            <ul class="mgTop20 clearFix">
+                <li>
+                    <label>物资编码</label>
+                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资编码" disabled>
+                </li>
+                <li>
+                    <label>物资名称</label>
+                    <input class="projectName label6-width" ng-model="conf.name" placeholder="物资名称">
+                </li>
+                <li>
+                    <label>物资类型</label>
+                    <input class="projectName label6-width" ng-model="conf.codeName" placeholder="物资类型">
+                </li>
+                <li>
+                    <label>规格型号</label>
+                    <input class="projectName label6-width" ng-model="conf.model" placeholder="规格型号">
+                </li>
+                <li>
+                    <label>供应商（厂家）</label>
+                    <input class="projectName label6-width" ng-model="conf.supplier" placeholder="供应商（厂家）">
+                </li>
+            </ul>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSure()" ng-if="nowAdd==true">新增</a>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="modifySure()" ng-if="nowAdd==false">修改</a>
+        </div>
+        <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeFileForm()"></div>
+    </div>
+</div>

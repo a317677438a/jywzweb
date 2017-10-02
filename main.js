@@ -15,7 +15,7 @@
             "pagination": 'libs/pagination',
 
             "ngDialog": 'libs/ngDialog',
-            "ngValidator": 'libs/angular-validator',
+            "ngValidator": 'libs/angular-validator', //必输项插件
             "ngStrap": 'libs/angular-strap',
             "ngLocal": 'libs/angular-locale_zh-cn',
             "ngBusy": 'libs/angular-busy',

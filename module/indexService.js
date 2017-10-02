@@ -50,6 +50,18 @@ define(['app'],function(app){
                     //删除物资类型
                     deleteType : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialsType/deleteType.json',data,WITH_CREDENTIALS);
+                    },
+                    //查询全部物资
+                    getAllMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getAllMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增物资时查询最大编码
+                    getMaterialNum : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getMaterialNum.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增物资
+                    addMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/addMaterial.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

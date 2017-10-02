@@ -7,54 +7,184 @@ define(['app'],function(app){
     [
         '$scope',
         'ngDialog',
-        'FileUploader',
-        'API_ENDPOINT',
-        function($scope,ngDialog,FileUploader,API_ENDPOINT){
-            //保证当前导航菜单高亮
-            var url=localStorage.getItem('url');
-            if(document.getElementById('menuList')){
-                var tagA=document.getElementById('menuList').getElementsByTagName('a');
-                for(var i in tagA){
-                    if(tagA.hasOwnProperty(i) && tagA[i].hash==url){
-                        tagA[i].className='on';
+        'indexService',
+        function($scope,ngDialog,indexService){
+
+            $scope.conf = {};
+            $scope.data = [];
+            $scope.message = 'Please Wait...';
+            // 初始化分页
+            $scope.page={};
+            $scope.pagesize = 10;
+            $scope.page.pagenum = 1;
+            $scope.spageselect=function(page){
+                $scope.getEmployeesPage(page);
+            };
+
+            //检测输入页数是否合法
+            $scope.checkPageNum=function(pageNum,numPages){
+                var temp=/^\d+(\.\d+)?$/;
+                if(pageNum){
+                    if(temp.test(pageNum)){
+                        $scope.page.pagenum=pageNum;
+                    }else{
+                        $scope.page.pagenum='';
+                        alert("请输入一个数字");
+                    }
+                    if(parseInt(pageNum)>numPages){
+                        $scope.page.pagenum=numPages;
+                        return false;
                     }
                 }
-            }
-            $scope.isNow = 1;
-            $scope.showLoad = false;
-            //切换tab页
-            $scope.getActive = function (id) {
-                $scope.isNow = id;
             };
-            //上传
-            var uploader = $scope.uploader = new FileUploader(  //直接导入
-                {
-                    url: API_ENDPOINT.url + 'business/externalDataImport.json',
-                    withCredentials: true,
-                    removeAfterUpload: true
-                    //formData: [{ts_project_info_id: $scope.procurementStorage.project_name}]
-                }
-            );
-            $scope.forUpload = function(){
-                $scope.showLoad = true;
-                //ngDialog.open({
-                //    template: 'views/common/importFor.html',
-                //    className: 'alert',
-                //    showClose: true,
-                //    scope: $scope,
-                //    controller: ['$scope', function ($scope) {
-                //        var uploader = $scope.uploader = new FileUploader({
-                //            url: API_ENDPOINT.url+'asset/uploadFile.json',
-                //            withCredentials : true,
-                //            removeAfterUpload: true,
-                //        });
-                //    }]
+            $scope.pageChanged = function() {
+                $scope.getEmployeesPage();
+            };
+            $scope.getEmployeesPage=function(){
+                var requestData = {};
+                requestData.exeid='JY0002EQ001';
+                requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
+                requestData.limit=$scope.pagesize;
+                requestData.code = $scope.conf.searchCode;
+                requestData.name = $scope.conf.searchName;
+
+                //项目信息列表查询
+                $scope.promise = indexService.getAllMaterial(requestData).success(function(data){
+                    if(data.success=="true"){
+                        $scope.data = data.returndata.rows;
+                        $scope.totalItems = data.returndata.results;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alertButton.html',
+                            className: 'alertButton-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+                //    .error(function(){
+                //    window.location.href = 'views/common/error.html'
                 //})
             };
-            //关闭
+            //默认查询页面数据
+            $scope.getEmployeesPage();
+            //查询
+            $scope.search = function(){
+                $scope.getEmployeesPage();
+            };
+            //点击新增
+            $scope.addMateriel = function(){
+                $scope.showAdd = true;
+                $scope.nowAdd = true;
+                $scope.promise =indexService.getMaterialNum().success(function(data){
+                    if(data.success=="true"){
+                        $scope.maxNum = data.returndata;
+                        if($scope.maxNum===0){
+                            $scope.conf.code = "WZ1";
+                        }else{
+                            $scope.conf.code = "WZ"+$scope.maxNum;
+                        }
+                    }
+                })
+            };
+            //确定新增
+            $scope.addSure = function(){
+                var addMaterial = {
+                    code : $scope.conf.code,
+                    name : $scope.conf.name,
+                    codeName : $scope.conf.codeName,
+                    model : $scope.conf.model,
+                    supplier : $scope.conf.supplier
+                };
+                $scope.promise =indexService.addMaterial(addMaterial).success(function(data){
+                    if(data.success=="true"){
+                        $scope.showAdd = false;
+                        $scope.conf = {};
+                        $scope.getEmployeesPage();
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                setTimeout(function(){
+                                    ngDialog.close();
+                                },2000)
+                            }]
+                        })
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                setTimeout(function(){
+                                    ngDialog.close();
+                                },2000)
+                            }]
+                        })
+                    }
+                });
+            };
+            //关闭新增
             $scope.closeFileForm = function(){
-                $scope.showLoad = false;
-            }
+                $scope.showAdd = false;
+            };
+            //点击修改
+            $scope.modifyMateriel = function(){
+                $scope.nowAdd = false;
+            };
+            //删除
+            $scope.deleteMateriel = function(id){
+                $scope.id = id;
+                ngDialog.open({
+                    template: 'views/common/confirm.html',
+                    className: 'confirm',
+                    showClose: true,
+                    scope: $scope,
+                    controller: ['$scope', function ($scope) {
+                        $scope.confirmMsg = "是否确定删除！";
+                    }]
+                })
+            };
+            //确定删除
+            $scope.BeSure = function(){
+                $scope.promise = indexService.deleteType({id:$scope.id}).success(function(data){
+                    if(data.success=="true"){
+                        ngDialog.close();
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                $scope.getEmployeesPage();
+                            }]
+                        })
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+            };
+            //取消删除
+            $scope.BeCancel = function(){
+                ngDialog.close();
+            };
         }
     ]);
 });
