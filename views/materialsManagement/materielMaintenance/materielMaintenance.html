@@ -32,7 +32,7 @@
                 <tr ng-repeat="item in data">
                     <td>{{item.code}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.codeName}}</td>
+                    <td>{{item.type_name}}</td>
                     <td>{{item.model}}</td>
                     <td>{{item.supplier}}</td>
                     <td>
@@ -45,29 +45,38 @@
         <div ng-include="'views/common/paging.html'"></div>
     </div>
 </div>
-<div class="add-overlay" ng-if="showAdd">
+<div class="add-overlay" ng-show="showAdd">
     <div class="uploadFiles fileImportContent">
         <div class="forStar">
             <ul class="mgTop20 clearFix">
-                <li>
-                    <label>物资编码</label>
-                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资编码" disabled>
+                <li class="form-group">
+                    <label class="addStar">物资编码</label>
+                    <input class="projectName label6-width" ng-model="conf.code" placeholder="物资编码"
+                           validator="[requiredSubmit]" validator-group="group_name" disabled>
                 </li>
-                <li>
-                    <label>物资名称</label>
-                    <input class="projectName label6-width" ng-model="conf.name" placeholder="物资名称">
+                <li class="form-group">
+                    <label class="addStar">物资名称</label>
+                    <input class="projectName label6-width" ng-model="conf.name" placeholder="物资名称"
+                           validator="[requiredSubmit]" validator-group="group_name">
                 </li>
-                <li>
-                    <label>物资类型</label>
-                    <input class="projectName label6-width" ng-model="conf.codeName" placeholder="物资类型">
+                <li class="form-group">
+                    <label class="addStar">物资类型</label>
+                    <div class="styled-select label6-width">
+                        <select ng-model="conf.codeName" ng-options="o.key as o.value for o in TypeAndName"
+                                validator="[requiredSubmit]" validator-group="group_name">
+                        </select>
+                        <i class="arrow"></i>
+                    </div>
                 </li>
-                <li>
-                    <label>规格型号</label>
-                    <input class="projectName label6-width" ng-model="conf.model" placeholder="规格型号">
+                <li class="form-group">
+                    <label class="addStar">规格型号</label>
+                    <input class="projectName label6-width" ng-model="conf.model" placeholder="规格型号"
+                           validator="[requiredSubmit]" validator-group="group_name">
                 </li>
-                <li>
-                    <label>供应商（厂家）</label>
-                    <input class="projectName label6-width" ng-model="conf.supplier" placeholder="供应商（厂家）">
+                <li class="form-group">
+                    <label class="addStar">供应商（厂家）</label>
+                    <input class="projectName label6-width" ng-model="conf.supplier" placeholder="供应商（厂家）"
+                           validator="[requiredSubmit]" validator-group="group_name">
                 </li>
             </ul>
             <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSure()" ng-if="nowAdd==true">新增</a>

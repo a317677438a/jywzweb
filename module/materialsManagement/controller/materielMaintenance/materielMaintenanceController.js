@@ -13,6 +13,12 @@ define(['app'],function(app){
             $scope.conf = {};
             $scope.data = [];
             $scope.message = 'Please Wait...';
+            //查询物资类型编号与物资类型名称
+            $scope.promise =indexService.getMaterialTypeAndName().success(function(data){
+                if(data.success=="true"){
+                    $scope.TypeAndName = data.returndata;
+                }
+            })
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
@@ -53,6 +59,13 @@ define(['app'],function(app){
                     if(data.success=="true"){
                         $scope.data = data.returndata.rows;
                         $scope.totalItems = data.returndata.results;
+                        for(var i=0;i<$scope.data.length;i++){
+                            for(var j=0;j<$scope.TypeAndName.length;j++){
+                                if($scope.data[i].jy_material_type_id == $scope.TypeAndName[j].key){
+                                    $scope.data[i].type_name = $scope.TypeAndName[j].value;
+                                }
+                            }
+                        }
                     }else{
                         ngDialog.open({
                             template: 'views/common/alertButton.html',
@@ -87,15 +100,28 @@ define(['app'],function(app){
                         }else{
                             $scope.conf.code = "WZ"+$scope.maxNum;
                         }
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                setTimeout(function(){
+                                    ngDialog.close();
+                                },2000)
+                            }]
+                        })
                     }
-                })
+                });
             };
             //确定新增
             $scope.addSure = function(){
                 var addMaterial = {
                     code : $scope.conf.code,
                     name : $scope.conf.name,
-                    codeName : $scope.conf.codeName,
+                    jy_material_type_id : $scope.conf.codeName,
                     model : $scope.conf.model,
                     supplier : $scope.conf.supplier
                 };

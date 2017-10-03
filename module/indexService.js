@@ -62,6 +62,10 @@ define(['app'],function(app){
                     //新增物资
                     addMaterial : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialsType/addMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //查询物资类型编号与物资类型名称
+                    getMaterialTypeAndName : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getMaterialTypeAndName.json',data,WITH_CREDENTIALS);
                     }
                 };
             }
