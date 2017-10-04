@@ -8,7 +8,8 @@ define(['app'],function(app){
         '$scope',
         'ngDialog',
         'indexService',
-        function($scope,ngDialog,indexService){
+        '$validator',
+        function($scope,ngDialog,indexService,$validator){
 
             $scope.conf = {};
             $scope.data = [];
@@ -121,7 +122,7 @@ define(['app'],function(app){
                 var addMaterial = {
                     code : $scope.conf.code,
                     name : $scope.conf.name,
-                    jy_material_type_id : $scope.conf.codeName,
+                    jy_material_type_id : $scope.conf.jy_material_type_id,
                     model : $scope.conf.model,
                     supplier : $scope.conf.supplier
                 };
@@ -163,8 +164,48 @@ define(['app'],function(app){
                 $scope.showAdd = false;
             };
             //点击修改
-            $scope.modifyMateriel = function(){
+            $scope.modifyMateriel = function(id,item){
+                $scope.id = id;
+                $scope.conf = item;
+                $scope.showAdd = true;
                 $scope.nowAdd = false;
+            };
+            //确定修改
+            $scope.modifySure = function(){
+                $scope.showAdd = false;
+                var material = {
+                    id:$scope.id,
+                    jy_material_type_id:$scope.conf.jy_material_type_id,
+                    code:$scope.conf.code,
+                    name:$scope.conf.name,
+                    model:$scope.conf.model,
+                    supplier:$scope.conf.supplier
+                };
+                $validator.validate($scope,'group_name').success(function() {
+                    $scope.promise = indexService.modifyMaterial(material).success(function(data){
+                        if(data.success=="true"){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    })
+                })
             };
             //删除
             $scope.deleteMateriel = function(id){
@@ -181,7 +222,7 @@ define(['app'],function(app){
             };
             //确定删除
             $scope.BeSure = function(){
-                $scope.promise = indexService.deleteType({id:$scope.id}).success(function(data){
+                $scope.promise = indexService.deleteMaterial({id:$scope.id}).success(function(data){
                     if(data.success=="true"){
                         ngDialog.close();
                         ngDialog.open({

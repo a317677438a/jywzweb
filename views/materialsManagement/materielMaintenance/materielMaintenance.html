@@ -36,8 +36,8 @@
                     <td>{{item.model}}</td>
                     <td>{{item.supplier}}</td>
                     <td>
-                        <a class="button button-green operationButton" ng-click="modifyMateriel()">修改</a>
-                        <a class="button button-yellow operationButton" ng-click="deleteMateriel()">删除</a>
+                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>
@@ -62,7 +62,7 @@
                 <li class="form-group">
                     <label class="addStar">物资类型</label>
                     <div class="styled-select label6-width">
-                        <select ng-model="conf.codeName" ng-options="o.key as o.value for o in TypeAndName"
+                        <select ng-model="conf.jy_material_type_id" ng-options="o.key as o.value for o in TypeAndName"
                                 validator="[requiredSubmit]" validator-group="group_name">
                         </select>
                         <i class="arrow"></i>

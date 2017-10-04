@@ -66,6 +66,26 @@ define(['app'],function(app){
                     //查询物资类型编号与物资类型名称
                     getMaterialTypeAndName : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialsType/getMaterialTypeAndName.json',data,WITH_CREDENTIALS);
+                    },
+                    //修改物资信息
+                    modifyMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/modifyMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //删除物资
+                    deleteMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/deleteMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //查询所有入库单
+                    getAllStock : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/getAllStock.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增入库单--查询物资id与物资名称
+                    getMaterialAndId : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/getMaterialAndId.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增入库单
+                    addStock : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/addStock.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

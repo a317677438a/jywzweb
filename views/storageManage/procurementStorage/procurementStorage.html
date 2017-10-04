@@ -1,30 +1,54 @@
 <!-- 采购入库 -->
-<div class="mgTop20 mgBottom10 bkColor contentShadow clearFix">
-    <div class="forStar borderB ">
-        <ul class="clearFix">
-            <li style="width: 330px;overflow: inherit;">
-                <label>产品名称：</label>
-                <div class="styled-select label4-width">
-                    <select ng-model="conf.productName" ng-change="getFile()"
-                            ng-options="o.key as o.value for o in productName" style="width: 250px;">
-                        <option value=""></option>
-                    </select>
-                    <i class="arrow"></i>
-                </div>
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 300px;position: relative">
+                <input class="projectName" ng-model="conf.contract_no" placeholder="合同编号">
+                <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
+            </li>
+            <li style="width: 460px">
+                <label>查询入库日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
             </li>
         </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="addMateriel()">新增入库</a>
+        </div>
     </div>
-    <ul class="fileU">
-        <li>
-            <label>选择文件：</label>
-            <input id="file" type="file" uploader="uploader" nv-file-select="" class="reset-file-import">
-            <a class="text-info">下载模板</a>
-        </li>
-        <li>
-            <a class="button button-blue" ng-click="importAsset()">导入</a>
-        </li>
-    </ul>
-    <div class="padding10">
-        <p class="ft14 text-danger">提示：多次上传，提取日相同时，以最新上传为准</p>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>合同编号</th>
+                    <th>入库人</th>
+                    <th>入库类型</th>
+                    <th>入库时间</th>
+                    <th>入库仓库</th>
+                    <th>状态</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.contract_no}}</td>
+                    <td>{{item.putin_user}}</td>
+                    <td>{{item.putin_type}}</td>
+                    <td>{{item.putin_date}}</td>
+                    <td>{{item.putin_storehouse_code}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.remark}}</td>
+                    <td>
+                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
     </div>
 </div>
+<div class="add-overlay" ng-show="showAdd" ng-include="'views/storageManage/procurementStorage/addStorage.html'"></div>
