@@ -53,10 +53,8 @@ define(['app'],function(app){
                         })
                     }
                 };
-                //点击新增入库
-                $scope.addMateriel = function(){
-                    $scope.showAdd = true;
-                    $scope.storageModel.putin_type = '1';
+                ////查询物资已经对应的id
+                $scope.getMaterialAndId = function(){
                     $scope.promise = indexService.getMaterialAndId().success(function(data){  //查询物资已经对应的id
                         if(data.success=="true"){
                             $scope.MaterialAndId = data.returndata;
@@ -72,6 +70,12 @@ define(['app'],function(app){
                             })
                         }
                     });
+                };
+                $scope.getMaterialAndId();
+                //点击新增入库
+                $scope.addMateriel = function(){
+                    $scope.showAdd = true;
+                    $scope.storageModel.putin_type = '1';
                 };
                 //关闭新增窗口
                 $scope.closeForm = function(){
@@ -101,6 +105,7 @@ define(['app'],function(app){
                     };
                     $scope.promise = indexService.addStock(getInfo).success(function(data){
                         if(data.success=="true"){
+                            $scope.showAdd = false;
                             ngDialog.open({
                                 template: 'views/common/alert.html',
                                 className: 'alert',
@@ -108,6 +113,7 @@ define(['app'],function(app){
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
                                     $scope.response = data.returnmsg;
+                                    $scope.getEmployeesPage();
                                 }]
                             })
                         }else{
@@ -122,7 +128,7 @@ define(['app'],function(app){
                             })
                         }
                     });
-                }
+                };
                 // 初始化分页
                 $scope.page={};
                 $scope.pagesize = 10;
@@ -163,13 +169,6 @@ define(['app'],function(app){
                         if(data.success=="true"){
                             $scope.data = data.returndata.rows;
                             $scope.totalItems = data.returndata.results;
-                            for(var i=0;i<$scope.data.length;i++){
-                                for(var j=0;j<$scope.MaterialAndId.length;j++){
-                                    if($scope.data[i].jy_material_type_id == $scope.MaterialAndId[j].key){
-                                        $scope.data[i].type_name = $scope.MaterialAndId[j].value;
-                                    }
-                                }
-                            }
                         }else{
                             ngDialog.open({
                                 template: 'views/common/alertButton.html',
@@ -192,6 +191,37 @@ define(['app'],function(app){
                 $scope.search = function(){
                     $scope.getEmployeesPage();
                 };
+                //查询入库单对应的入库明细
+                $scope.fromStockGetMaterial = function(id){
+                    $scope.promise = indexService.fromStockGetMaterial({id:id}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.MaterialListModify = data.returndata;
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alertButton.html',
+                                className: 'alertButton-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                $scope.storageModelModify = {};  //修改入库信息的对象
+                //点击修改
+                $scope.modifyMateriel = function(id,item){
+                    console.log(item);
+                    $scope.showModify = true;
+                    $scope.fromStockGetMaterial(id);
+                    $scope.storageModelModify = item;
+                    $scope.storageModelModify.putin_date = $filter('timeFilter')($scope.storageModelModify.putin_date);
+                };
+                //关闭修改
+                $scope.closeForm2 = function(){
+                    $scope.showModify = false;
+                }
             }
         ]);
 });

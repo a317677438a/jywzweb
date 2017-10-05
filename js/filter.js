@@ -867,6 +867,15 @@ angular.module('filter', [])
             }
         };
     })
+    .filter('putinType', function () {
+        return function (data) {
+            if (data) {
+                if (data == 1) return "采购入库";
+                if (data == 2) return "退库入库";
+                if (data == 3) return "移库入库";
+            }
+        };
+    })
     //yyyy-mm-dd转化成中国标准时间格式
     .filter('timeToDate', function () {
         return function (date) {

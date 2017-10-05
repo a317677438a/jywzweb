@@ -86,6 +86,10 @@ define(['app'],function(app){
                     //新增入库单
                     addStock : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/addStock.json',data,WITH_CREDENTIALS);
+                    },
+                    //查询入库单对应的入库明细
+                    fromStockGetMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/fromStockGetMaterial.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

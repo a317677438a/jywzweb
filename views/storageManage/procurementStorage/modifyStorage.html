@@ -1,11 +1,11 @@
 <div class="bkColor pos-re addSecurities" style="margin-top: 2%">
-    <h4 class="borderB padding10 textC">新增入库单</h4>
+    <h4 class="borderB padding10 textC">修改入库单</h4>
     <div class="forStar clearFix" style="height: 350px;overflow-y:auto;overflow-x: hidden">
         <ul class="fl clearFix" style="width: 36%;margin-left: 19%;">
             <li class="form-group">
                 <label class="addStar">入库类型：</label>
                 <div class="styled-select label4-width">
-                    <select ng-model="storageModel.putin_type" ng-options="o.key as o.value for o in StockType"
+                    <select ng-model="storageModelModify.putin_type" ng-options="o.key as o.value for o in StockType"
                             validator="[requiredSubmit]" validator-group="securities_name" disabled>
                     </select>
                     <i class="arrow"></i>
@@ -13,36 +13,36 @@
             </li>
             <li class="form-group">
                 <label class="addStar">入库人：</label>
-                <input class="label4-width" ng-model="storageModel.putin_user" >
+                <input class="label4-width" ng-model="storageModelModify.putin_user" >
             </li>
             <li class="form-group">
                 <label class="addStar">入库仓库编码：</label>
-                <input class="label6-width" ng-model="storageModel.putin_storehouse_code" >
+                <input class="label6-width" ng-model="storageModelModify.putin_storehouse_code" >
             </li>
         </ul>
         <ul class="fl clearFix" style="width: 45%">
             <li class="form-group">
                 <label class="addStar">入库日期：</label>
-                <input class="label4-width" ng-model="storageModel.putin_date" bs-datepicker>
+                <input class="label4-width" ng-model="storageModelModify.putin_date" bs-datepicker>
             </li>
             <li class="form-group">
                 <label class="addStar">操作人：</label>
-                <input class="label4-width" ng-model="storageModel.inputuser" >
+                <input class="label4-width" ng-model="storageModelModify.inputuser" >
             </li>
             <li class="form-group">
                 <label class="addStar">合同号：</label>
-                <input class="label4-width" ng-model="storageModel.contract_no" >
+                <input class="label4-width" ng-model="storageModelModify.contract_no" >
             </li>
         </ul>
         <ul class="fl clearFix" style="margin-left: 19%;width: 63%">
             <li class="form-group" style="width: 100%">
                 <label class="addStar">备注：</label>
-                <textarea style="width: 91.9%;height: 70px;resize: none;padding: 5px" ng-model="storageModel.remark"></textarea>
+                <textarea style="width: 91.9%;height: 70px;resize: none;padding: 5px" ng-model="storageModelModify.remark"></textarea>
             </li>
             <i class="iconfont icon-jia2" ng-click="addMaterial()">添加物资</i>
         </ul>
         <ul class="fl clearFix" style="margin-left: 19%;width: 63%">
-            <li ng-repeat="item in MaterialList" style="width: 100%">
+            <li ng-repeat="item in MaterialListModify" style="width: 100%">
                 <div class="styled-select displayIn fl clearFix">
                     <select ng-model="item.jy_material_id" ng-options="o.key as o.value for o in MaterialAndId">
                     </select>
@@ -54,6 +54,6 @@
         </ul>
     </div>
 
-    <div class="ngdialog-close" ng-click="closeForm()"></div>
-    <a class="button button-blue marginLButton mgBottom10 mgTop20" ng-click="addOneStorageSure()">新增</a>
+    <div class="ngdialog-close" ng-click="closeForm2()"></div>
+    <a class="button button-blue marginLButton mgBottom10 mgTop20" ng-click="modifyOneStorageSure()">修改</a>
 </div>
