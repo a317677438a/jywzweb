@@ -90,6 +90,10 @@ define(['app'],function(app){
                     //查询入库单对应的入库明细
                     fromStockGetMaterial : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/fromStockGetMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //删除入库单
+                    deleteOneStock : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/deleteOneStock.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

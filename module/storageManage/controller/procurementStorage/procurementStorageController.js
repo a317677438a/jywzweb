@@ -212,7 +212,6 @@ define(['app'],function(app){
                 $scope.storageModelModify = {};  //修改入库信息的对象
                 //点击修改
                 $scope.modifyMateriel = function(id,item){
-                    console.log(item);
                     $scope.showModify = true;
                     $scope.fromStockGetMaterial(id);
                     $scope.storageModelModify = item;
@@ -221,7 +220,52 @@ define(['app'],function(app){
                 //关闭修改
                 $scope.closeForm2 = function(){
                     $scope.showModify = false;
-                }
+                };
+                //点击删除
+                $scope.deleteMateriel = function(id){
+                    $scope.id = id;
+                    ngDialog.open({
+                        template: 'views/common/confirm.html',
+                        className: 'confirm',
+                        showClose: true,
+                        scope: $scope,
+                        controller: ['$scope', function ($scope) {
+                            $scope.confirmMsg = "是否确定删除！";
+                        }]
+                    })
+                };
+                //确定删除
+                $scope.BeSure = function(){
+                    $scope.promise = indexService.deleteOneStock({id:$scope.id}).success(function(data){
+                        if(data.success=="true"){
+                            ngDialog.close();
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    $scope.getEmployeesPage();
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //取消删除
+                $scope.BeCancel = function(){
+                    ngDialog.close();
+                };
             }
         ]);
 });
