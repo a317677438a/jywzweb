@@ -91,6 +91,10 @@ define(['app'],function(app){
                     fromStockGetMaterial : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/fromStockGetMaterial.json',data,WITH_CREDENTIALS);
                     },
+                    //确定修改入库单
+                    modifyOneStock : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/modifyOneStock.json',data,WITH_CREDENTIALS);
+                    },
                     //删除入库单
                     deleteOneStock : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/deleteOneStock.json',data,WITH_CREDENTIALS);

@@ -212,10 +212,52 @@ define(['app'],function(app){
                 $scope.storageModelModify = {};  //修改入库信息的对象
                 //点击修改
                 $scope.modifyMateriel = function(id,item){
+                    $scope.jy_storehouse_in_id = id;
                     $scope.showModify = true;
                     $scope.fromStockGetMaterial(id);
                     $scope.storageModelModify = item;
                     $scope.storageModelModify.putin_date = $filter('timeFilter')($scope.storageModelModify.putin_date);
+                };
+                $scope.addMaterialModify = function(){
+                    $scope.MaterialListModify.push({jy_storehouse_in_id:$scope.jy_storehouse_in_id,jy_material_id:'',putin_number:''});
+                };
+                $scope.deleteOneMaterialModify = function(id){
+                    $scope.MaterialListModify.splice(id,1);
+                };
+                //确定修改
+                $scope.modifyOneStorageSure = function(){
+                    $scope.storageModelModify_copy = angular.copy($scope.storageModelModify);
+                    $scope.storageModelModify_copy.putin_date = $filter('datePickerFormat2')($scope.storageModelModify_copy.putin_date);
+                    $scope.storageModelModify_copy.status = 1;
+                    var getInfo = {
+                        stockInfo : $scope.storageModelModify_copy,
+                        stockDetailsList : $scope.MaterialListModify
+                    };
+                    $scope.promise = indexService.modifyOneStock(getInfo).success(function(data){
+                        if(data.success=="true"){
+                            $scope.showModify = false;
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    $scope.getEmployeesPage();
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
                 };
                 //关闭修改
                 $scope.closeForm2 = function(){

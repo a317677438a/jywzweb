@@ -39,7 +39,7 @@
                 <label class="addStar">备注：</label>
                 <textarea style="width: 91.9%;height: 70px;resize: none;padding: 5px" ng-model="storageModelModify.remark"></textarea>
             </li>
-            <i class="iconfont icon-jia2" ng-click="addMaterial()">添加物资</i>
+            <i class="iconfont icon-jia2" ng-click="addMaterialModify()">添加物资</i>
         </ul>
         <ul class="fl clearFix" style="margin-left: 19%;width: 63%">
             <li ng-repeat="item in MaterialListModify" style="width: 100%">
@@ -49,7 +49,7 @@
                     <i class="arrow"></i>
                 </div>
                 <input ng-model="item.putin_number" class="fl label10-width" style="margin-left: 10px" placeholder="数量">
-                <i class="iconfont icon-sfsiconchacha-copy fl" style="font-size: 20px" ng-click="deleteOneMaterial($index)" title="删除"></i>
+                <i class="iconfont icon-sfsiconchacha-copy fl" style="font-size: 20px" ng-click="deleteOneMaterialModify($index)" title="删除"></i>
             </li>
         </ul>
     </div>
