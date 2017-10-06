@@ -1,8 +1,8 @@
 /**
- * Created by huangyao on 2017/5/16.
+ * Created by huangyao on 2017/10/5.
  */
 define(['app'],function(app){
-    app.register.controller('procurementStorageController',
+    app.register.controller('forOutBoundController',
         [
             '$scope',
             'ngDialog',
@@ -10,12 +10,11 @@ define(['app'],function(app){
             'commonQuery',
             '$filter',
             function($scope,ngDialog,indexService,commonQuery,$filter){
-
                 $scope.conf = {};
                 $scope.message = 'Please Wait...';
                 $scope.storageModel = {}; //新增入库单对象
                 //入库类型枚举
-                commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.material.StockType'}).success(function(data){
+                commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.material.OutStockType'}).success(function(data){
                     if(data.success=="true"){
                         $scope.StockType = data.returndata;
                     }

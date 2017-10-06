@@ -32,13 +32,21 @@
             "indexController": 'module/indexController',
             "indexService": 'module/indexService',
 
-            //项目管理
+            //物资管理
             "materialsManagement" : 'module/materialsManagement/materialsManagementApp',
             "materialTypeController": 'module/materialsManagement/controller/materialType/materialTypeController',
             "materielMaintenanceController": 'module/materialsManagement/controller/materielMaintenance/materielMaintenanceController',
-            //资产池管理
+            //入库管理
             "procurementStorageController": 'module/storageManage/controller/procurementStorage/procurementStorageController',
             "storageQueryController": 'module/storageManage/controller/storageQuery/storageQueryController',
+            //出库管理
+            "forOutBoundController": 'module/stockOutManagement/controller/forOutBound/forOutBoundController',
+            "stockOutQueryController": 'module/stockOutManagement/controller/stockOutQuery/stockOutQueryController',
+            //物资申领
+            "claimsForQueryController": 'module/materialsFor/controller/claimsForQuery/claimsForQueryController',
+            "materialRequisitionController": 'module/materialsFor/controller/materialRequisition/materialRequisitionController',
+            "outStockRegistrationController": 'module/materialsFor/controller/outStockRegistration/outStockRegistrationController',
+            "stockRequisitionController": 'module/materialsFor/controller/stockRequisition/stockRequisitionController',
             //工作台
             "workController": 'module/workbench/controller/work/workController',
             //业务参数

@@ -55,6 +55,42 @@ define(['app'],function(app){
                             }]
                     }
                 })
+                .state('stockOutManagement', {
+                    url: '/stockOutManagement',
+                    templateUrl: 'views/stockOutManagement/stockOutManagement.html',//出库管理
+                    controller: 'stockOutManagementController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'module/stockOutManagement/controller/stockOutManagementController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
+                })
+                .state('materialsFor', {
+                    url: '/materialsFor',
+                    templateUrl: 'views/materialsFor/materialsFor.html',//物资申领
+                    controller: 'materialsForController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'module/materialsFor/controller/materialsForController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
+                })
                 .state('workbench', {
                     url: '/workbench',
                     templateUrl: 'views/workbench/workbench.html',//工作台

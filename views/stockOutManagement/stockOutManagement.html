@@ -1,0 +1,9 @@
+<!-- 出库管理-->
+<div class="subNav wrap topNav">
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">申领出库</a>
+    <div class="dashed"></div>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">出库查询统计</a>
+</div>
+<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/stockOutManagement/forOutBound/forOutBound.html'" ng-controller="forOutBoundController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/stockOutManagement/stockOutQuery/stockOutQuery.html'" ng-controller="stockOutQueryController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+
