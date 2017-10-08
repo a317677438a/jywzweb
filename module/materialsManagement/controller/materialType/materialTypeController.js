@@ -84,7 +84,7 @@ define(['app'],function(app){
                 $scope.promise =indexService.getMaterialType().success(function(data){
                     if(data.success=="true"){
                         $scope.maxNum = data.returndata;
-                        $scope.conf.code = "JYWZLX"+$scope.maxNum;
+                        $scope.conf.code = $scope.maxNum;
                     }
                 })
             };

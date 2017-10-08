@@ -51,6 +51,17 @@ angular.module('filter', [])
             }
         };
     })
+    //入库单状态
+    .filter('StorageStatus', function () {
+        return function (val) {
+            switch (val) {
+                case "1":
+                    return '待确认';
+                case "2":
+                    return '合格在库';
+            }
+        };
+    })
     //资产还款方式
     .filter('repayType', function () {
         return function (val) {

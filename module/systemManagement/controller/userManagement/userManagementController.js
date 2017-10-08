@@ -328,8 +328,8 @@ define(['app'],function(app){
                     });
                 };
                 //用户仓库编码列表查询
-                $scope.haveStorehouseCode = function(){
-                    indexService.haveStorehouseCode({id:$rootScope.id}).success(function(data){
+                $scope.haveStorehouseCode = function(toId){
+                    indexService.haveStorehouseCode({id:toId}).success(function(data){
                         if(data.success=="true"){
                             $scope.storeCode = data.returndata;
                             $('input:checkbox').each(function () {
@@ -358,8 +358,8 @@ define(['app'],function(app){
                     });
                 };
                 //除登录用户之外的仓库编码列表查询
-                $scope.otherHaveStorehouseCode = function(){
-                    indexService.otherHaveStorehouseCode({id:$rootScope.id}).success(function(data){
+                $scope.otherHaveStorehouseCode = function(toId){
+                    indexService.otherHaveStorehouseCode({id:toId}).success(function(data){
                         if(data.success=="true"){
                             $scope.haveStoreCode = data.returndata;
                             $('input:checkbox').each(function () {
@@ -389,14 +389,15 @@ define(['app'],function(app){
                     });
                 };
                 //仓库设置
-                $scope.setEntrepot = function(){
+                $scope.setEntrepot = function(index,toId){
+                    $scope.toId = toId;
                     $scope.isShowEntrepot = true;
-                    $scope.haveStorehouseCode();
-                    $scope.otherHaveStorehouseCode();
+                    $scope.haveStorehouseCode(toId);
+                    $scope.otherHaveStorehouseCode(toId);
                 };
                 //确认设置
+                $scope.storehouseCodesArr = [];
                 $scope.addEntrepot = function(){
-                    $scope.storehouseCodesArr = [];
                     $('input:checkbox').each(function () {
                         if($(this).attr('checked')=='checked'){
                             $scope.storehouseCodesArr.push($(this).val());
@@ -409,7 +410,7 @@ define(['app'],function(app){
                             }
                         }
                     }
-                    indexService.setStorehouseCode({id:$rootScope.id,storehouseCodes:$scope.storehouseCodesArr}).success(function(data){
+                    indexService.setStorehouseCode({id:$scope.toId,storehouseCodes:$scope.storehouseCodesArr}).success(function(data){
                         if(data.success=="true"){
                             $scope.isShowEntrepot = false;
                             $scope.getEmployeesPage();

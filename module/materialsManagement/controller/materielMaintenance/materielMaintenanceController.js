@@ -96,11 +96,7 @@ define(['app'],function(app){
                 $scope.promise =indexService.getMaterialNum().success(function(data){
                     if(data.success=="true"){
                         $scope.maxNum = data.returndata;
-                        if($scope.maxNum===0){
-                            $scope.conf.code = "WZ1";
-                        }else{
-                            $scope.conf.code = "WZ"+$scope.maxNum;
-                        }
+                        $scope.conf.code = $scope.maxNum;
                     }else{
                         ngDialog.open({
                             template: 'views/common/alert.html',
@@ -117,47 +113,67 @@ define(['app'],function(app){
                     }
                 });
             };
+            //点击鼠标显示下拉菜单
+            $scope.showMenu = function(){
+                $scope.isShowMenu = true;
+            };
+            //点击下拉的将上面的值替换掉
+            $scope.changevalue = function(name,key){
+                $scope.conf.jy_material_type_id = name;
+                $scope.conf.jy_material_type_name = key;
+                $scope.isShowMenu = false;
+            };
+            //点击其他地方关闭下拉框
+            $scope.notShow = function(){
+                $scope.isShowMenu = false;
+            };
+            //清楚所选
+            $scope.removeName = function(){
+                $scope.conf.jy_material_type_id = ''
+            };
             //确定新增
             $scope.addSure = function(){
                 var addMaterial = {
                     code : $scope.conf.code,
                     name : $scope.conf.name,
-                    jy_material_type_id : $scope.conf.jy_material_type_id,
+                    jy_material_type_id : $scope.conf.jy_material_type_name,
                     model : $scope.conf.model,
                     supplier : $scope.conf.supplier
                 };
-                $scope.promise =indexService.addMaterial(addMaterial).success(function(data){
-                    if(data.success=="true"){
-                        $scope.showAdd = false;
-                        $scope.conf = {};
-                        $scope.getEmployeesPage();
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                                setTimeout(function(){
-                                    ngDialog.close();
-                                },2000)
-                            }]
-                        })
-                    }else{
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert-error',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                                setTimeout(function(){
-                                    ngDialog.close();
-                                },2000)
-                            }]
-                        })
-                    }
-                });
+                $validator.validate($scope,'group_name').success(function() {
+                    $scope.promise =indexService.addMaterial(addMaterial).success(function(data){
+                        if(data.success=="true"){
+                            $scope.showAdd = false;
+                            $scope.conf = {};
+                            $scope.getEmployeesPage();
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    setTimeout(function(){
+                                        ngDialog.close();
+                                    },2000)
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    setTimeout(function(){
+                                        ngDialog.close();
+                                    },2000)
+                                }]
+                            })
+                        }
+                    });
+                })
             };
             //关闭新增
             $scope.closeFileForm = function(){

@@ -119,6 +119,22 @@ define(['app'],function(app){
                     getAllStock : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/getAllStock.json',data,WITH_CREDENTIALS);
                     },
+                    //新增入库单--自动生成入库单号
+                    getCode : function(data){
+                        return $http.post(API_ENDPOINT.url+'/base/getCode.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增入库单--查询入库仓库编码
+                    haveStorehouseCodeList : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/haveStorehouseCodeList.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增入库单--添加物资--所有物资下拉列表
+                    getALLMaterialList : function(data){
+                        return $http.post(API_ENDPOINT.url+'/base/getALLMaterialList.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增入库单--根据物资id查询物资信息
+                    getMaterialById : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/getMaterialById.json',data,WITH_CREDENTIALS);
+                    },
                     //新增入库单--查询物资id与物资名称
                     getMaterialAndId : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/getMaterialAndId.json',data,WITH_CREDENTIALS);
@@ -126,6 +142,10 @@ define(['app'],function(app){
                     //新增入库单
                     addStock : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/addStock.json',data,WITH_CREDENTIALS);
+                    },
+                    //确认入库
+                    inboundGoodsConfirmation : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/inboundGoodsConfirmation.json',data,WITH_CREDENTIALS);
                     },
                     //查询入库单对应的入库明细
                     fromStockGetMaterial : function(data){

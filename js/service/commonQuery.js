@@ -25,6 +25,13 @@ define(['app'],function(app){
                     listQuery:function(data){
                         return $http.post(API_ENDPOINT.url+'base/listquery.json',data,WITH_CREDENTIALS)
                     },
+                    /**
+                     *  查单条记录信息
+                     *
+                     */
+                    infoquery:function(data){
+                        return $http.post(API_ENDPOINT.url+'base/infoquery.json',data,WITH_CREDENTIALS)
+                    },
                     //项目名称下拉查询
                     projectNameSelect : function(data){
                         return $http.post(API_ENDPOINT.url+'sys/projectNameSelect.json',data,WITH_CREDENTIALS)
