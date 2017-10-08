@@ -19,7 +19,9 @@ define(
                 'angularFileUpload',
                 'ui.bootstrap.pagination', //分页插件注入
                 'cgBusy', //加载等待
-                'ngAnimate' //动画 依赖
+                'ngAnimate', //动画 依赖
+
+                'materialsApp' //物资申领
             ]);
     }
 )

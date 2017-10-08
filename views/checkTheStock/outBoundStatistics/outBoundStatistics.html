@@ -1,0 +1,52 @@
+<!-- 出库统计 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 300px;position: relative">
+                <input class="projectName" ng-model="conf.contract_no" placeholder="合同编号/物资名称/供应商/存放仓库">
+                <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
+            </li>
+            <li style="width: 460px">
+                <label>入库日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue">导出</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+            <tr>
+                <th>入库类型</th>
+                <th>物资名称</th>
+                <th>物资类型</th>
+                <th>入库数量</th>
+                <th>供应商</th>
+                <th>规格型号</th>
+                <th>入库时间</th>
+                <th>合同号</th>
+                <th>存放仓库</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in data">
+                <td>{{item.putin_type}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.type_name}}</td>
+                <td>{{item.putin_number}}</td>
+                <td>{{item.supplier}}</td>
+                <td>{{item.model}}</td>
+                <td>{{item.putin_date}}</td>
+                <td>{{item.contract_no}}</td>
+                <td>{{item.putin_storehouse_code}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>

@@ -91,17 +91,17 @@ define(['app'],function(app){
                             }]
                     }
                 })
-                .state('workbench', {
-                    url: '/workbench',
-                    templateUrl: 'views/workbench/workbench.html',//工作台
-                    controller: 'workbenchController',
+                .state('checkTheStock', {
+                    url: '/checkTheStock',
+                    templateUrl: 'views/checkTheStock/checkTheStock.html',//仓库盘点
+                    controller: 'checkTheStockController',
                     resolve: {
                         loadCtrl: ['$q',
                             function ($q) {
                                 var deferred = $q.defer();
                                 //异步加载controller／directive/filter/service
                                 require([
-                                    'module/workbench/controller/workbenchController.js'
+                                    'module/checkTheStock/controller/checkTheStockController.js'
                                 ], function () {
                                     deferred.resolve();
                                 });
@@ -109,24 +109,24 @@ define(['app'],function(app){
                             }]
                     }
                 })
-                .state('bizParam', {
-                    url: '/bizParam',
-                    templateUrl: 'views/bizParam/bizParam.html',//业务参数
-                    controller: 'bizParamController',
+                .state('systemManagement', {
+                    url: '/systemManagement',
+                    templateUrl: 'views/systemManagement/systemManagement.html',//系统管理
+                    controller: 'systemManagementController',
                     resolve: {
                         loadCtrl: ['$q',
                             function ($q) {
                                 var deferred = $q.defer();
                                 //异步加载controller／directive/filter/service
                                 require([
-                                    'module/bizParam/controller/bizParamController.js'
+                                    'module/systemManagement/controller/systemManagementController.js'
                                 ], function () {
                                     deferred.resolve();
                                 });
                                 return deferred.promise;
                             }]
                     }
-                })
+                });
             //解决路由异常的方法
             $urlRouterProvider.otherwise('/materialsManagement');
         });

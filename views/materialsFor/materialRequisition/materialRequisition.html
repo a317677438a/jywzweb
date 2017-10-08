@@ -1,1 +1,88 @@
 <!-- 领料审批 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 330px">
+                <label>申领状态：</label>
+                <div class="styled-select label3-width">
+                    <select ng-model="conf.status" ng-change="changeProject()" ng-options="o.key as o.value for o in ApplyStatus" style="width: 250px;">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li style="width: 460px">
+                <label>日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>领用人</th>
+                    <th>申请日期</th>
+                    <th>审批人</th>
+                    <th>领料仓库</th>
+                    <th>申请状态</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<tr ng-repeat="item in data">-->
+                <!--<td>{{item.putout_type}}</td>-->
+                <!--<td>{{item.putout_user}}</td>-->
+                <!--<td>{{item.putout_date}}</td>-->
+                <!--<td>{{item.putout_storehouse_code}}</td>-->
+                <!--<td>{{item.apply_user}}</td>-->
+                <!--<td>{{item.status}}</td>-->
+                <!--<td>{{item.remark}}</td>-->
+                <!--<td>{{item.inputuser}}</td>-->
+                <!--<td>-->
+                <!--<a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>-->
+                <!--<a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>
+                        <a class="button button-green operationButton" ng-click="passMaterial()">同意</a>
+                        <a class="button button-yellow operationButton" ng-click="refuseMaterial()">拒绝</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-show="showPass">
+    <div class="uploadFiles fileImportContent">
+        <div class="forStar">
+            <ul class="mgTop20 clearFix">
+                <li class="form-group">
+                    <label class="addStar">审批日期</label>
+                    <input class="projectName label6-width" ng-model="doPass.review_date"
+                           validator="[requiredSubmit]" validator-group="group_name" bs-datepicker>
+                </li>
+                <li class="form-group" style="width: 100%">
+                    <label class="addStar">审批意见：</label>
+                    <textarea style="width: 91.9%;height: 70px;resize: none;padding: 5px" ng-model="doPass.review_remark"></textarea>
+                </li>
+            </ul>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSure()" ng-if="nowAdd==true">通过</a>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="modifySure()" ng-if="nowAdd==false">拒绝</a>
+        </div>
+        <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeFileForm()"></div>
+    </div>
+</div>

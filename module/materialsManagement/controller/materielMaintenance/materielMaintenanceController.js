@@ -69,8 +69,8 @@ define(['app'],function(app){
                         }
                     }else{
                         ngDialog.open({
-                            template: 'views/common/alertButton.html',
-                            className: 'alertButton-error',
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
                             showClose: true,
                             scope: $scope,
                             controller: ['$scope', function ($scope) {

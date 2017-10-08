@@ -1,1 +1,63 @@
 <!-- 申领查询 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 80%">
+            <li>
+                <label>领料申请人：</label>
+                <input class="label5-width">
+            </li>
+            <li>
+                <label>领料仓库：</label>
+                <input class="label5-width">
+            </li>
+            <li style="width: 460px">
+                <label>日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>物资名称</th>
+                    <th>领料数量</th>
+                    <th>供应商</th>
+                    <th>规格型号</th>
+                    <th>领料日期</th>
+                    <th>领用人员</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<tr ng-repeat="item in data">-->
+                <!--<td>{{item.putout_type}}</td>-->
+                <!--<td>{{item.putout_user}}</td>-->
+                <!--<td>{{item.putout_date}}</td>-->
+                <!--<td>{{item.putout_storehouse_code}}</td>-->
+                <!--<td>{{item.apply_user}}</td>-->
+                <!--<td>{{item.status}}</td>-->
+                <!--<td>{{item.remark}}</td>-->
+                <!--<td>{{item.inputuser}}</td>-->
+                <!--<td>-->
+                <!--<a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>-->
+                <!--<a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>

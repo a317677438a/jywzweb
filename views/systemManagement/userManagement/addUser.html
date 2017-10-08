@@ -1,0 +1,64 @@
+<div class="addUser forStar">
+    <h4 class="borderB padding10 textC">新增用户</h4>
+    <ul class="firstUl tabLable clearFix">
+        <li class="form-group">
+            <label class="addStar pos-re">登录账号：</label>
+            <input type="text" class="label6-width form-control" ng-model="adUser.loginname" validator="[requiredSubmit]" validator-group="group_name">
+        </li>
+        <li class="form-group">
+            <label class="addStar pos-re">登录密码：</label>
+            <input type="password" class="label6-width form-control" ng-model="adUser.passwd" validator="[requiredSubmit]" validator-group="group_name">
+        </li>
+        <li class="form-group">
+            <label class="addStar pos-re">用户类型：</label>
+            <div class="styled-select label6-width">
+                <select class=" form-control"  ng-model="adUser.role" ng-options="o.key as o.value for o in UserRole" validator="[requiredSubmit]" validator-group="group_name">
+                </select>
+                <i class="arrow"></i>
+            </div>
+        </li>
+        <li class="form-group">
+            <label class="addStar pos-re">组织：</label>
+            <div class="styled-select label6-width">
+                <select class="form-control"  ng-model="adUser.organize_code" ng-options="o.key as o.value for o in paramquery" validator="[requiredSubmit]" validator-group="group_name">
+                </select>
+                <i class="arrow"></i>
+            </div>
+        </li>
+        <!--<li class="form-group" style="overflow: inherit;">-->
+            <!--<label class="addStar pos-re">所属机构：</label>-->
+            <!--<div class="styled-select label6-width" style="overflow: inherit;">-->
+                <!--<input type="hidden" ng-model="adUser.sys_org_id" validator="[requiredSubmit]" validator-group="group_name">-->
+                <!--<input type="text" class=" form-control inputPRight" title="清空" ng-model="adUser.name" ng-mousedown="find($event)">-->
+                <!--<i class="iconfont icon-sfsiconchacha-copy poorContent" ng-click="removeName()"></i>-->
+                <!--<ul style="right: -2px;top:28px;border-radius: 4px;" ng-mouseleave="notShow()" class="add-menu" ng-show="isShow==true">-->
+                    <!--<li ng-repeat="item in orgName | filter:adUser.name" style="position: relative;width: 142px">-->
+                        <!--<a ng-click="changevalue(item.orgname,item.sys_org_id)">-->
+                            <!--<input type="text" title="{{item.orgname}}" class="mouseFocus" style="width: 148px;overflow: hidden;border: none;cursor: pointer" ng-model="item.orgname">-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</li>-->
+        <li class="form-group">
+            <label class="addStar">人员编号：</label>
+            <input type="text" class="label6-width form-control" ng-model="adUser.code" validator="[requiredSubmit]" validator-group="group_name">
+        </li>
+        <li class="form-group">
+            <label  class="addStar">人员名称：</label>
+            <input type="text" class="label6-width form-control" ng-model="adUser.name" validator="[requiredSubmit]" validator-group="group_name">
+        </li>
+        <li>
+            <label>办公电话：</label>
+            <input class="label6-width form-control" type="text" ng-model="adUser.ophone" onkeyup="this.value=this.value.match(/^(0|[1-9]\d{0,17})(\.\d{0,12})?$/g)">
+        </li>
+        <li>
+            <label>手机：</label>
+            <input class="label6-width form-control" type="text" ng-model="adUser.mphone" onkeyup="this.value=this.value.match(/^(0|[1-9]\d{0,17})(\.\d{0,12})?$/g)">
+        </li>
+    </ul>
+    <div style="float: left;margin: 26px 26px 26px 295px;">
+        <a class="button button-lightBlue" ng-click="addUser()">提交</a>
+        <a class="button button-green" ng-click="cancel()">取消</a>
+    </div>
+</div>

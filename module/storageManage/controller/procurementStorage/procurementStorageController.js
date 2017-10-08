@@ -171,8 +171,8 @@ define(['app'],function(app){
                             $scope.totalItems = data.returndata.results;
                         }else{
                             ngDialog.open({
-                                template: 'views/common/alertButton.html',
-                                className: 'alertButton-error',
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
                                 showClose: true,
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
@@ -198,8 +198,8 @@ define(['app'],function(app){
                             $scope.MaterialListModify = data.returndata;
                         }else{
                             ngDialog.open({
-                                template: 'views/common/alertButton.html',
-                                className: 'alertButton-error',
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
                                 showClose: true,
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {

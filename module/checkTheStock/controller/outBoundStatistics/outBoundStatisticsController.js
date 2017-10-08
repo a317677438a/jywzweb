@@ -1,8 +1,8 @@
 /**
- * Created by huangyao on 2017/5/16.
+ * Created by huangyao on 2017/10/5.
  */
 define(['app'],function(app){
-    app.register.controller('HolidaySettingController',
+    app.register.controller('outBoundStatisticsController',
         [
             '$scope',
             function($scope){

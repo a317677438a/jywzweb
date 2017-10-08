@@ -43,14 +43,17 @@
             "forOutBoundController": 'module/stockOutManagement/controller/forOutBound/forOutBoundController',
             "stockOutQueryController": 'module/stockOutManagement/controller/stockOutQuery/stockOutQueryController',
             //物资申领
+            "materialsApp" : 'module/materialsFor/materialsApp',
             "claimsForQueryController": 'module/materialsFor/controller/claimsForQuery/claimsForQueryController',
             "materialRequisitionController": 'module/materialsFor/controller/materialRequisition/materialRequisitionController',
             "outStockRegistrationController": 'module/materialsFor/controller/outStockRegistration/outStockRegistrationController',
             "stockRequisitionController": 'module/materialsFor/controller/stockRequisition/stockRequisitionController',
-            //工作台
-            "workController": 'module/workbench/controller/work/workController',
-            //业务参数
-            "HolidaySettingController": 'module/bizParam/controller/HolidaySetting/HolidaySettingController'
+            //仓库盘点
+            "outBoundStatisticsController": 'module/checkTheStock/controller/outBoundStatistics/outBoundStatisticsController',
+            "libraryStatisticsController": 'module/checkTheStock/controller/libraryStatistics/libraryStatisticsController',
+            //系统管理
+            "userManagementController": 'module/systemManagement/controller/userManagement/userManagementController',
+            "modifyPasswordController": 'module/systemManagement/controller/modifyPassword/modifyPasswordController'
         },
         waitSeconds : 7,  //出现网络慢加载文件慢的时候  设置最长等待时间7s
         shim : {  //这里shim等于快速定义一个模块，定义模块需要的依赖
@@ -106,7 +109,8 @@
     };
     require.config(config);
 
-    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','filter','jquery_ui','fullcalendar','materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
+    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','materialsApp','filter','jquery_ui','fullcalendar',
+        'materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
         angular.bootstrap(document,['securityManage']);
     });
 

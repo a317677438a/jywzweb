@@ -18,10 +18,14 @@ angular.module('filter', [])
     .filter('userType', function () {
         return function (val) {
             switch (val) {
-                case "0" :
-                    return '管理台增加用户';
                 case "1" :
-                    return '业务平台增加用户';
+                    return '系统管理员';
+                case "2" :
+                    return '仓管员';
+                case "3" :
+                    return '领导';
+                case "4" :
+                    return '物资申请人';
             }
         };
     })
@@ -29,9 +33,9 @@ angular.module('filter', [])
     .filter('userstatus', function () {
         return function (val) {
             switch (val) {
-                case "0" :
-                    return '正常';
                 case "1" :
+                    return '正常';
+                case "2" :
                     return '停用';
             }
         };

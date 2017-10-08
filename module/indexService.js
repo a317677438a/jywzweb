@@ -11,9 +11,13 @@ define(['app'],function(app){
             'WITH_CREDENTIALS',
             function($http,API_ENDPOINT,WITH_CREDENTIALS){
                 return{
+                    //公共信息查询
+                    paramquery : function(data){
+                        return  $http.post(API_ENDPOINT.url+'base/paramquery.json',data,WITH_CREDENTIALS);
+                    },
                     //权限、登录url
-                    qryLoginUserMenus : function(data){
-                        return  $http.post(API_ENDPOINT.url+'qryLoginUserMenus.json',data,WITH_CREDENTIALS);
+                    queryUserLoginInfo : function(data){
+                        return  $http.post(API_ENDPOINT.url+'queryUserLoginInfo.json',data,WITH_CREDENTIALS);
                     },
                     //退出登录
                     logout : function(data){
@@ -30,6 +34,42 @@ define(['app'],function(app){
                     //首页  查询系统提示--标记为已读
                     setRead : function(data){
                         return $http.post(API_ENDPOINT.url+'sysConfig/setRead.json',data,WITH_CREDENTIALS);
+                    },
+                    //用户信息列表查询
+                    userListQuery : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/userListQuery.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增用户
+                    userAdd : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/userAdd.json',data,WITH_CREDENTIALS);
+                    },
+                    //修改用户
+                    userModify : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/userModify.json',data,WITH_CREDENTIALS);
+                    },
+                    //停用用户
+                    stopUserService : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/stopUserService.json',data,WITH_CREDENTIALS);
+                    },
+                    //启用用户
+                    startUserService : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/startUserService.json',data,WITH_CREDENTIALS);
+                    },
+                    //重置密码
+                    resetPasswd : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/resetPasswd.json',data,WITH_CREDENTIALS);
+                    },
+                    //用户仓库编码列表查询
+                    haveStorehouseCode : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/haveStorehouseCode.json',data,WITH_CREDENTIALS);
+                    },
+                    //除登录用户之外的仓库编码列表查询
+                    otherHaveStorehouseCode : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/otherHaveStorehouseCode.json',data,WITH_CREDENTIALS);
+                    },
+                    //设置仓库员仓库编码
+                    setStorehouseCode : function(data){
+                        return $http.post(API_ENDPOINT.url+'user/setStorehouseCode.json',data,WITH_CREDENTIALS);
                     },
                     //新增物资类型
                     addType : function(data){
@@ -98,6 +138,10 @@ define(['app'],function(app){
                     //删除入库单
                     deleteOneStock : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/deleteOneStock.json',data,WITH_CREDENTIALS);
+                    },
+                    //入库查询统计
+                    procurementStorage : function(data){
+                        return $http.post(API_ENDPOINT.url+'/stockManagement/procurementStorage.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

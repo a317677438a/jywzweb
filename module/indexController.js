@@ -20,66 +20,37 @@ define(['app'],function(app){
             $rootScope.module_productID='';//全局产品ID
             $scope.logoImg = 'img/logo.png';
 
-            var loginame=sessionStorage.getItem('loginname');
-            $scope.loginname=loginame;
-            //文件类型
-            commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.asset.FileTypeEnum'}).success(function(data){
-                if(data.success=="true"){
-                    $scope.FileTypeEnum = data.returndata;
-                }
-            });
             $scope.logout=function(){
-                if($rootScope.systemType!='-1'){ //测试环境或者生产环境
-                    $http.jsonp($rootScope.loginUrl+'logAll/logout/jsonp?callback=JSON_CALLBACK').success(function(){
-                        window.location.href = $rootScope.loginUrl;
-                    });
-                }else{ //本地环境
-                    indexService.logout({}).success(function(data){
-                        if(data.success==true){
-                            location.href='views/login.html';
-                        }else{
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className:'alert-error',
-                                scope:$scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response= '系统异常，请稍后重试!';
-                                }]
-                            });
-                        }
-                    });
-                }
+                indexService.logout({}).success(function(data){
+                    if(data.success==true){
+                        location.href='views/login.html';
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className:'alert-error',
+                            scope:$scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response= '系统异常，请稍后重试!';
+                            }]
+                        });
+                    }
+                });
             };
             //获取用户权限等数据
-            //indexService.qryLoginUserMenus({}).success(function(data){
-            //    if(data.success=="true"){
-            //        $rootScope.menus = data.returndata.menus; //一级菜单和二级菜单
-            //        $rootScope.actions = data.returndata.actions;  //三级菜单
-            //        $rootScope.logoName = data.returndata.username;//登录名
-            //        $rootScope.loginUrl = data.returndata.loginUrl; //登录URL
-            //        $rootScope.loginUrl_copy = angular.copy($rootScope.loginUrl);
-            //        $rootScope.systemType = data.returndata.systemType; //请求类型
-            //
-            //        if(data.returndata.platformLogo!=undefined&&data.returndata.platformLogo!=""){
-            //            $scope.logoImg = data.returndata.platformLogo; //平台logo
-            //            $rootScope.loginUrl = data.returndata.platformUrl; //平台LOGO对应链接地址
-            //            $scope.platformId = data.returndata.platformId; //平台号
-            //
-            //            if($scope.platformId=='10001'){
-            //                loadjscssfile("cssVersion/changeStyle.css", "css");
-            //            }
-            //        }
-            //        //向项目模块广播事件
-            //        $rootScope.$broadcast('recall',$rootScope.menus);
-            //
-            //    }else{
-            //
-            //    }
-            //})
-            //    .error(function(data){
-            //        //location.href='views/login.html';
-            //        //sessionStorage.setItem("TTR",true);
-            //    });
+            indexService.queryUserLoginInfo({}).success(function(data){
+                if(data.success=="true"){
+                    $rootScope.loginname = data.returndata.loginname; //登录名
+                    $rootScope.id = data.returndata.id;  //用户id
+                    $rootScope.name = data.returndata.name;//用户名
+                    $rootScope.role = data.returndata.role; //用户类型
+                }else{
+
+                }
+            })
+                .error(function(data){
+                    //location.href='views/login.html';
+                    //sessionStorage.setItem("TTR",true);
+                });
             //判断浏览器版本
             if($.browser.msie&&$.browser.version<=8)
             {

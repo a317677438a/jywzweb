@@ -1,0 +1,69 @@
+<!-- 用户管理 -->
+<div class="mgTop20 mgBottom10 bkColor contentShadow">
+    <div class="forStar borderB mgBottom10 clearFix">
+        <ul class="fl clearFix" style="width: 80%;">
+            <li>
+                <label>用户名称：</label>
+                <input class="label4-width" ng-model="conf.name">
+            </li>
+            <li>
+                <label>人员编号：</label>
+                <input class="label4-width" ng-model="conf.code">
+            </li>
+            <li>
+                <label>登录账号：</label>
+                <input class="label4-width" ng-model="conf.loginname">
+            </li>
+            <li>
+                <label>组织：</label>
+                <div class="styled-select label4-width">
+                    <select class="" ng-model="conf.organize_code"  ng-options="o.key as o.value for o in paramquery">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+        <a class="button button-blue" ng-click="getEmployeesPage();">查询</a>
+        <a class="button button-blue" ng-click="addMenu()">新增</a>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>组织</th>
+                    <th>人员编号</th>
+                    <th>人员名称</th>
+                    <th>登录账号</th>
+                    <th>用户角色</th>
+                    <th>办公电话</th>
+                    <th>手机</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.organize_code_name}}</td>
+                    <td>{{item.code}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.loginname}}</td>
+                    <td>{{item.role | userType}}</td>
+                    <td>{{item.ophone}}</td>
+                    <td>{{item.mphone}}</td>
+                    <td>{{item.status | userstatus}}</td>
+                    <td>
+                        <a class="button button-green operationButton" ng-click="modify(item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-if="item.status=='1'" ng-click="restore($index,item.id,item.userstatus)">停用</a>
+                        <a class="button button-lightBlue operationButton" ng-if="item.status=='2'" ng-click="restart($index,item.id,item.userstatus)">恢复</a>
+                        <a class="button button-lightBlue operationButton" ng-if="item.role=='2'" ng-click="setEntrepot($index,item.id,item.userstatus)">仓库设置</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="fl" ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-show="isShowfile" ng-include="'views/systemManagement/userManagement/addUser.html'"></div><!--  新增用户界面 -->
+<div class="add-overlay" ng-show="isShowmodify" ng-include="'views/systemManagement/userManagement/modifyUser.html'"></div><!--  新增用户界面 -->
+<div class="add-overlay" ng-show="isShowEntrepot" ng-include="'views/systemManagement/userManagement/setEntrepot.html'"></div><!--  仓库设置 -->

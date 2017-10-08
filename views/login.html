@@ -6,52 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="securityManager">
 
-    <link rel="icon" type="image/png" href="../img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="../img/logo_ico.jpg"/>
 
-    <link rel="shortcut icon" href="../img/favicon/favicon.ico">
-
-    <title>资产证券化管理平台-登录</title>
-    <link rel="shortcut icon" href="../img/logo3_ico.ico"/>
-    <link rel="stylesheet" href="../css/iconfont.css">
-    <link href="../css/common.css" rel="stylesheet"/>
-    <link href="../scss/login.css" rel="stylesheet">
+    <title>物资管理系统-登录</title>
+    <link rel="stylesheet" href="../scss/iconfont.css">
+    <link href="../scss/common.css" rel="stylesheet"/>
+    <link href="../css/login.css" rel="stylesheet">
+    <style>
+        .placeholder{
+            position: absolute;
+            left: 10px;
+            top: 15px;
+        }
+    </style>
 </head>
 <body ng-controller="loginController" class="login-page"
       cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
 <div class="page-bg">
-    <img class="bg-img" src="../img/bg.png"/>
-
-    <div class="bg-bottom">
-        <div class="bottom-box">
-            <img class="ice ice-01" src="../img/ice-01.png"/>
-            <img class="ice ice-02" src="../img/ice-02.png"/>
-            <img class="ice ice-03" src="../img/ice-03.png"/>
-        </div>
-    </div>
+    <img class="bg-img" src="../img/bj.png"/>
 </div>
 <div class="login-table">
     <div class="login-center">
-        <div class="login-banner">
-            <img class="plane" src="../img/plane.png"/>
-        </div>
         <div class="login-form">
+            <h2 style="text-align: center;margin-bottom: 20px;font-size: 20px;font-family: Microsoft Yahei;">物资管理系统登录</h2>
             <form>
                 <div class="errInfo" ng-bind="conf.errInfo"></div>
                 <div class="input-group">
                     <label for="username" class="login-label iconfont icon-yonhuming"></label>
-                    <input type="text" id="username" placeholder="用户名" ng-model="loginname" ng-focus="conf.errInfo=''"
+                    <input style="font-size: 14px;font-family: Microsoft Yahei;" type="text" id="username" placeholder="用户名" ng-model="loginname" ng-focus="conf.errInfo='';checkPlaceholder(0)"
                            required>
                 </div>
                 <div class="input-group">
                     <label for="password" class="login-label iconfont icon-mima"></label>
-                    <input class="" type="password" id="password" placeholder="密码" ng-model="passwd" maxlength="16"
-                           ng-focus="conf.errInfo=''" required>
+                    <input style="font-size: 14px;font-family: Microsoft Yahei;" class="" type="password" id="password" placeholder="密码" ng-model="passwd" maxlength="16"
+                           ng-focus="conf.errInfo='';checkPlaceholder(1)" required>
                 </div>
-                <div class="code-group">
-                    <input class="login-code" id="loginCode" placeholder="请输入验证码" maxlength="4"
-                           ng-focus="conf.errCode=''" ng-keyup="checkLogin($event)" required>
-                    <span ng-click="createCode()"></span>
-                    <input type="text" class="code-img" id="checkCode" ng-click="createCode()" readonly="readonly"/>
+                <div class="code-group" style="position: relative">
+                    <input style="font-size: 14px;font-family: Microsoft Yahei;" class="login-code" id="loginCode" placeholder="请输入验证码" maxlength="4"
+                           ng-focus="conf.errCode='';checkPlaceholder(2)" ng-keyup="checkLogin($event)" required>
+                    <input type="text" class="code-img" style="font-style: italic;" id="checkCode" ng-click="createCode()" readonly="readonly"/>
                     <a href="" class="change-img" ng-click="createCode()">换一张</a>
                 </div>
                 <div class="errCode" ng-bind="conf.errCode"></div>
@@ -105,27 +98,53 @@
         createCode();
         $scope.createCode = function () {
             createCode();
+        };
+
+        //判断当前浏览器是否支持placeholder属性
+        function placeholderSupport() {
+            return 'placeholder' in document.createElement('input');
         }
-
-
+        $(function(){
+            if(!placeholderSupport()){   // 判断浏览器是否支持 placeholder
+                $(document).ready(function(){
+                    //默认遍历循环添加placeholder
+                    $('[placeholder]').each(function(){
+                        $(this).parent().append("<span class='placeholder'>"+$(this).attr('placeholder')+"</span>");
+                    })
+                    $('[placeholder]').blur(function(){
+                        if($(this).val()!=""){  //如果当前值不为空，隐藏placeholder
+                            $(this).parent().find('span.placeholder').hide();
+                        }
+                        else{
+                            $(this).parent().find('span.placeholder').show();
+                        }
+                    })
+                });
+            }
+        });
+        $scope.checkPlaceholder = function(id){
+            if(!placeholderSupport()){
+                $('span').eq(id).hide()
+            }
+        }
         //点击登录
         $scope.conf = {
             errCode: '',
             errInfo: ''
-        }
+        };
         $scope.doLogin = function () {
             $scope.login();
-        }
+        };
         $scope.checkLogin = function ($event) {
             if ($event.keyCode == 13) {
                 $scope.login();
             }
-        }
+        };
         $scope.login = function () {
             var userInfo = {
                 loginname: $scope.loginname,
                 passwd: $scope.passwd
-            }
+            };
             //console.log(userInfo)
             var loginCode = document.getElementById("loginCode").value.toUpperCase();
             if (userInfo.loginname == undefined || userInfo.loginname == '') {
@@ -138,7 +157,7 @@
             }
             if (loginCode.length <= 0) {
                 $scope.conf.errCode = "验证码不能为空！";
-                return false;false
+                return false;
             } else if (loginCode != code) {
                 $scope.conf.errCode = "验证码错误！";
                 createCode();

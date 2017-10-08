@@ -58,7 +58,7 @@
                     <td>1</td>
                     <td>1</td>
                     <td>
-                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">物资明细</a>
+                        <a class="button button-green operationButton" href="#/goodsDetails">物资明细</a>
                         <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
                         <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
                     </td>
@@ -68,5 +68,5 @@
         <div ng-include="'views/common/paging.html'"></div>
     </div>
 </div>
-<div class="add-overlay" ng-show="showAdd" ng-include="'views/stockOutManagement/forOutBound/addBound.html'"></div>
-<div class="add-overlay" ng-show="showModify" ng-include="'views/stockOutManagement/forOutBound/modifyBound.html'"></div>
+<div class="add-overlay" ng-show="showAdd" ng-include="'views/materialsFor/stockRequisition/addStockRequisition.html'"></div>
+<div class="add-overlay" ng-show="showModify" ng-include="'views/materialsFor/stockRequisition/modifyStockRequisition.html'"></div>

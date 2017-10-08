@@ -1,0 +1,50 @@
+<div class="addUser forStar" id="modifyInstitutions">
+    <h4 class="borderB padding10 textC">修改用户信息</h4>
+    <ul class="firstUl tabLable">
+        <li class="form-group">
+            <label class="addStar">登录账号：</label>
+            <input type="text" class="label6-width form-control" ng-model="code.loginname" validator="[requiredSubmit]" validator-group="user_name" disabled>
+        </li>
+        <li>
+            <label>登录密码：</label>
+            <input type="password" class="label6-width form-control" ng-model="code.passwd">
+        </li>
+        <li class="form-group">
+            <label class="addStar pos-re">用户类型：</label>
+            <div class="styled-select label6-width">
+                <select class=" form-control"  ng-model="code.role" ng-options="o.key as o.value for o in UserRole" validator="[requiredSubmit]" validator-group="user_name">
+                </select>
+                <i class="arrow"></i>
+            </div>
+        </li>
+        <li class="form-group">
+            <label class="addStar pos-re">组织：</label>
+            <div class="styled-select label6-width">
+                <select class="form-control"  ng-model="code.organize_code" ng-options="o.key as o.value for o in paramquery" validator="[requiredSubmit]" validator-group="user_name">
+                </select>
+                <i class="arrow"></i>
+            </div>
+        </li>
+        <li class="form-group">
+            <label class="addStar">人员编号：</label>
+            <input type="text" class="label6-width form-control" ng-model="code.code" validator="[requiredSubmit]" validator-group="user_name">
+        </li>
+        <li class="form-group">
+            <label  class="addStar">人员名称：</label>
+            <input type="text" class="label6-width form-control" ng-model="code.name" validator="[requiredSubmit]" validator-group="user_name">
+        </li>
+        <li>
+            <label>办公电话：</label>
+            <input class="label6-width form-control" type="text" ng-model="code.ophone">
+        </li>
+        <li>
+            <label>手机：</label>
+            <input class="label6-width form-control" type="text" ng-model="code.mphone">
+        </li>
+    </ul>
+    <div style="float: left;margin: 26px 26px 26px 295px;">
+        <a class="button button-lightBlue" ng-click="modifyAtSure()">提交</a>
+        <a class="button button-green" ng-click="cclModify()">取消</a>
+    </div>
+    <div class="ngdialog-close2"  style="cursor: pointer" ng-click="cclModify()"></div>
+</div>

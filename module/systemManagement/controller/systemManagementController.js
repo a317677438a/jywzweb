@@ -1,8 +1,8 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','HolidaySettingController'],function(app){
-    app.register.controller('bizParamController',
+define(['app','userManagementController','modifyPasswordController'],function(app){
+    app.register.controller('systemManagementController',
     [
         '$scope',
         function($scope){

@@ -1,0 +1,12 @@
+<div class="setInstitution" >
+    <h4 class="borderB padding10 textC">设置用户权限</h4>
+    <treecontrol class="tree-classic"
+                 tree-model="menutree">
+        <input type="checkbox" ng-model="conf.check_array[node.id]" ng-click="checkMe($index,node.id)">
+        <span>{{node.menuname}}</span>
+    </treecontrol>
+    <div style="margin: 26px 0px 26px 76px;">
+        <a class="button button-lightBlue" ng-click="addSure()">提交</a>
+        <a class="button button-green" ng-click="cut()">取消</a>
+    </div>
+</div>

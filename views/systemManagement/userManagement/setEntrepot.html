@@ -1,0 +1,14 @@
+<div class="addUser forStar">
+    <h4 class="borderB padding10 textC">仓库设置</h4>
+    <ul class="firstUl tabLable clearFix">
+        <li ng-repeat="item in storehouse">
+            <input type="checkbox" class="fl" name="{{item.key}}" value="{{item.key}}" style="height: .2rem;">
+            <label>{{item.value}}</label>
+        </li>
+    </ul>
+    <p style="color: red;padding-left: 20px">不可选择的仓库为其他仓管员管理的仓库!</p>
+    <div style="float: left;margin: 26px 26px 26px 295px;">
+        <a class="button button-lightBlue" ng-click="addEntrepot()">提交</a>
+        <a class="button button-green" ng-click="cancelEntrepot()">取消</a>
+    </div>
+</div>

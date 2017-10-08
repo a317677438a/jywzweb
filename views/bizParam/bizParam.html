@@ -1,6 +1,0 @@
-<!-- 业务参数-->
-<div class="subNav wrap topNav">
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">节假日设置</a>
-</div>
-<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/bizParam/HolidaySetting/HolidaySetting.html'" ng-controller="HolidaySettingController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-
