@@ -60,6 +60,7 @@
                         <th>规格型号</th>
                         <th>供应商（厂家）</th>
                         <th>入库数量</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,9 @@
                         <td>{{item.model}}</td>
                         <td>{{item.supplier}}</td>
                         <td>{{item.putin_number}}</td>
+                        <td>
+                            <a class="button button-yellow operationButton" ng-click="deleteOneMaterial($index)">删除</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

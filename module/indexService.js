@@ -59,6 +59,10 @@ define(['app'],function(app){
                     resetPasswd : function(data){
                         return $http.post(API_ENDPOINT.url+'user/resetPasswd.json',data,WITH_CREDENTIALS);
                     },
+                    //查询某个角色下的用户列表。
+                    getUserByRole : function(data){
+                        return $http.post(API_ENDPOINT.url+'base/getUserByRole.json',data,WITH_CREDENTIALS);
+                    },
                     //用户仓库编码列表查询
                     haveStorehouseCode : function(data){
                         return $http.post(API_ENDPOINT.url+'user/haveStorehouseCode.json',data,WITH_CREDENTIALS);
@@ -162,6 +166,14 @@ define(['app'],function(app){
                     //入库查询统计
                     procurementStorage : function(data){
                         return $http.post(API_ENDPOINT.url+'/stockManagement/procurementStorage.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增领料申请
+                    addApply : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/addApply.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增领料申请---查询查询物资在仓库的存量=入库数量-出库数据。以及用户持有物资的数量。
+                    materialOwnNumber : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/materialOwnNumber.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

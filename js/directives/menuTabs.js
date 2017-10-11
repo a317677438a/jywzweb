@@ -235,7 +235,22 @@ angular.module('menuTabs',[])
                 $document.off('mouseup', mouseup);
             }
         };
-    }]);
+    }])
+    //清除内容
+    .directive('ensureUnique',function(){
+        return{
+            restrict : 'A',
+            require : '?ngModel',
+            scope:{
+                ngModel: '='
+            },
+            link : function(scope,ele,attrs,ngModel){
+                ele.on('click', function() {
+                    ngModel.$setViewValue('');
+                });
+            }
+        }
+    })
 
 
 

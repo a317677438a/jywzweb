@@ -913,4 +913,21 @@ angular.module('filter', [])
                 return val;
             }
         };
-    });
+    })
+    //项目状态
+    .filter('applyStatus', function () {
+        return function (val) {
+            switch (val) {
+                case "1":
+                    return '待审核';
+                case "2":
+                    return '审批拒绝';
+                case "3":
+                    return '待领用（审批通过）';
+                case "4":
+                    return '已领用';
+                default :
+                    return val;
+            }
+        };
+    })

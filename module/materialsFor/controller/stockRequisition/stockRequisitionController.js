@@ -8,7 +8,10 @@ define(['app'],function(app){
             'commonQuery',
             'indexService',
             'ngDialog',
-            function($scope,commonQuery,indexService,ngDialog){
+            '$filter',
+            '$validator',
+            '$rootScope',
+            function($scope,commonQuery,indexService,ngDialog,$filter,$validator,$rootScope){
 
                 $scope.conf = {};
                 $scope.message = 'Please Wait...';
@@ -52,11 +55,15 @@ define(['app'],function(app){
                         })
                     }
                 };
-                ////查询物资已经对应的id
-                $scope.getMaterialAndId = function(){
-                    $scope.promise = indexService.getMaterialAndId().success(function(data){  //查询物资已经对应的id
+                //查询某个角色下的用户列表。
+                $scope.getUserByRole = function(type){
+                    $scope.promise = indexService.getUserByRole({role:type,exeid:'MS0002EQ01'}).success(function(data){  //查询物资已经对应的id
                         if(data.success=="true"){
-                            $scope.MaterialAndId = data.returndata;
+                            if(type==2){
+                                $scope.UserByRole_canguan = data.returndata;
+                            }else if(type==3){
+                                $scope.UserByRole_lingdao = data.returndata;
+                            }
                         }else{
                             ngDialog.open({
                                 template: 'views/common/alert.html',
@@ -70,39 +77,228 @@ define(['app'],function(app){
                         }
                     });
                 };
-                $scope.getMaterialAndId();
-                //点击新增入库
+                //新增申领单---查询出库人对应的仓库编码
+                $scope.haveStorehouseCode = function(){
+                    $scope.promise = indexService.haveStorehouseCode({id:$scope.storageModel.storehouse_user}).success(function(data){  //查询物资已经对应的id
+                        if(data.success=="true"){
+                            $scope.houseCodeList = data.returndata;
+                            if($scope.houseCodeList.length>0){
+                                $scope.storageModel.apply_storehouse_code = $scope.houseCodeList[0];
+                            }
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //新增申领单---自动生成申领单号
+                $scope.getCode = function(){
+                    $scope.promise = indexService.getCode({codeType:'SQ'}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.storageModel.apply_code = data.returndata.code;
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //新增申领单---添加物资--所有物资下拉列表
+                $scope.getALLMaterialList = function(){
+                    $scope.promise = indexService.getALLMaterialList({exeid:'MS0000EQ006'}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.ALLMaterialList = data.returndata;
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //查询查询物资在仓库的存量=入库数量-出库数据。以及用户持有物资的数量。
+                $scope.materialOwnNumber = function(){
+                    $scope.promise = indexService.materialOwnNumber({storehouse_code:$scope.storageModel.apply_storehouse_code,material_id:$scope.conf.material_key}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.conf.storeNumber = data.returndata.storeNumber; //库存
+                            $scope.conf.ownNumber = data.returndata.ownNumber; //当前物资拥有数量
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //点击新增申领单
                 $scope.addMateriel = function(){
                     $scope.showAdd = true;
-                    $scope.storageModel.putin_type = '1';
+                    $scope.storageModel.apply_user_name = $rootScope.name;
+                    $scope.storageModel.apply_user = $rootScope.id;
+                    $scope.storageModel.storehouse_user = ''; //出库人
+                    $scope.storageModel.apply_storehouse_code = ''; //领料仓库
+                    $scope.getCode();
+                    $scope.getUserByRole(2);
+                    $scope.getUserByRole(3);
                 };
-                //关闭新增窗口
+                //切换出库人
+                $scope.getMyHouse = function(){
+                    $scope.haveStorehouseCode();
+                };
+                //关闭新增申领窗口
                 $scope.closeForm = function(){
                     $scope.showAdd = false;
                 };
                 //点击新增物资
                 $scope.MaterialList=[];
                 $scope.addMaterial = function(){
-                    $scope.MaterialList.push({jy_material_id:'',putin_number:''});
+                    $validator.validate($scope,'securities_name').success(function() {
+                        $scope.showAddMaterial = true;
+                        $scope.getALLMaterialList();
+                        $scope.conf.material = '';
+                        $scope.conf.code = '';
+                        $scope.conf.name = '';
+                        $scope.conf.codename = '';
+                        $scope.conf.model = '';
+                        $scope.conf.supplier = '';
+                        $scope.conf.apply_number = '';
+                    });
+                };
+                //点击鼠标显示下拉菜单
+                $scope.showMenu = function(){
+                    $scope.isShowMenu = true;
+                };
+                //点击下拉的将上面的值替换掉
+                $scope.changevalue = function(name,key){
+                    $scope.conf.material = name;
+                    $scope.conf.material_key = key;
+                    $scope.isShowMenu = false;
+                    $scope.promise = indexService.getMaterialById({id:$scope.conf.material_key}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.conf.code = data.returndata.code;
+                            $scope.conf.codename = data.returndata.codename;
+                            $scope.conf.model = data.returndata.model;
+                            $scope.conf.supplier = data.returndata.supplier;
+                            $scope.conf.name = data.returndata.name;
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                    $scope.materialOwnNumber();
+                };
+                //点击其他地方关闭下拉框
+                $scope.notShow = function(){
+                    $scope.isShowMenu = false;
+                };
+                //清除所选
+                $scope.removeName = function(){
+                    $scope.conf.material = '';
+                    $scope.conf.code = '';
+                    $scope.conf.name = '';
+                    $scope.conf.codename = '';
+                    $scope.conf.model = '';
+                    $scope.conf.supplier = '';
+                    $scope.conf.storeNumber = '';
+                    $scope.conf.apply_number = '';
+                };
+                //确定新增物资
+                $scope.addSureAddMaterial = function(){
+                    $validator.validate($scope,'AddStock').success(function() {//继续申领
+                        $scope.doSure = function(){
+                            for(var i=0;i<$scope.MaterialList.length;i++){
+                                if($scope.conf.code == $scope.MaterialList[i].code){
+                                    ngDialog.open({
+                                        template: 'views/common/alert.html',
+                                        className: 'alert',
+                                        showClose: true,
+                                        scope: $scope,
+                                        controller: ['$scope', function ($scope) {
+                                            $scope.response = "该物资已存在,不允许重复添加!";
+                                        }]
+                                    });
+                                    return;
+                                }
+                            }
+                            $scope.MaterialList.push(
+                                {
+                                    code : $scope.conf.code,
+                                    name : $scope.conf.name,
+                                    codename : $scope.conf.codename,
+                                    model : $scope.conf.model,
+                                    supplier : $scope.conf.supplier,
+                                    jy_material_id:$scope.conf.material_key,
+                                    apply_number:$scope.conf.apply_number
+                                }
+                            );
+                            $scope.showAddMaterial = false;
+                        };
+                        //取消申领
+                        $scope.doCancel = function(){
+                            ngDialog.close();
+                        };
+                        if(parseInt($scope.conf.ownNumber)>0){
+                            ngDialog.open({
+                                template: 'views/common/confirmstock.html',
+                                className: 'confirm',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.confirmMsg = "该物资您当前已拥有" + $scope.ownNumber +"个,是否继续申领？";
+                                }]
+                            });
+                        }else{
+                            $scope.doSure();
+                        }
+                    })
+                };
+                //关闭新增物资
+                $scope.closeAddMaterialModify = function(){
+                    $scope.showAddMaterial = false;
                 };
                 //删除一个物资
                 $scope.deleteOneMaterial =function(id){
                     $scope.MaterialList.splice(id,1);
                 };
-                //确定新增入库单
+                //确定新增申领单
                 $scope.addOneStorageSure = function(){
-                    var year = $scope.getNewDate('1');
-                    var time = $scope.getNewDate('2');
-                    $scope.storageModel.crt_date = year;
-                    $scope.storageModel.crt_time = time;
                     $scope.storageModel_copy = angular.copy($scope.storageModel);
-                    $scope.storageModel_copy.putin_date = $filter('datePickerFormat2')($scope.storageModel_copy.putin_date);
-                    $scope.storageModel_copy.status = 1;
+                    $scope.storageModel_copy.apply_date = $filter('datePickerFormat2')($scope.storageModel_copy.apply_date);
                     var getInfo = {
-                        stockInfo : $scope.storageModel_copy,
-                        stockDetailsList : $scope.MaterialList
+                        applyInfo : $scope.storageModel_copy,
+                        applyDetailList : $scope.MaterialList
                     };
-                    $scope.promise = indexService.addStock(getInfo).success(function(data){
+                    $scope.promise = indexService.addApply(getInfo).success(function(data){
                         if(data.success=="true"){
                             $scope.showAdd = false;
                             ngDialog.open({
@@ -159,12 +355,13 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
-                    requestData.contract_no = $scope.conf.contract_no;
-                    requestData.putin_date_start = $scope.conf.startDate;
-                    requestData.putin_date_end = $scope.conf.endDate;
+                    requestData.exeid = 'JY3001EQ002';
+                    requestData.status = $scope.conf.status;
+                    requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
 
                     //项目信息列表查询
-                    $scope.promise = indexService.getAllStock(requestData).success(function(data){
+                    $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
                             $scope.data = data.returndata.rows;
                             $scope.totalItems = data.returndata.results;
