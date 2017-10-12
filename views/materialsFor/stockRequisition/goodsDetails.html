@@ -2,31 +2,31 @@
 <div class="wrap propertyPosition">
     当前位置：<a href="#/materialsFor">领料申请</a> > <a href="#/materialsFor">物资明细</a>
 </div>
-<div class="wrap mgBottom10 bkColor contentShadow">
+<div class="wrap mgBottom10 bkColor contentShadow" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
     <div class="commonTable padding10 clearFix">
-        <h4 class="mgBottom20 mgTop20">领料仓库：{{dealno_arr.join('')}}</h4>
+        <h4 class="mgBottom20 mgTop20">领料仓库：{{house}}</h4>
         <table>
             <thead>
                 <tr>
+                    <th>物资编码</th>
                     <th>物资名称</th>
                     <th>物资类型</th>
                     <th>规格型号</th>
-                    <th>供应商</th>
+                    <th>供应商（厂家）</th>
                     <th>申领数量</th>
-                    <th>物资状态</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
+                    <td>{{item.code}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.type_name}}</td>
+                    <td>{{item.codename}}</td>
                     <td>{{item.model}}</td>
                     <td>{{item.supplier}}</td>
                     <td>{{item.apply_number}}</td>
-                    <td>{{item.status}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!--<div class="clearFix" ng-include="'views/common/paging.html'"></div>-->
+    <div class="clearFix" ng-include="'views/common/paging.html'"></div>
 </div>

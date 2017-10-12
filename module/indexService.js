@@ -174,6 +174,22 @@ define(['app'],function(app){
                     //新增领料申请---查询查询物资在仓库的存量=入库数量-出库数据。以及用户持有物资的数量。
                     materialOwnNumber : function(data){
                         return $http.post(API_ENDPOINT.url+'/apply/materialOwnNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //修改一条申请记录
+                    modifyApply : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/modifyApply.json',data,WITH_CREDENTIALS);
+                    },
+                    //删除一条申请记录
+                    deleteApply : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/deleteApply.json',data,WITH_CREDENTIALS);
+                    },
+                    //领料审批 --  审核
+                    reviewApply : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/reviewApply.json',data,WITH_CREDENTIALS);
+                    },
+                    //领料审批 --  出库登记
+                    receiveApplyMaterial : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/receiveApplyMaterial.json',data,WITH_CREDENTIALS);
                     }
                 };
             }
