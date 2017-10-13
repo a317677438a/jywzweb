@@ -159,12 +159,13 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
-                    requestData.contract_no = $scope.conf.contract_no;
-                    requestData.putin_date_start = $scope.conf.startDate;
-                    requestData.putin_date_end = $scope.conf.endDate;
-
+                    requestData.exeid='JY4001EQ002';
+                    requestData.putout_type = 1;
+                    requestData.putout_code = $scope.conf.putout_code;
+                    requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                     //项目信息列表查询
-                    $scope.promise = indexService.getAllStock(requestData).success(function(data){
+                    $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
                             $scope.data = data.returndata.rows;
                             $scope.totalItems = data.returndata.results;

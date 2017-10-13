@@ -2,20 +2,29 @@
  * Created by huangyao on 2017/10/5.
  */
 define(['app'],function(app){
-    app.register.controller('stockOutQueryController',
+    app.register.controller('materialsDetailsController',
         [
             '$scope',
             'commonQuery',
-            'ngDialog',
             'indexService',
-            'API_ENDPOINT',
-            function($scope,commonQuery,ngDialog,indexService,API_ENDPOINT){
+            'ngDialog',
+            '$stateParams',
+            '$rootScope',
+            function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope){
 
-                $scope.conf = {};
-                $scope.conf.putout_code = '';
-                $scope.conf.putout_storehouse_code = '';
-                $scope.conf.putout_user_name = '';
+
                 $scope.message = 'Please Wait...';
+                //保证当前导航菜单高亮
+                var url = localStorage.getItem('url');
+                if (document.getElementById('menuList')) {
+                    var tagA = document.getElementById('menuList').getElementsByTagName('a');
+                    for (var i in tagA) {
+                        if (tagA.hasOwnProperty(i) && tagA[i].hash == url) {
+                            tagA[i].className = 'on';
+                        }
+                    }
+                }
+                $scope.house = $stateParams.house; //领料仓库
                 // 初始化分页
                 $scope.page={};
                 $scope.pagesize = 10;
@@ -45,14 +54,15 @@ define(['app'],function(app){
                 };
                 $scope.getEmployeesPage=function(){
                     var requestData = {};
-                    requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
-                    requestData.limit=$scope.pagesize;
-                    requestData.exeid = 'JY4001EQ004';
-                    requestData.putout_code = $scope.conf.putout_code;
-                    requestData.putout_storehouse_code = $scope.conf.putout_storehouse_code;
-                    requestData.putout_user_name = $scope.conf.putout_user_name;
+                    //requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
+                    //requestData.limit=$scope.pagesize;
+                    requestData.exeid = 'JY4001EQ003';
+                    requestData.id = $stateParams.id;
+                    //requestData.apply_code = $stateParams.code;
+                    //requestData.apply_storehouse_code = $scope.house;
+                    //requestData.apply_user_name = $rootScope.id;
 
-
+                    //项目信息列表查询
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
                             $scope.data = data.returndata.rows;
@@ -75,30 +85,6 @@ define(['app'],function(app){
                 };
                 //默认查询页面数据
                 $scope.getEmployeesPage();
-                //查询
-                $scope.search = function(){
-                    $scope.getEmployeesPage();
-                };
-
-                //下载文档
-                $scope.downLoad = function(ul,filename,suffix){
-                    var downloadDetail = {
-                        exeid : 'JY4001EQ004',
-                        putout_storehouse_code : $scope.conf.putout_storehouse_code,
-                        putout_code : $scope.conf.putout_code,
-                        putout_user_name : $scope.conf.putout_user_name
-                    }
-                    $scope.promise = indexService.downloadDetail(downloadDetail).success(function(data){
-                        if(data){
-                            var url=API_ENDPOINT.url+'storehouseout/downloadDetail.json?'+$.param(downloadDetail);
-                            setTimeout(function(){
-                                window.open(url);
-                            },1000)
-                        }
-                    }).error(function(){
-                        window.location.href = 'views/common/error.html';
-                    })
-                }
             }
         ]);
 });

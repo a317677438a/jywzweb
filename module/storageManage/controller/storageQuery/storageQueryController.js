@@ -43,9 +43,10 @@ define(['app'],function(app){
                 var requestData = {};
                 requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                 requestData.limit=$scope.pagesize;
-                requestData.contract_no = $scope.conf.contract_no;
-                requestData.putin_date_start = $scope.conf.startDate;
-                requestData.putin_date_end = $scope.conf.endDate;
+                requestData.exeid='JY2001EQ009';
+                requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
+                requestData.putin_code = $scope.conf.putin_code;
+                requestData.putin_user_name = $scope.conf.putin_user_name;
 
                 //项目信息列表查询
                 $scope.promise = indexService.procurementStorage(requestData).success(function(data){

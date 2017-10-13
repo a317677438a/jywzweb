@@ -39,7 +39,8 @@
             //入库管理
             "procurementStorageController": 'module/storageManage/controller/procurementStorage/procurementStorageController',
             "storageQueryController": 'module/storageManage/controller/storageQuery/storageQueryController',
-            //出库管理
+            //出库管理 stockOutApp
+            "stockOutApp" : 'module/stockOutManagement/stockOutApp',
             "forOutBoundController": 'module/stockOutManagement/controller/forOutBound/forOutBoundController',
             "stockOutQueryController": 'module/stockOutManagement/controller/stockOutQuery/stockOutQueryController',
             //物资申领
@@ -109,7 +110,7 @@
     };
     require.config(config);
 
-    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','materialsApp','filter','jquery_ui','fullcalendar',
+    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','materialsApp','stockOutApp','filter','jquery_ui','fullcalendar',
         'materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
         angular.bootstrap(document,['securityManage']);
     });

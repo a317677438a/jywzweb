@@ -3,7 +3,7 @@
     <div class="forStar mgBottom20 borderB clearFix">
         <ul class="fl clearFix" style="width: 70%">
             <li style="width: 300px;position: relative">
-                <input class="projectName" ng-model="conf.contract_no" placeholder="出库仓库">
+                <input class="projectName" ng-model="conf.contract_no" placeholder="出库单号">
                 <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
             </li>
             <li style="width: 460px">
@@ -15,7 +15,7 @@
         </ul>
         <div class="fl">
             <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
-            <a class="button button-blue" ng-click="addMateriel()">新增出库</a>
+            <!--<a class="button button-blue" ng-click="addMateriel()">新增出库</a>-->
         </div>
     </div>
     <div class="commonTable clearFix">
@@ -24,42 +24,25 @@
                 <tr>
                     <th>出库类型</th>
                     <th>出库人</th>
-                    <th>入库日期</th>
+                    <th>出库日期</th>
                     <th>出库仓库</th>
                     <th>申请人</th>
                     <th>状态</th>
                     <th>备注</th>
-                    <th>操作人</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                <!--<tr ng-repeat="item in data">-->
-                    <!--<td>{{item.putout_type}}</td>-->
-                    <!--<td>{{item.putout_user}}</td>-->
-                    <!--<td>{{item.putout_date}}</td>-->
-                    <!--<td>{{item.putout_storehouse_code}}</td>-->
-                    <!--<td>{{item.apply_user}}</td>-->
-                    <!--<td>{{item.status}}</td>-->
-                    <!--<td>{{item.remark}}</td>-->
-                    <!--<td>{{item.inputuser}}</td>-->
-                    <!--<td>-->
-                        <!--<a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>-->
-                        <!--<a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                <tr ng-repeat="item in data">
+                    <td>{{item.putout_type}}</td>
+                    <td>{{item.putout_user_name}}</td>
+                    <td>{{item.putout_date}}</td>
+                    <td>{{item.putout_storehouse_name}}</td>
+                    <td>{{item.apply_user_name}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.remark}}</td>
                     <td>
-                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
-                        <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
+                        <a class="button button-green operationButton" href="#/materialsDetails?id={{item.id}}&house={{item.putout_storehouse_name}}"></a>
                     </td>
                 </tr>
             </tbody>

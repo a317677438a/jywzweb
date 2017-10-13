@@ -190,6 +190,10 @@ define(['app'],function(app){
                     //领料审批 --  出库登记
                     receiveApplyMaterial : function(data){
                         return $http.post(API_ENDPOINT.url+'/apply/receiveApplyMaterial.json',data,WITH_CREDENTIALS);
+                    },
+                    //申领出库 --  记录导出
+                    downloadDetail : function(data){
+                        return $http.post(API_ENDPOINT.url+'/storehouseout/downloadDetail.json',data,WITH_CREDENTIALS);
                     }
                 };
             }
