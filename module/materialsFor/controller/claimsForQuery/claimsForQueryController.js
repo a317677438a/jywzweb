@@ -10,9 +10,15 @@ define(['app'],function(app){
             '$filter',
             '$validator',
             'indexService',
-            function($scope,commonQuery,ngDialog,$filter,$validator,indexService){
+            'API_ENDPOINT',
+            function($scope,commonQuery,ngDialog,$filter,$validator,indexService,API_ENDPOINT){
 
                 $scope.conf = {};
+                $scope.conf.apply_storehouse_code = '';
+                $scope.conf.apply_code = '';
+                $scope.conf.apply_user_name = '';
+                $scope.conf.startDate = '';
+                $scope.conf.endDate = '';
                 $scope.message = 'Please Wait...';
                 //申领状态
                 commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.material.ApplyStatus'}).success(function(data){
@@ -92,6 +98,28 @@ define(['app'],function(app){
                 $scope.search = function(){
                     $scope.getEmployeesPage();
                 };
+                //下载文档
+                $scope.downLoad = function(ul,filename,suffix){
+                    var downloadDetail = {
+                        exeid : 'JY3001EQ008',
+                        apply_storehouse_code : $scope.conf.apply_storehouse_code,
+                        apply_code : $scope.conf.apply_code,
+                        apply_user_name : $scope.conf.apply_user_name,
+                        apply_date_start : $filter('datePickerFormat')($scope.conf.startDate),
+                        apply_date_end : $filter('datePickerFormat')($scope.conf.endDate)
+                    }
+                    $scope.promise = indexService.downloadDetailApply(downloadDetail).success(function(data){
+                        if(data){
+                            var url=API_ENDPOINT.url+'apply/downloadDetail.json?'+$.param(downloadDetail);
+                            setTimeout(function(){
+                                window.open(url);
+                            },1000)
+                        }
+                    }).error(function(){
+                        window.location.href = 'views/common/error.html';
+                    })
+                }
+
             }
         ]);
 });

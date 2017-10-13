@@ -1,7 +1,7 @@
 <!-- 申领查询 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix" style="width: 80%">
+        <ul class="fl clearFix">
             <li>
                 <label>申领单号：</label>
                 <input class="label5-width" ng-model="conf.apply_code">
@@ -15,6 +15,10 @@
                     <i class="arrow"></i>
                 </div>
             </li>
+            <li>
+                <label>申领人:</label>
+                <input class="label5-width" ng-model="conf.apply_user_name" placeholder="申领人">
+            </li>
             <li style="width: 460px">
                 <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
@@ -24,6 +28,7 @@
         </ul>
         <div class="fl">
             <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="downLoad()">导出</a>
         </div>
     </div>
     <div class="commonTable clearFix">

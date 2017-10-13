@@ -7,7 +7,8 @@ define(['app'],function(app){
         '$scope',
         'indexService',
         'ngDialog',
-        function($scope,indexService,ngDialog){
+        'API_ENDPOINT',
+        function($scope,indexService,ngDialog,API_ENDPOINT){
 
             $scope.conf = {};
             $scope.conf.startDate = '';
@@ -69,10 +70,33 @@ define(['app'],function(app){
                 //    window.location.href = 'views/common/error.html'
                 //})
             };
+            //默认查询页面数据
+            $scope.getEmployeesPage();
             //查询
             $scope.search = function(){
                 $scope.getEmployeesPage();
             };
+            //下载文档
+            $scope.downLoad = function(ul,filename,suffix){
+                var downloadDetail = {
+                    exeid : 'JY2001EQ009',
+                    putin_storehouse_code : $scope.conf.putin_storehouse_code,
+                    putin_code : $scope.conf.putin_code,
+                    putin_user_name : $scope.conf.putin_user_name,
+                    putin_date_start : $filter('datePickerFormat')($scope.conf.startDate),
+                    putin_date_end : $filter('datePickerFormat')($scope.conf.endDate)
+                }
+                $scope.promise = indexService.downloadDetailIno(downloadDetail).success(function(data){
+                    if(data){
+                        var url=API_ENDPOINT.url+'storehouseout/downloadDetail.json?'+$.param(downloadDetail);
+                        setTimeout(function(){
+                            window.open(url);
+                        },1000)
+                    }
+                }).error(function(){
+                    window.location.href = 'views/common/error.html';
+                })
+            }
         }
     ]);
 });

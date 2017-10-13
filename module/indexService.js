@@ -191,9 +191,17 @@ define(['app'],function(app){
                     receiveApplyMaterial : function(data){
                         return $http.post(API_ENDPOINT.url+'/apply/receiveApplyMaterial.json',data,WITH_CREDENTIALS);
                     },
-                    //申领出库 --  记录导出
+                    //出库查询统计 --  记录导出
                     downloadDetail : function(data){
                         return $http.post(API_ENDPOINT.url+'/storehouseout/downloadDetail.json',data,WITH_CREDENTIALS);
+                    },
+                    //入库查询统计 --  记录导出
+                    downloadDetailIno : function(data){
+                        return $http.post(API_ENDPOINT.url+'/storehousein/downloadDetail.json',data,WITH_CREDENTIALS);
+                    },
+                    //物资申领--申领查询 --  记录导出
+                    downloadDetailApply : function(data){
+                        return $http.post(API_ENDPOINT.url+'/apply/downloadDetail.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

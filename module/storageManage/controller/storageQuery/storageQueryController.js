@@ -7,11 +7,17 @@ define(['app'],function(app){
         '$scope',
         'indexService',
         'ngDialog',
-        function($scope,indexService,ngDialog){
+        'API_ENDPOINT',
+        '$filter',
+        'commonQuery',
+        function($scope,indexService,ngDialog,API_ENDPOINT,$filter,commonQuery){
 
             $scope.conf = {};
             $scope.conf.startDate = '';
             $scope.conf.endDate = '';
+            $scope.conf.putin_storehouse_code = '';
+            $scope.conf.putin_code = '';
+            $scope.conf.putin_user_name = '';
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
@@ -49,7 +55,7 @@ define(['app'],function(app){
                 requestData.putin_user_name = $scope.conf.putin_user_name;
 
                 //项目信息列表查询
-                $scope.promise = indexService.procurementStorage(requestData).success(function(data){
+                $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                     if(data.success=="true"){
                         $scope.data = data.returndata.rows;
                         $scope.totalItems = data.returndata.results;
@@ -69,10 +75,33 @@ define(['app'],function(app){
                 //    window.location.href = 'views/common/error.html'
                 //})
             };
+            //默认查询页面数据
+            $scope.getEmployeesPage();
             //查询
             $scope.search = function(){
                 $scope.getEmployeesPage();
             };
+            //下载文档
+            $scope.downLoad = function(ul,filename,suffix){
+                var downloadDetail = {
+                    exeid : 'JY2001EQ009',
+                    putin_storehouse_code : $scope.conf.putin_storehouse_code,
+                    putin_code : $scope.conf.putin_code,
+                    putin_user_name : $scope.conf.putin_user_name,
+                    putin_date_start : $filter('datePickerFormat')($scope.conf.startDate),
+                    putin_date_end : $filter('datePickerFormat')($scope.conf.endDate)
+                }
+                $scope.promise = indexService.downloadDetailIno(downloadDetail).success(function(data){
+                    if(data){
+                        var url=API_ENDPOINT.url+'storehousein/downloadDetail.json?'+$.param(downloadDetail);
+                        setTimeout(function(){
+                            window.open(url);
+                        },1000)
+                    }
+                }).error(function(){
+                    window.location.href = 'views/common/error.html';
+                })
+            }
         }
     ]);
 });

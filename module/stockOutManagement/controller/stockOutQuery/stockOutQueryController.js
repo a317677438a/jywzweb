@@ -90,7 +90,9 @@ define(['app'],function(app){
                         exeid : 'JY4001EQ004',
                         putout_storehouse_code : $scope.conf.putout_storehouse_code,
                         putout_code : $scope.conf.putout_code,
-                        putout_user_name : $scope.conf.putout_user_name
+                        putout_user_name : $scope.conf.putout_user_name,
+                        putout_date_start : $filter('datePickerFormat')($scope.conf.startDate),
+                        putout_date_end : $filter('datePickerFormat')($scope.conf.endDate)
                     }
                     $scope.promise = indexService.downloadDetail(downloadDetail).success(function(data){
                         if(data){
