@@ -1,7 +1,7 @@
 <!-- 出库查询统计 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix" style="width: 70%">
+        <ul class="fl clearFix">
             <li style="position: relative">
                 <label>出库单号:</label>
                 <input class="label5-width" ng-model="conf.putout_code" placeholder="出库单号">
@@ -14,6 +14,12 @@
             <li>
                 <label>出库人:</label>
                 <input class="label5-width" ng-model="conf.putout_user_name" placeholder="出库人">
+            </li>
+            <li style="width: 460px">
+                <label>日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
             </li>
         </ul>
         <div class="fl">

@@ -1,13 +1,23 @@
 <!-- 入库统计 -->
+<!-- 入库查询统计 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix" style="width: 70%">
-            <li style="width: 300px;position: relative">
-                <input class="projectName" ng-model="conf.contract_no" placeholder="合同编号/物资名称/供应商/存放仓库">
-                <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
+        <ul class="fl clearFix">
+            <li style="position: relative">
+                <label>入库单号:</label>
+                <input class="label5-width" ng-model="conf.putin_code" placeholder="入库单号">
+                <!--<i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>-->
+            </li>
+            <li>
+                <label>入库仓库编码：</label>
+                <input class="label6-width" ng-model="conf.putin_storehouse_code" placeholder="入库仓库编码">
+            </li>
+            <li>
+                <label>入库人:</label>
+                <input class="label5-width" ng-model="conf.putin_user_name" placeholder="入库人">
             </li>
             <li style="width: 460px">
-                <label>入库日期时段：</label>
+                <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
@@ -36,14 +46,14 @@
             <tbody>
             <tr ng-repeat="item in data">
                 <td>{{item.putin_type}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.type_name}}</td>
+                <td>{{item.material_name}}</td>
+                <td>{{item.material_type_name}}</td>
                 <td>{{item.putin_number}}</td>
                 <td>{{item.supplier}}</td>
                 <td>{{item.model}}</td>
                 <td>{{item.putin_date}}</td>
                 <td>{{item.contract_no}}</td>
-                <td>{{item.putin_storehouse_code}}</td>
+                <td>{{item.putin_storehouse_name}}</td>
             </tr>
             </tbody>
         </table>

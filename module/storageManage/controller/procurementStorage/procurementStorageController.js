@@ -307,7 +307,7 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
-                    requestData.contract_no = $scope.conf.contract_no;
+                    requestData.putin_code = $scope.conf.putin_code;
                     requestData.putin_date_start = $scope.conf.startDate;
                     requestData.putin_date_end = $scope.conf.endDate;
                     requestData.putin_type = 1;

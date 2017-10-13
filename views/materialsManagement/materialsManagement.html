@@ -4,5 +4,5 @@
     <div class="dashed"></div>
     <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" href="#/materielMaintenance" ng-click="set(2)">物资维护</a>
 </div>
-<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/materialsManagement/materialType/materialType.html'" ng-controller="materialTypeController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/materialsManagement/materielMaintenance/materielMaintenance.html'" ng-controller="materielMaintenanceController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap pos-re" ng-if="conf.isCurrentproperty==1" ng-include="'views/materialsManagement/materialType/materialType.html'" ng-controller="materialTypeController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap pos-re" ng-if="conf.isCurrentproperty==2" ng-include="'views/materialsManagement/materielMaintenance/materielMaintenance.html'" ng-controller="materielMaintenanceController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
