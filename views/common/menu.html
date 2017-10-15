@@ -9,30 +9,30 @@
             </li>
         </ul>
         <ul class="fl menu-list menu-hover" id="menuList">
-            <li>
+            <li ng-if="role==2">
                 <a class="" href="#/materialsManagement" menu-tabs>
                     <i class="iconfont"></i>物资管理
                 </a>
             </li>
-            <li>
+            <li ng-if="role==2">
                 <a class="" href="#/storageManage" menu-tabs>
                     <i class="iconfont"></i>入库管理
                 </a>
             </li>
 
-            <li>
+            <li ng-if="role==2">
                 <a class="" href="#/stockOutManagement" menu-tabs>
                     <i class="iconfont"></i>出库管理
                 </a>
             </li>
 
-            <li>
+            <li ng-if="role!=1">
                 <a class="" href="#/materialsFor" menu-tabs>
                     <i class="iconfont"></i>物资申领
                 </a>
             </li>
 
-            <li>
+            <li ng-if="role==2">
                 <a class="" href="#/checkTheStock" menu-tabs>
                     <i class="iconfont"></i>仓库盘点
                 </a>

@@ -1,6 +1,6 @@
 <!-- 系统管理 -->
 <div class="subNav wrap topNav">
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">用户管理</a>
+    <a ng-if="role==1" ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">用户管理</a>
     <div class="dashed"></div>
     <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">密码修改</a>
 </div>
