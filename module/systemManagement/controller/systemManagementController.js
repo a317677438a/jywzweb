@@ -5,9 +5,14 @@ define(['app','userManagementController','modifyPasswordController'],function(ap
     app.register.controller('systemManagementController',
     [
         '$scope',
-        function($scope){
+        '$rootScope',
+        function($scope,$rootScope){
             $scope.conf = {};
-            $scope.conf.isCurrentproperty = 1;
+            if($rootScope.role==1){
+                $scope.conf.isCurrentproperty = 1;
+            }else{
+                $scope.conf.isCurrentproperty = 2;
+            }
 
             $scope.set = function(id){
                 $scope.conf.isCurrentproperty = id;

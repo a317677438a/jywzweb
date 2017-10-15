@@ -394,9 +394,9 @@ define(['app'],function(app){
                     $scope.isShowEntrepot = true;
                     $scope.haveStorehouseCode(toId);
                     $scope.otherHaveStorehouseCode(toId);
+                    $scope.storehouseCodesArr = [];
                 };
                 //确认设置
-                $scope.storehouseCodesArr = [];
                 $scope.addEntrepot = function(){
                     $('input:checkbox').each(function () {
                         if($(this).attr('checked')=='checked'){

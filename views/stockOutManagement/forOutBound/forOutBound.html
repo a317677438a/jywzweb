@@ -34,15 +34,15 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
-                    <td>{{item.putout_type}}</td>
+                    <td>{{item.putout_type | putoutType}}</td>
                     <td>{{item.putout_user_name}}</td>
                     <td>{{item.putout_date}}</td>
                     <td>{{item.putout_storehouse_name}}</td>
                     <td>{{item.apply_user_name}}</td>
-                    <td>{{item.status}}</td>
+                    <td>{{item.status | putoutStatus}}</td>
                     <td>{{item.remark}}</td>
                     <td>
-                        <a class="button button-green operationButton" href="#/materialsDetails?id={{item.id}}&house={{item.putout_storehouse_name}}"></a>
+                        <a class="button button-green operationButton" href="#/materialsDetails?id={{item.id}}&house={{item.putout_storehouse_name}}">物资详情</a>
                     </td>
                 </tr>
             </tbody>

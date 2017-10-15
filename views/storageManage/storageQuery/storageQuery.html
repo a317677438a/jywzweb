@@ -64,7 +64,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
-                    <td>{{item.putin_type}}</td>
+                    <td>{{item.putin_type | putinType}}</td>
                     <td>{{item.material_name}}</td>
                     <td>{{item.material_type_name}}</td>
                     <td>{{item.putin_number}}</td>

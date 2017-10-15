@@ -9,8 +9,13 @@
                 <!--<i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>-->
             </li>
             <li>
-                <label>入库仓库编码：</label>
-                <input class="label6-width" ng-model="conf.putin_storehouse_code" placeholder="入库仓库编码">
+                <label>出库仓库编码：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="conf.putin_storehouse_code"  ng-options="o.key as o.value for o in paramqueryArr" style="width: 250px;">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
             </li>
             <li>
                 <label>入库人:</label>

@@ -160,6 +160,7 @@ define(['app'],function(app){
                     $scope.storageModel.apply_user = $rootScope.id;
                     $scope.storageModel.storehouse_user = ''; //出库人
                     $scope.storageModel.apply_storehouse_code = ''; //领料仓库
+                    $scope.storageModel.apply_date = new Date();
                     $scope.getCode();
                     $scope.getUserByRole(2);
                     $scope.getUserByRole(3);

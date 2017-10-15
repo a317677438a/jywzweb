@@ -43,6 +43,8 @@ define(['app'],function(app){
                     $rootScope.id = data.returndata.id;  //用户id
                     $rootScope.name = data.returndata.name;//用户名
                     $rootScope.role = data.returndata.role; //用户类型
+
+                    $state.go('systemManagement');
                 }else{
 
                 }

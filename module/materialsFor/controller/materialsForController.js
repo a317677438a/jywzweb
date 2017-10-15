@@ -6,9 +6,16 @@ define(['app','claimsForQueryController','materialRequisitionController','outSto
     [
         '$scope',
         '$stateParams',
-        function($scope,$stateParams){
+        '$rootScope',
+        function($scope,$stateParams,$rootScope){
             $scope.conf = {};
-            $scope.conf.isCurrentproperty = 1;
+            if($rootScope.role==4){
+                $scope.conf.isCurrentproperty = 1;
+            }else if($rootScope.role==3){
+                $scope.conf.isCurrentproperty = 2;
+            }else if($rootScope.role==2){
+                $scope.conf.isCurrentproperty = 3;
+            }
             if($stateParams.type!=''&&$stateParams.type!=undefined){
                 $scope.conf.isCurrentproperty = 2 ;
             }

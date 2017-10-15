@@ -18,13 +18,19 @@
             left: 10px;
             top: 15px;
         }
+        .pageMsg{
+            position: absolute;
+            bottom: 2%;
+            left: 37%;
+            color: #fff;
+        }
     </style>
 </head>
-<body ng-controller="loginController" class="login-page"
+<body ng-controller="loginController" class="login-page" style="background-color: #00367a;"
       cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
-<div class="page-bg" style="min-width: 1280px;min-height: 700px;background-color: #00367a;">
-    <!--<img class="bg-img" src="../img/bg.png"/>-->
-</div>
+<!--<div class="page-bg" style="min-width: 1280px;min-height: 700px;background-color: #00367a;">-->
+    <!--&lt;!&ndash;<img class="bg-img" src="../img/bg.png"/>&ndash;&gt;-->
+<!--</div>-->
 <img src="../img/logoDW.png" style="position: absolute;top: 37%;left: 20%;width: 300px;">
 <div class="login-table">
     <div class="login-center">
@@ -59,7 +65,7 @@
         </div>
     </div>
 </div>
-
+<p class="pageMsg">建议使用IE10以上、谷歌、火狐三种浏览器，以便获得更好的用户体验。</p>
 <script charset="utf-8" src="../libs/jquery.min.js"></script>
 <script charset="utf-8" src="../libs/angular.min.js"></script>
 <script charset="utf-8" src="../libs/angular-ui-router.js"></script>
