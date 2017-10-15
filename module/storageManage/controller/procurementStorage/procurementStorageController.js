@@ -307,13 +307,14 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
+                    requestData.exeid='JY2001EQ003';
                     requestData.putin_code = $scope.conf.putin_code;
                     requestData.putin_date_start = $scope.conf.startDate;
                     requestData.putin_date_end = $scope.conf.endDate;
                     requestData.putin_type = 1;
 
                     //项目信息列表查询
-                    $scope.promise = indexService.getAllStock(requestData).success(function(data){
+                    $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
                             $scope.data = data.returndata.rows;
                             $scope.totalItems = data.returndata.results;

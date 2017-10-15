@@ -12,6 +12,7 @@ define(['app'],function(app){
             '$filter',
             function($scope,commonQuery,ngDialog,indexService,API_ENDPOINT,$filter){
 
+
                 $scope.conf = {};
                 $scope.conf.putout_code = '';
                 $scope.conf.putout_storehouse_code = '';
@@ -19,6 +20,53 @@ define(['app'],function(app){
                 $scope.conf.startDate = '';
                 $scope.conf.endDate = '';
                 $scope.message = 'Please Wait...';
+
+                //仓库查询
+                $scope.paramquery = function(){
+                    indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.paramqueryArr = data.returndata.rows;
+                        }
+                    });
+                };
+                $scope.paramquery();
+                //点击鼠标显示下拉菜单
+                $scope.showMenu = function(){
+                    $scope.isShowMenu = true;
+                };
+                //点击下拉的将上面的值替换掉
+                $scope.changevalue = function(name,key){
+                    $scope.conf.jy_material_name = name;
+                    $scope.conf.jy_material_id = key;
+                    $scope.isShowMenu = false;
+                };
+                //点击其他地方关闭下拉框
+                $scope.notShow = function(){
+                    $scope.isShowMenu = false;
+                };
+                //清除所选
+                $scope.removeName = function(){
+                    $scope.conf.jy_material_name = '';
+                };
+                //所有物资下拉列表
+                $scope.getALLMaterialList = function(){
+                    $scope.promise = indexService.getALLMaterialList({exeid:'MS0000EQ006'}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.ALLMaterialList = data.returndata;
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                $scope.getALLMaterialList();
                 // 初始化分页
                 $scope.page={};
                 $scope.pagesize = 10;
@@ -56,6 +104,7 @@ define(['app'],function(app){
                     requestData.putout_user_name = $scope.conf.putout_user_name;
                     requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
                     requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
+                    requestData.jy_material_id = $scope.conf.jy_material_id;
 
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
@@ -90,8 +139,10 @@ define(['app'],function(app){
                         exeid : 'JY4001EQ004',
                         putout_storehouse_code : $scope.conf.putout_storehouse_code,
                         putout_code : $scope.conf.putout_code,
-                        putout_user_name : $scope.conf.putout_user_name
-                    }
+                        putout_user_name : $scope.conf.putout_user_name,
+                        putout_date_start : $filter('datePickerFormat')($scope.conf.startDate),
+                        putout_date_end : $filter('datePickerFormat')($scope.conf.endDate)
+                    };
                     $scope.promise = indexService.downloadDetail(downloadDetail).success(function(data){
                         if(data){
                             var url=API_ENDPOINT.url+'storehouseout/downloadDetail.json?'+$.param(downloadDetail);

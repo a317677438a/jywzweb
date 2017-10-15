@@ -2,9 +2,10 @@
     <div class="wrap clearFix">
         <ul class="fl logo-ul">
             <li>
-                <a class="lg-img fl" href="{{loginUrl}}" target="_blank">
-                    <img class="fl" src="{{logoImg}}">
+                <a class="lg-img fl">
+                    <img class="fl" src="img/logoDW.png" style="width: 155px">
                 </a>
+                <p style="float: left;margin: 9% 0 0 0;color: #fff;">辅材管理系统</p>
             </li>
         </ul>
         <ul class="fl menu-list menu-hover" id="menuList">
@@ -50,14 +51,14 @@
             <li>
                 <a style="padding: 0px" title="{{name}}"><img src="img/uname.png">{{name | nameLength}}</a>
             </li>
-            <li class="adviceImgHover" ng-class="{'adviceImgClick':clock}" ng-click="goToLogJob()" style="float: left;color: #fff;width: 68px">
-                <a class="adviceImg" style="text-decoration: none;margin-left: 6px;">
-                    <img src="img/advice.png">
-                    <span ng-if="itemRemindCheck>99">99+</span>
-                    <span ng-if="itemRemindCheck>0&&itemRemindCheck<=99">{{itemRemindCheck}}</span>
-                    <span ng-if="itemRemindCheck==0">0</span>
-                </a>
-            </li>
+            <!--<li class="adviceImgHover" ng-class="{'adviceImgClick':clock}" ng-click="goToLogJob()" style="float: left;color: #fff;width: 68px">-->
+                <!--<a class="adviceImg" style="text-decoration: none;margin-left: 6px;">-->
+                    <!--<img src="img/advice.png">-->
+                    <!--<span ng-if="itemRemindCheck>99">99+</span>-->
+                    <!--<span ng-if="itemRemindCheck>0&&itemRemindCheck<=99">{{itemRemindCheck}}</span>-->
+                    <!--<span ng-if="itemRemindCheck==0">0</span>-->
+                <!--</a>-->
+            <!--</li>-->
         </ul>
     </div>
 </div>

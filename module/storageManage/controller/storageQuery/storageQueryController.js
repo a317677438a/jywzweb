@@ -18,6 +18,53 @@ define(['app'],function(app){
             $scope.conf.putin_storehouse_code = '';
             $scope.conf.putin_code = '';
             $scope.conf.putin_user_name = '';
+
+            //仓库查询
+            $scope.paramquery = function(){
+                indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.paramqueryArr = data.returndata.rows;
+                    }
+                });
+            };
+            $scope.paramquery();
+            //点击鼠标显示下拉菜单
+            $scope.showMenu = function(){
+                $scope.isShowMenu = true;
+            };
+            //点击下拉的将上面的值替换掉
+            $scope.changevalue = function(name,key){
+                $scope.conf.jy_material_name = name;
+                $scope.conf.jy_material_id = key;
+                $scope.isShowMenu = false;
+            };
+            //点击其他地方关闭下拉框
+            $scope.notShow = function(){
+                $scope.isShowMenu = false;
+            };
+            //清除所选
+            $scope.removeName = function(){
+                $scope.conf.jy_material_name = '';
+            };
+            //所有物资下拉列表
+            $scope.getALLMaterialList = function(){
+                $scope.promise = indexService.getALLMaterialList({exeid:'MS0000EQ006'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.ALLMaterialList = data.returndata;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+            };
+            $scope.getALLMaterialList();
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
@@ -53,6 +100,7 @@ define(['app'],function(app){
                 requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
                 requestData.putin_code = $scope.conf.putin_code;
                 requestData.putin_user_name = $scope.conf.putin_user_name;
+                requestData.jy_material_id = $scope.conf.jy_material_id;
 
                 //项目信息列表查询
                 $scope.promise = commonQuery.listQuery(requestData).success(function(data){

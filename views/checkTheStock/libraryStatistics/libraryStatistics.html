@@ -22,6 +22,21 @@
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
             </li>
+            <li style="overflow: inherit">
+                <label>物资名称：</label>
+                <div class="styled-select label6-width" style="overflow: inherit;">
+                    <input type="text" style="width: 157px;" ng-model="conf.jy_material_name" placeholder="物资编码-物资名称" ng-mousedown="showMenu()"
+                           validator="[requiredSubmit]" validator-group="AddStock">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" ng-click="removeName()"></i>
+                    <ul style="right: -2px;top:28px;border-radius: 4px;" ng-mouseleave="notShow()" class="add-menu" ng-show="isShowMenu==true">
+                        <li ng-repeat="item in ALLMaterialList | filter:conf.jy_material_name" style="position: relative;width: 142px">
+                            <a ng-click="changevalue(item.value,item.key)">
+                                <input type="text" title="{{item.value}}" class="mouseFocus" style="width: 148px;overflow: hidden;border: none;cursor: pointer" ng-model="item.value">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
         <div class="fl">
             <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
