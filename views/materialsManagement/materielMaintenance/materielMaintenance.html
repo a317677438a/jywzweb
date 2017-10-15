@@ -6,9 +6,19 @@
                 <label>物资编码：</label>
                 <input class="projectName label6-width" ng-model="conf.searchCode" placeholder="物资类型编码">
             </li>
-            <li>
-                <label>物资名称：</label>
-                <input class="projectName label6-width" ng-model="conf.searchName" placeholder="物资类型名称">
+            <li class="form-group" style="overflow: inherit">
+                <label>物资名称</label>
+                <div class="styled-select label6-width" style="overflow: inherit;">
+                    <input type="text" style="width: 144px;" ng-model="conf.searchName_type" placeholder="物资编码-物资名称" ng-mousedown="showMaterialMenu()">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" ng-click="removeMaterialName()"></i>
+                    <ul style="right: -2px;top:28px;border-radius: 4px;" ng-mouseleave="notShowMaterial()" class="add-menu" ng-show="isShowMaterialMenu==true">
+                        <li ng-repeat="item in ALLMaterialList | filter:conf.searchName_type" style="position: relative;width: 142px">
+                            <a ng-click="changematerialvalue(item.value,item.key)">
+                                <input type="text" title="{{item.value}}" class="mouseFocus" style="width: 148px;overflow: hidden;border: none;cursor: pointer" ng-model="item.value">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="fl">

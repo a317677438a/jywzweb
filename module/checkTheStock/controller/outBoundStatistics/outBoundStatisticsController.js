@@ -47,6 +47,7 @@ define(['app'],function(app){
                 //清除所选
                 $scope.removeName = function(){
                     $scope.conf.jy_material_name = '';
+                    $scope.conf.jy_material_id = '';
                 };
                 //所有物资下拉列表
                 $scope.getALLMaterialList = function(){

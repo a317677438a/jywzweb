@@ -19,7 +19,50 @@ define(['app'],function(app){
                 if(data.success=="true"){
                     $scope.TypeAndName = data.returndata;
                 }
-            })
+            });
+            //新增入库---添加物资--所有物资下拉列表
+            $scope.getALLMaterialList = function(){
+                $scope.promise = indexService.getALLMaterialList({exeid:'MS0000EQ006'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.ALLMaterialList = data.returndata;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+            };
+            $scope.getALLMaterialList();
+            //点击新增物资
+            $scope.addMaterial = function(){
+                $scope.conf = {};
+                $scope.showAddMaterial = true;
+            };
+            //点击鼠标显示下拉菜单
+            $scope.showMaterialMenu = function(){
+                $scope.isShowMaterialMenu = true;
+            };
+            //点击下拉的将上面的值替换掉
+            $scope.changematerialvalue = function(name,key){
+                $scope.conf.searchName_type = name;
+                $scope.conf.searchName = key;
+                $scope.isShowMaterialMenu = false;
+            };
+            //点击其他地方关闭下拉框
+            $scope.notShowMaterial = function(){
+                $scope.isShowMaterialMenu = false;
+            };
+            //清除所选
+            $scope.removeMaterialName = function(){
+                $scope.conf.searchName_type = '';
+                $scope.conf.searchName = '';
+            };
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
@@ -53,7 +96,7 @@ define(['app'],function(app){
                 requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                 requestData.limit=$scope.pagesize;
                 requestData.code = $scope.conf.searchCode;
-                requestData.name = $scope.conf.searchName;
+                requestData.id = $scope.conf.searchName;
 
                 //项目信息列表查询
                 $scope.promise = indexService.getAllMaterial(requestData).success(function(data){
