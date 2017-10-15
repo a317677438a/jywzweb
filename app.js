@@ -21,7 +21,8 @@ define(
                 'cgBusy', //加载等待
                 'ngAnimate', //动画 依赖
 
-                'materialsApp' //物资申领
+                'materialsApp', //物资申领
+                'stockOutApp' //出库管理
             ]);
     }
 )

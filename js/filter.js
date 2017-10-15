@@ -902,8 +902,8 @@ angular.module('filter', [])
     .filter('putoutStatus', function () {
         return function (data) {
             if (data) {
-                if (data == 1) return "待确认";
-                if (data == 3) return "确认出库";
+                if (data == '1') return "待确认";
+                if (data == '2') return "确认出库";
             }
         };
     })

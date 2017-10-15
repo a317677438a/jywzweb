@@ -57,6 +57,7 @@
                     <th>规格型号</th>
                     <th>领料日期</th>
                     <th>领用人员</th>
+                    <th>状态</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,6 +69,7 @@
                     <td>{{item.model}}</td>
                     <td>{{item.apply_date | timeFilter}}</td>
                     <td>{{item.apply_user_name}}</td>
+                    <td>{{item.applystatus | applyStatus}}</td>
                 </tr>
             </tbody>
         </table>

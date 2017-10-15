@@ -12,7 +12,6 @@ define(['app'],function(app){
             '$rootScope',
             function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope){
 
-
                 $scope.message = 'Please Wait...';
                 //保证当前导航菜单高亮
                 var url = localStorage.getItem('url');
@@ -25,6 +24,25 @@ define(['app'],function(app){
                     }
                 }
                 $scope.house = $stateParams.house; //领料仓库
+                //查询一条申请单的物资明细信息
+                //$scope.fromStockGetMaterial = function(id){
+                //    $scope.promise = commonQuery.listQuery({id:$stateParams.id,exeid:'JY3001EQ003'}).success(function(data){
+                //        if(data.success=="true"){
+                //            $scope.MaterialListModify = data.returndata.rows;
+                //        }else{
+                //            ngDialog.open({
+                //                template: 'views/common/alert.html',
+                //                className: 'alert-error',
+                //                showClose: true,
+                //                scope: $scope,
+                //                controller: ['$scope', function ($scope) {
+                //                    $scope.response = data.returnmsg;
+                //                }]
+                //            })
+                //        }
+                //    });
+                //};
+                //$scope.fromStockGetMaterial();
                 // 初始化分页
                 $scope.page={};
                 $scope.pagesize = 10;
@@ -56,7 +74,7 @@ define(['app'],function(app){
                     var requestData = {};
                     //requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     //requestData.limit=$scope.pagesize;
-                    requestData.exeid = 'JY4001EQ003';
+                    requestData.exeid = 'JY3001EQ003';
                     requestData.id = $stateParams.id;
                     //requestData.apply_code = $stateParams.code;
                     //requestData.apply_storehouse_code = $scope.house;
