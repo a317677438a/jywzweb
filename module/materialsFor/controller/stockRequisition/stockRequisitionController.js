@@ -160,7 +160,9 @@ define(['app'],function(app){
                     $scope.storageModel.apply_user = $rootScope.id;
                     $scope.storageModel.storehouse_user = ''; //出库人
                     $scope.storageModel.apply_storehouse_code = ''; //领料仓库
+                    $scope.storageModel.review_user = ''; //审批人
                     $scope.storageModel.apply_date = new Date();
+                    $scope.MaterialList = [];
                     $scope.getCode();
                     $scope.getUserByRole(2);
                     $scope.getUserByRole(3);
@@ -235,7 +237,7 @@ define(['app'],function(app){
                 };
                 //确定新增物资
                 $scope.addSureAddMaterial = function(){
-                    $validator.validate($scope,'AddStock').success(function() {//继续申领
+                    $validator.validate($scope,'AddStock').success(function() {   //继续申领
                         $scope.doSure = function(){
                             for(var i=0;i<$scope.MaterialList.length;i++){
                                 if($scope.conf.code == $scope.MaterialList[i].code){
@@ -275,7 +277,7 @@ define(['app'],function(app){
                                 showClose: true,
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
-                                    $scope.confirmMsg = "该物资您当前已拥有" + $scope.ownNumber +"个,是否继续申领？";
+                                    $scope.confirmMsg = "该物资您当前已拥有" + $scope.conf.ownNumber +"个,是否继续申领？";
                                 }]
                             });
                         }else{
@@ -498,7 +500,7 @@ define(['app'],function(app){
                     $scope.showAddMaterial = false;
                 };
                 //删除一个物资
-                $scope.deleteOneMaterial = function(id){
+                $scope.deleteOneModifyMaterial = function(id){
                     $scope.MaterialListModify.splice(id,1);
                 };
                 //确定修改
