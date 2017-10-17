@@ -128,8 +128,55 @@ define(['app'],function(app){
                     })
                 };
                 //审批拒绝
-                $scope.refuseStock = function(){
-                    $scope.showRefuse = true;
+                $scope.refuseStock = function(id){
+                    $scope.id = id;
+                    ngDialog.open({
+                        template: 'views/common/confirm.html',
+                        className: 'confirm',
+                        showClose: true,
+                        scope: $scope,
+                        controller: ['$scope', function ($scope) {
+                            $scope.confirmMsg = "是否确定拒绝？";
+                        }]
+                    })
+                };
+                //确定拒绝
+                $scope.BeSure = function(){
+                    ngDialog.close();
+                    var receiveApplyMaterial = {
+                        loginname : '',
+                        passwd : '',
+                        id : $scope.id,
+                        status : '2'
+                    };
+                    $scope.promise = indexService.receiveApplyMaterial(receiveApplyMaterial).success(function(data){
+                        if(data.success=="true"){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    $scope.getEmployeesPage();
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
+                //取消
+                $scope.BeCancel = function(){
+                    ngDialog.close();
                 };
                 //关闭确认
                 $scope.closeEnter = function(){
