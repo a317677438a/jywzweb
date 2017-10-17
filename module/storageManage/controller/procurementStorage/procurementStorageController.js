@@ -516,7 +516,7 @@ define(['app'],function(app){
                 };
                 //确认入库
                 $scope.inboundGoodsConfirmation = function(id){
-                    $scope.promise = indexService.inboundGoodsConfirmation({id:$scope.id}).success(function(data){
+                    $scope.promise = indexService.inboundGoodsConfirmation({id:id}).success(function(data){
                         if(data.success=="true"){
                             $scope.getEmployeesPage();
                             ngDialog.open({
