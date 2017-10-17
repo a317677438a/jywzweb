@@ -88,6 +88,8 @@ define(['app'],function(app){
                 $scope.registrationSure = function(id){
                     $scope.id = id;
                     $scope.showEnter = true;
+                    $scope.conf.loginname = '';
+                    $scope.conf.passwd = '';
                 };
                 //输入密码确认
                 $scope.stockSure = function(){

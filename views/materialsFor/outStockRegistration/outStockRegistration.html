@@ -52,6 +52,7 @@
                     <td>
                         <a class="button button-yellow operationButton" ng-show="item.status=='3'" ng-click="refuseStock(item.id)">拒绝领料</a>
                         <a class="button button-green operationButton" ng-show="item.status=='3'" ng-click="registrationSure(item.id,item)">领料确认</a>
+                        <a class="button button-green operationButton" href="#/goodsDetails?code={{item.id}}&house={{item.apply_storehouse_code}}">物资明细</a>
                     </td>
                 </tr>
             </tbody>

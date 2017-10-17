@@ -239,6 +239,7 @@ define(['app'],function(app){
                 $scope.addSureAddMaterial = function(){
                     $validator.validate($scope,'AddStock').success(function() {   //继续申领
                         $scope.doSure = function(){
+                            ngDialog.close();
                             for(var i=0;i<$scope.MaterialList.length;i++){
                                 if($scope.conf.code == $scope.MaterialList[i].code){
                                     ngDialog.open({
