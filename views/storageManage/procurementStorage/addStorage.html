@@ -11,7 +11,7 @@
                 <input class="label4-width" ng-model="storageModel.putin_user_name" disabled>
             </li>
             <li class="form-group">
-                <label class="addStar">入库仓库编码：</label>
+                <label class="addStar">入库仓库：</label>
                 <div class="styled-select label6-width">
                     <select ng-model="storageModel.putin_storehouse_code" ng-options="o.key as o.value for o in houseCodeList"
                             validator="[requiredSubmit]" validator-group="securities_name">
@@ -123,7 +123,7 @@
                     <input class="projectName label6-width" ng-model="conf.supplier" disabled>
                 </li>
                 <li class="form-group">
-                    <label class="addStar">入库数量</label>
+                    <label class="addStar">申领数量</label>
                     <input class="projectName label6-width" ng-model="conf.putin_number" placeholder="入库数量"
                            validator="[requiredSubmit]" validator-group="AddMaterial">
                 </li>
