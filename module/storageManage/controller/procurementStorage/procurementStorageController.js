@@ -218,8 +218,8 @@ define(['app'],function(app){
                     })
                 };
                 //关闭新增物资
-                $scope.closeAddMaterialModify = function(){
-                    $scope.showAddMaterialModify = false;
+                $scope.closeAddMaterial = function(){
+                    $scope.showAddMaterial = false;
                 };
                 //删除一个物资
                 $scope.deleteOneMaterial =function(id){
@@ -388,6 +388,10 @@ define(['app'],function(app){
                     $scope.storageModelModify = item;
                     $scope.storageModelModify.putin_date = $filter('timeFilter')($scope.storageModelModify.putin_date);
                     $scope.storageModelModify.putin_user_name = $rootScope.name;
+                };
+                //关闭新增物资
+                $scope.closeAddMaterialModify = function(){
+                    $scope.showAddMaterialModify = false;
                 };
                 //修改--点击新增一条
                 $scope.addMaterialModify = function(){
