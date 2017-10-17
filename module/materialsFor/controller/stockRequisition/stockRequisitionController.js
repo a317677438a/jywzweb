@@ -79,7 +79,7 @@ define(['app'],function(app){
                 };
                 //新增申领单---查询出库人对应的仓库编码
                 $scope.haveStorehouseCode = function(id){
-                    $scope.promise = indexService.haveStorehouseCode({id:id}).success(function(data){  //查询物资已经对应的id
+                    $scope.promise = indexService.haveStorehouseCodeList({id:id}).success(function(data){  //查询物资已经对应的id
                         if(data.success=="true"){
                             $scope.houseCodeList = data.returndata;
                             if($scope.houseCodeList.length>0){

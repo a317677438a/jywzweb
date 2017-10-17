@@ -48,6 +48,7 @@
                     <td>
                         <a class="button button-green operationButton" ng-show="item.status=='1'" ng-click="passMaterial(item.id,item)">同意</a>
                         <a class="button button-yellow operationButton" ng-show="item.status=='1'" ng-click="refuseMaterial(item)">拒绝</a>
+                        <a class="button button-green operationButton" href="#/goodsDetails?code={{item.id}}&house={{item.apply_storehouse_code}}">物资明细</a>
                     </td>
                 </tr>
             </tbody>

@@ -38,7 +38,7 @@
             <li class="form-group">
                 <label class="addStar">领料仓库：</label>
                 <div class="styled-select label4-width">
-                    <select ng-model="storageModel.apply_storehouse_code" ng-options="o for o in houseCodeList"
+                    <select ng-model="storageModel.apply_storehouse_code" ng-options="o.key as o.value for o in houseCodeList"
                             validator="[requiredSubmit]" validator-group="securities_name">
                     </select>
                     <i class="arrow"></i>
