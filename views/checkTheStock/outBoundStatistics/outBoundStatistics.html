@@ -54,6 +54,7 @@
                 <th>出库单号</th>
                 <th>出库类型</th>
                 <th>出库仓库</th>
+                <th>出库时间</th>
                 <th>物资名称</th>
                 <th>物资编号</th>
                 <th>物资类型</th>
@@ -66,8 +67,9 @@
             <tbody>
             <tr ng-repeat="item in data">
                 <td>{{item.putout_code}}</td>
-                <td>{{item.putout_type}}</td>
+                <td>{{item.putout_type | putoutType}}</td>
                 <td>{{item.putout_storehouse_name}}</td>
+                <td>{{item.putout_date | timeFilter}}</td>
                 <td>{{item.material_name}}</td>
                 <td>{{item.material_code}}</td>
                 <td>{{item.material_type_name}}</td>

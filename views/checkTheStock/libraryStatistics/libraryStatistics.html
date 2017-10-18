@@ -53,6 +53,7 @@
             <thead>
             <tr>
                 <th>入库类型</th>
+                <th>入库时间</th>
                 <th>物资名称</th>
                 <th>物资类型</th>
                 <th>入库数量</th>
@@ -65,7 +66,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in data">
-                <td>{{item.putin_type}}</td>
+                <td>{{item.putin_type | putinType}}</td>
+                <td>{{item.putin_date | timeFilter}}</td>
                 <td>{{item.material_name}}</td>
                 <td>{{item.material_type_name}}</td>
                 <td>{{item.putin_number}}</td>

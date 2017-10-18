@@ -39,6 +39,7 @@
                     <th>审批人</th>
                     <th>领料仓库</th>
                     <th>申请状态</th>
+                    <th>审批意见</th>
                     <th>备注</th>
                     <th>操作</th>
                 </tr>
@@ -51,11 +52,12 @@
                     <td>{{item.review_user_name}}</td>
                     <td>{{item.apply_storehouse_name}}</td>
                     <td>{{item.status | applyStatus}}</td>
+                    <td>{{item.review_remark}}</td>
                     <td>{{item.remark}}</td>
                     <td>
                         <a class="button button-green operationButton" href="#/goodsDetails?code={{item.id}}&house={{item.apply_storehouse_name}}">物资明细</a>
-                        <a class="button button-green operationButton" ng-show="item.status=='1'" ng-click="modifyMateriel(item.id,item)">修改</a>
-                        <a class="button button-yellow operationButton" ng-show="item.status=='1'" ng-click="deleteMateriel(item.id)">删除</a>
+                        <a class="button button-green operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="deleteMateriel(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>
