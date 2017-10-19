@@ -36,6 +36,7 @@
                     <th>审批人</th>
                     <th>领料仓库</th>
                     <th>申请状态</th>
+                    <th>审批意见</th>
                     <th>备注</th>
                     <th>操作</th>
                 </tr>
@@ -48,6 +49,7 @@
                     <td>{{item.review_user_name}}</td>
                     <td>{{item.apply_storehouse_name}}</td>
                     <td>{{item.status | applyStatus}}</td>
+                    <td>{{item.review_remark}}</td>
                     <td>{{item.remark}}</td>
                     <td>
                         <a class="button button-yellow operationButton" ng-show="item.status=='3'" ng-click="refuseStock(item.id)">拒绝领料</a>
