@@ -10,7 +10,7 @@ define(['app','materialTypeController','materielMaintenanceController'],function
             $scope.conf = {};
             $scope.conf.isCurrentproperty = 1;
             if($stateParams.type!=''&&$stateParams.type!=undefined){
-                $scope.conf.isCurrentproperty = 2 ;
+                $scope.conf.isCurrentproperty = $stateParams.type ;
             }
             $scope.set = function(id){
                 $scope.conf.isCurrentproperty = id;

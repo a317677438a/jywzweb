@@ -17,7 +17,7 @@ define(['app','claimsForQueryController','materialRequisitionController','outSto
                 $scope.conf.isCurrentproperty = 3;
             }
             if($stateParams.type!=''&&$stateParams.type!=undefined){
-                $scope.conf.isCurrentproperty = 2 ;
+                $scope.conf.isCurrentproperty = $stateParams.type ;
             }
             $scope.set = function(id){
                 $scope.conf.isCurrentproperty = id;

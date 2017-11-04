@@ -1,0 +1,69 @@
+<div class="wrap mgTop20 bkColor contentShadow">
+    <h4 class="textC">功能导航</h4>
+    <ul class="shouyeUl" style="padding-left: 20%;">
+        <li ng-if="role==2">
+            <label>物资管理：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/materialsManagement?type=1">物资类型</a>
+                <a type="button" class="btn btn-default" href="#/materialsManagement?type=2">物资维护</a>
+            </div>
+        </li>
+        <li ng-if="role==2">
+            <label>入库管理：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/storageManage?type=1">采购入库</a>
+                <a type="button" class="btn btn-default" href="#/storageManage?type=2">退库入库</a>
+                <a type="button" class="btn btn-default" href="#/storageManage?type=3">移库入库</a>
+                <a type="button" class="btn btn-default" href="#/storageManage?type=4">入库查询统计</a>
+            </div>
+        </li>
+        <li ng-if="role==2">
+            <label>出库管理：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/stockOutManagement?type=1">申领出库</a>
+                <a type="button" class="btn btn-default" href="#/stockOutManagement?type=2">移库出库</a>
+                <a type="button" class="btn btn-default" href="#/stockOutManagement?type=3">出库查询统计</a>
+            </div>
+        </li>
+        <li ng-if="role!=1">
+            <label>物资申领：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/materialsFor?type=1" ng-if="role==4">领料申请</a>
+                <a type="button" class="btn btn-default" href="#/materialsFor?type=2" ng-if="role==3">领料审批</a>
+                <a type="button" class="btn btn-default" href="#/materialsFor?type=3" ng-if="role==2">出库登记</a>
+                <a type="button" class="btn btn-default" href="#/materialsFor?type=4" ng-if="role==4">申领查询</a>
+            </div>
+        </li>
+        <li ng-if="role==4 || role==2">
+            <label>运行管理：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/operationalGuidance?type=1" ng-if="role==4">使用登记</a>
+                <a type="button" class="btn btn-default" href="#/operationalGuidance?type=2" ng-if="role==2">使用登记查询</a>
+                <a type="button" class="btn btn-default" href="#/operationalGuidance?type=3" ng-if="role==4">物资退回</a>
+                <a type="button" class="btn btn-default" href="#/operationalGuidance?type=4" ng-if="role==4">查看持有情况</a>
+            </div>
+        </li>
+        <li ng-if="role==2">
+            <label>仓库盘点：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=1">库存盘点</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=2">库存预警</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=3">出库统计</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=4">入库统计</a>
+            </div>
+        </li>
+        <li ng-if="role==2">
+            <label>仓储调拨：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default">仓储调拨</a>
+            </div>
+        </li>
+        <li>
+            <label>系统管理：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/systemManagement?type=1" ng-if="role==1">用户管理</a>
+                <a type="button" class="btn btn-default" href="#/systemManagement?type=2">密码修改</a>
+            </div>
+        </li>
+    </ul>
+</div>

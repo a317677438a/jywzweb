@@ -5,10 +5,13 @@ define(['app','forOutBoundController','stockOutQueryController','MoveLibraryOutb
     app.register.controller('stockOutManagementController',
         [
             '$scope',
-            function($scope){
+            '$stateParams',
+            function($scope,$stateParams){
                 $scope.conf = {};
                 $scope.conf.isCurrentproperty = 1;
-
+                if($stateParams.type!=''&&$stateParams.type!=undefined){
+                    $scope.conf.isCurrentproperty = $stateParams.type ;
+                }
                 $scope.set = function(id){
                     $scope.conf.isCurrentproperty = id;
                 };

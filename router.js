@@ -19,6 +19,24 @@ define(['app'],function(app){
     })
         .config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider
+                .state('shouye', {
+                    url: '/shouye',
+                    templateUrl: 'views/shouye/shouye.html',//首页
+                    controller: 'shouyeController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'views/shouye/shouyeController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
+                })
                 .state('materialsManagement', {
                     url: '/materialsManagement?type',
                     templateUrl: 'views/materialsManagement/materialsManagement.html',//物资管理
@@ -38,7 +56,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('storageManage', {
-                    url: '/storageManage',
+                    url: '/storageManage?type',
                     templateUrl: 'views/storageManage/storageManage.html',//入库管理
                     controller: 'storageManageController',
                     resolve: {
@@ -56,7 +74,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('stockOutManagement', {
-                    url: '/stockOutManagement',
+                    url: '/stockOutManagement?type',
                     templateUrl: 'views/stockOutManagement/stockOutManagement.html',//出库管理
                     controller: 'stockOutManagementController',
                     resolve: {
@@ -74,7 +92,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('materialsFor', {
-                    url: '/materialsFor',
+                    url: '/materialsFor?type',
                     templateUrl: 'views/materialsFor/materialsFor.html',//物资申领
                     controller: 'materialsForController',
                     resolve: {
@@ -92,7 +110,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('operationalGuidance', {
-                    url: '/operationalGuidance',
+                    url: '/operationalGuidance?type',
                     templateUrl: 'views/operationalGuidance/operationalGuidance.html',//运行管理
                     controller: 'operationalGuidanceController',
                     resolve: {
@@ -110,7 +128,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('checkTheStock', {
-                    url: '/checkTheStock',
+                    url: '/checkTheStock?type',
                     templateUrl: 'views/checkTheStock/checkTheStock.html',//仓库盘点
                     controller: 'checkTheStockController',
                     resolve: {
@@ -128,7 +146,7 @@ define(['app'],function(app){
                     }
                 })
                 .state('systemManagement', {
-                    url: '/systemManagement',
+                    url: '/systemManagement?type',
                     templateUrl: 'views/systemManagement/systemManagement.html',//系统管理
                     controller: 'systemManagementController',
                     resolve: {
@@ -146,7 +164,7 @@ define(['app'],function(app){
                     }
                 });
             //解决路由异常的方法
-            $urlRouterProvider.otherwise('/materialsManagement');
+            $urlRouterProvider.otherwise('/shouye');
         });
 });
 
