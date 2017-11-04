@@ -53,6 +53,7 @@
             "outStockRegistrationController": 'module/materialsFor/controller/outStockRegistration/outStockRegistrationController',
             "stockRequisitionController": 'module/materialsFor/controller/stockRequisition/stockRequisitionController',
             //运行管理
+            "operationApp" : 'module/operationalGuidance/operationApp',
             "operationalGuidanceController": 'module/operationalGuidance/operationalGuidanceController',
             "GoodsReturnedController": 'module/operationalGuidance/controller/GoodsReturned/GoodsReturnedController',
             "useRegistrationController": 'module/operationalGuidance/controller/useRegistration/useRegistrationController',
@@ -61,6 +62,8 @@
             //仓库盘点
             "outBoundStatisticsController": 'module/checkTheStock/controller/outBoundStatistics/outBoundStatisticsController',
             "libraryStatisticsController": 'module/checkTheStock/controller/libraryStatistics/libraryStatisticsController',
+            "inventoryVerificationController": 'module/checkTheStock/controller/inventoryVerification/inventoryVerificationController',
+            "inventoryWarningController": 'module/checkTheStock/controller/inventoryWarning/inventoryWarningController',
             //系统管理
             "userManagementController": 'module/systemManagement/controller/userManagement/userManagementController',
             "modifyPasswordController": 'module/systemManagement/controller/modifyPassword/modifyPasswordController'
@@ -119,7 +122,7 @@
     };
     require.config(config);
 
-    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','materialsApp','stockOutApp','filter','jquery_ui','fullcalendar',
+    require(['router','jquery','uiRouter','indexController','indexService','appConstants','menuTabs','commonQuery','materialsApp','stockOutApp','operationApp','filter','jquery_ui','fullcalendar',
         'materialsManagement','ngAnimate','ngStrap','ngLocal','pagination','ngDialog','ngBusy','ngTree','ngUpload','ngValidator'],function(){
         angular.bootstrap(document,['securityManage']);
     });

@@ -203,7 +203,10 @@ define(['app'],function(app){
                     downloadDetailApply : function(data){
                         return $http.post(API_ENDPOINT.url+'/apply/downloadDetail.json',data,WITH_CREDENTIALS);
                     },
-
+                    //退库入库列表---确认入库
+                    materialbackconfirm : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialback/confirm.json',data,WITH_CREDENTIALS);
+                    },
                     /***
                      *  物资使用情况
                      */
@@ -214,6 +217,26 @@ define(['app'],function(app){
                     //新增物资使用信息
                     addMaterialuse : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialuse/add.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增物资退回单
+                    addMaterialback : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialback/add.json',data,WITH_CREDENTIALS);
+                    },
+                    //修改物资退回单
+                    modifyMaterialback : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialback/modify.json',data,WITH_CREDENTIALS);
+                    },
+                    //物资退回单删除
+                    deleteMaterialback : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialback/delete.json',data,WITH_CREDENTIALS);
+                    },
+                    //查看持有情况
+                    materialsOwnNumber : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialown/materialsOwnNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //下载查看持有情况
+                    downloadOwnNumber : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialown/downloadOwnNumber.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

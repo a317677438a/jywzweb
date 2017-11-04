@@ -1,8 +1,14 @@
 <!-- 仓库盘点 -->
 <div class="subNav wrap topNav">
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">出库统计</a>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">库存盘点</a>
     <div class="dashed"></div>
-    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">入库统计</a>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">库存预警</a>
+    <div class="dashed"></div>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 3]" ng-click="set(3)">出库统计</a>
+    <div class="dashed"></div>
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 4]" ng-click="set(4)">入库统计</a>
 </div>
-<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/checkTheStock/outBoundStatistics/outBoundStatistics.html'" ng-controller="outBoundStatisticsController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
-<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/checkTheStock/libraryStatistics/libraryStatistics.html'" ng-controller="libraryStatisticsController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/checkTheStock/inventoryVerification/inventoryVerification.html'" ng-controller="inventoryVerificationController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/checkTheStock/inventoryWarning/inventoryWarning.html'" ng-controller="inventoryWarningController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==3" ng-include="'views/checkTheStock/outBoundStatistics/outBoundStatistics.html'" ng-controller="outBoundStatisticsController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==4" ng-include="'views/checkTheStock/libraryStatistics/libraryStatistics.html'" ng-controller="libraryStatisticsController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>

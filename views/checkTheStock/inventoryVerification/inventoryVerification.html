@@ -1,7 +1,7 @@
-<!-- 使用登记查询 -->
+<!-- 库存盘点 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix" style="width: 70%">
+        <ul class="fl clearFix">
             <li style="overflow: inherit">
                 <label>物资名称：</label>
                 <div class="styled-select label6-width" style="overflow: inherit;">
@@ -17,48 +17,48 @@
                     </ul>
                 </div>
             </li>
-            <li style="width: 460px">
-                <label>日期时段：</label>
-                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
-                <div class="pos-re">
-                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
-                </div>
-                <span class="fr span-get">到</span>
-                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
-                <div class="pos-re">
-                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+            <li>
+                <label>出库仓库编码：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="conf.putout_storehouse_code"  ng-options="o.key as o.value for o in paramqueryArr" style="width: 250px;">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
                 </div>
             </li>
         </ul>
         <div class="fl">
             <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="downLoad()">导出</a>
         </div>
     </div>
     <div class="commonTable clearFix">
         <table>
             <thead>
-            <tr>
-                <th>使用人</th>
-                <th>使用物资名称</th>
-                <th>供应商</th>
-                <th>规格型号</th>
-                <th>使用日期</th>
-                <th>使用数量</th>
-                <th>状态</th>
-                <th>备注</th>
-            </tr>
+                <tr>
+                    <th>存放仓库</th>
+                    <th>物资名称</th>
+                    <th>物资编号</th>
+                    <th>物资类型</th>
+                    <th>供应商</th>
+                    <th>规格型号</th>
+                    <th>入库数量</th>
+                    <th>出库数量</th>
+                    <th>库存数量</th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in data">
-                <td>{{item.user_name}}</td>
-                <td>{{item.material_name}}</td>
-                <td>{{item.supplier}}</td>
-                <td>{{item.model}}</td>
-                <td>{{item.use_date | timeFilter}}</td>
-                <td>{{item.use_number}}</td>
-                <td>{{item.status | useStatus}}</td>
-                <td>{{item.remark}}</td>
-            </tr>
+                <tr ng-repeat="item in data">
+                    <td>{{item.putout_code}}</td>
+                    <td>{{item.putout_type | putoutType}}</td>
+                    <td>{{item.putout_storehouse_name}}</td>
+                    <td>{{item.putout_date | timeFilter}}</td>
+                    <td>{{item.material_name}}</td>
+                    <td>{{item.material_code}}</td>
+                    <td>{{item.material_type_name}}</td>
+                    <td>{{item.putout_number}}</td>
+                    <td>{{item.model}}</td>
+                </tr>
             </tbody>
         </table>
         <div ng-include="'views/common/paging.html'"></div>

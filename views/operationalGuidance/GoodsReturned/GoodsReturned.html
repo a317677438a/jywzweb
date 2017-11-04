@@ -2,6 +2,10 @@
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
         <ul class="fl clearFix" style="width: 70%">
+            <li>
+                <label>退库单号：</label>
+                <input class="label4-width" ng-model="conf.putin_code">
+            </li>
             <li style="width: 460px">
                 <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
@@ -24,31 +28,23 @@
         <table>
             <thead>
                 <tr>
-                    <th>申请单号</th>
-                    <th>领用人</th>
-                    <th>申请日期</th>
-                    <th>审批人</th>
-                    <th>领料仓库</th>
-                    <th>申请状态</th>
-                    <th>审批意见</th>
-                    <th>备注</th>
-                    <th>操作</th>
+                    <th>退回单号</th>
+                    <th>退回日期</th>
+                    <th>退回仓库</th>
+                    <th>操作人</th>
+                    <th>用户操作</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
-                    <td>{{item.apply_code}}</td>
-                    <td>{{item.apply_user_name}}</td>
-                    <td>{{item.apply_date | timeFilter}}</td>
-                    <td>{{item.review_user_name}}</td>
-                    <td>{{item.apply_storehouse_name}}</td>
-                    <td>{{item.status | applyStatus}}</td>
-                    <td>{{item.review_remark}}</td>
-                    <td>{{item.remark}}</td>
+                    <td>{{item.putin_code}}</td>
+                    <td>{{item.putin_date | timeFilter}}</td>
+                    <td>{{item.putin_storehouse_name}}</td>
+                    <td>{{item.putin_user_name}}</td>
                     <td>
-                        <a class="button button-green operationButton" href="#/goodsDetails?code={{item.id}}&house={{item.apply_storehouse_name}}">物资明细</a>
-                        <a class="button button-green operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="modifyMateriel(item.id,item)">修改</a>
-                        <a class="button button-yellow operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="deleteMateriel(item.id)">删除</a>
+                        <a class="button button-green operationButton" href="#/GoodsReturnedDetails?id={{item.id}}&type=1">退回明细</a>
+                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>
@@ -57,3 +53,4 @@
     </div>
 </div>
 <div class="add-overlay" ng-show="showAdd" ng-include="'views/operationalGuidance/GoodsReturned/addGoodsReturned.html'"></div>
+<div class="add-overlay" ng-show="showModify" ng-include="'views/operationalGuidance/GoodsReturned/modifyGoodsReturned.html'"></div>

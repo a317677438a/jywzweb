@@ -2,7 +2,7 @@
  * Created by huangyao on 2017/10/5.
  */
 define(['app'],function(app){
-    app.register.controller('GoodsReturnedController',
+    app.register.controller('modifyGoodsReturnedController',
         [
             '$scope',
             'ngDialog',
@@ -48,10 +48,10 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
-                    requestData.exeid = 'JY6001EQ002';
-                    requestData.putin_type = '2';
-                    requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
-                    requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
+                    requestData.exeid = 'JY3001EQ002';
+                    requestData.status = $scope.conf.status;
+                    requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
 
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){
@@ -345,195 +345,6 @@ define(['app'],function(app){
                             })
                         }
                     });
-                };
-                //删除退回单
-                $scope.deleteMateriel = function(id){
-                    $scope.deleteId = id;
-                    ngDialog.open({
-                        template: 'views/common/confirm.html',
-                        className: 'confirm',
-                        showClose: true,
-                        scope: $scope,
-                        controller: ['$scope', function ($scope) {
-                            $scope.confirmMsg = "是否确认删除？";
-                        }]
-                    })
-                };
-                //确认删除退回单
-                $scope.BeSure = function(){
-                    $scope.promise = indexService.deleteMaterialback({id:$scope.deleteId}).success(function(data){
-                        if(data.success=="true"){
-                            ngDialog.close();
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = data.returnmsg;
-                                    $scope.getEmployeesPage();
-                                }]
-                            })
-                        }else{
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert-error',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = data.returnmsg;
-                                }]
-                            })
-                        }
-                    });
-                };
-                //取消删除退回单
-                $scope.BeCancel = function(){
-                    ngDialog.close();
-                };
-                /************************************************************修改*************************************************/
-                //查询一条退货单的物资明细信息
-                $scope.fromStockGetMaterial = function(id){
-                    $scope.promise = commonQuery.listQuery({id:id,exeid:'JY6001EQ003'}).success(function(data){
-                        if(data.success=="true"){
-                            $scope.MaterialListModify = data.returndata.rows;
-                        }else{
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert-error',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = data.returnmsg;
-                                }]
-                            })
-                        }
-                    });
-                };
-                $scope.storageModelModify = {};  //修改退库库信息的对象
-                //点击修改退回单
-                $scope.modifyMateriel = function(id,item){
-                    $scope.modifyMateriel_in_id = id;
-                    $scope.showModify = true;
-                    $scope.fromStockGetMaterial(id);
-                    $scope.storageModelModify = item;
-                    $scope.storageModelModify.putin_date = $filter('timeFilter')($scope.storageModelModify.putin_date);
-                    $scope.getUserByRole();
-                    $scope.haveStorehouseCode($scope.storageModelModify.storehouse_user);
-                };
-                //点击修改一个物资信息
-                $scope.ModifyOneModifyMaterial = function(id,item){
-                    console.log(item);
-                    $scope.showAddMaterial = true;
-                    $scope.conf = item;
-                };
-                //点击新增一个物资
-                $scope.addMaterialModify = function(){
-                    $validator.validate($scope,'modify_securities_name').success(function() {
-                        $scope.showAddMaterial = true;
-                        $scope.getALLMaterialList();
-                        $scope.conf.material = '';
-                        $scope.conf.code = '';
-                        $scope.conf.name = '';
-                        $scope.conf.codename = '';
-                        $scope.conf.model = '';
-                        $scope.conf.supplier = '';
-                        $scope.conf.apply_number = '';
-                    });
-                };
-
-                $scope.addSureModifyMaterial = function(){
-                    $validator.validate($scope,'ModifyStock').success(function() {//继续申领
-                        if($scope.conf.ownNumber == '0'){
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = "未拥有该物资!";
-                                }]
-                            });
-                            return;
-                        }
-                        for(var i=0;i<$scope.MaterialListModify.length;i++){
-                            if($scope.conf.code == $scope.MaterialListModify[i].code){
-                                ngDialog.open({
-                                    template: 'views/common/alert.html',
-                                    className: 'alert',
-                                    showClose: true,
-                                    scope: $scope,
-                                    controller: ['$scope', function ($scope) {
-                                        $scope.response = "该物资已存在,不允许重复添加!";
-                                    }]
-                                });
-                                return;
-                            }
-                        }
-                        $scope.MaterialListModify.push(
-                            {
-                                code : $scope.conf.code,
-                                name : $scope.conf.name,
-                                codename : $scope.conf.codename,
-                                model : $scope.conf.model,
-                                supplier : $scope.conf.supplier,
-                                jy_material_id:$scope.conf.material_key,
-                                putin_number:$scope.conf.putin_number
-                            }
-                        );
-                        $scope.showAddMaterial = false;
-                    })
-                };
-                //关闭修改申领窗口
-                $scope.closeModifyMaterialModify = function(){
-                    $scope.showAddMaterial = false;
-                };
-                //删除一个物资
-                $scope.deleteOneModifyMaterial = function(id){
-                    $scope.MaterialListModify.splice(id,1);
-                };
-                //确定修改
-                $scope.modifyOneStorageSure = function(){
-                    $scope.storageModelModify_copy = angular.copy($scope.storageModelModify);
-                    $scope.storageModelModify_copy.putin_date = $filter('datePickerFormat2')($scope.storageModelModify_copy.putin_date);
-
-                    var getInfo = {
-                        id : $scope.modifyMateriel_in_id,
-                        putin_code : $scope.storageModelModify_copy.putin_code,
-                        putin_user : $scope.storageModelModify_copy.putin_user,
-                        putin_date : $scope.storageModelModify_copy.putin_date,
-                        putin_storehouse_code : $scope.storageModelModify_copy.putin_storehouse_code,
-                        remark : $scope.storageModelModify_copy.remark
-                    };
-                    $scope.promise = indexService.modifyMaterialback({materialBackInfo:getInfo,materialBackDetails:$scope.MaterialListModify}).success(function(data){
-                        if(data.success=="true"){
-                            $scope.showModify = false;
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = data.returnmsg;
-                                    $scope.getEmployeesPage();
-                                }]
-                            })
-                        }else{
-                            ngDialog.open({
-                                template: 'views/common/alert.html',
-                                className: 'alert-error',
-                                showClose: true,
-                                scope: $scope,
-                                controller: ['$scope', function ($scope) {
-                                    $scope.response = data.returnmsg;
-                                }]
-                            })
-                        }
-                    });
-                };
-                //关闭修改
-                $scope.closeForm2 = function(){
-                    $scope.showModify = false;
                 };
             }
         ]);

@@ -22,7 +22,8 @@ define(
                 'ngAnimate', //动画 依赖
 
                 'materialsApp', //物资申领
-                'stockOutApp' //出库管理
+                'stockOutApp', //出库管理
+                'operationApp' //运行管理
             ]);
     }
 )

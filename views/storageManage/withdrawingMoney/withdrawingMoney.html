@@ -1,16 +1,26 @@
 <!-- 退库入库 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix" style="width: 70%">
+        <ul class="fl clearFix" style="width: 80%">
             <li style="width: 300px;position: relative">
                 <input class="projectName" ng-model="conf.putin_code" placeholder="退库入库单号">
                 <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
             </li>
+            <li>
+                <label>退库人名称：</label>
+                <input class="label6-width" class="projectName" ng-model="conf.cancel_user_name" placeholder="退库人名称">
+            </li>
             <li style="width: 460px">
-                <label>退库入库日期时段：</label>
+                <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
             </li>
         </ul>
         <div class="fl">
@@ -23,7 +33,7 @@
             <thead>
                 <tr>
                     <th>退库入库单号</th>
-                    <th>合同编号</th>
+                    <th>退库人</th>
                     <th>入库类型</th>
                     <th>入库时间</th>
                     <th>入库仓库</th>
@@ -35,17 +45,15 @@
             <tbody>
                 <tr ng-repeat="item in data">
                     <td>{{item.putin_code}}</td>
-                    <td>{{item.contract_no}}</td>
+                    <td>{{item.cancel_user_name}}</td>
                     <td>{{item.putin_type | putinType}}</td>
                     <td>{{item.putin_date | timeFilter}}</td>
                     <td>{{item.putin_storehouse_name}}</td>
                     <td>{{item.status | StorageStatus}}</td>
                     <td>{{item.remark}}</td>
                     <td>
-                        <a class="button button-green operationButton" ng-if="item.status=='1'" ng-click="modifyMateriel(item.id,item)">拒绝入库</a>
                         <a class="button button-green operationButton" ng-if="item.status=='1'" ng-click="inboundGoodsConfirmation(item.id,item)">确认入库</a>
-                        <a class="button button-yellow operationButton" ng-if="item.status=='1'" ng-click="deleteMateriel(item.id)">删除</a>
-                        <a class="button button-blue operationButton" ng-click="MaterielDetails(item.id,item)">详情</a>
+                        <a class="button button-green operationButton" href="#/GoodsReturnedDetails?id={{item.id}}&type=2">物资明细</a>
                     </td>
                 </tr>
             </tbody>

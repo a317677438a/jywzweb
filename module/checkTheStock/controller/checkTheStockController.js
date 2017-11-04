@@ -1,7 +1,7 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','outBoundStatisticsController','libraryStatisticsController'],function(app){
+define(['app','outBoundStatisticsController','libraryStatisticsController','inventoryVerificationController','inventoryWarningController'],function(app){
     app.register.controller('checkTheStockController',
     [
         '$scope',

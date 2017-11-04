@@ -13,59 +13,7 @@ define(['app'],function(app){
         function($scope,indexService,ngDialog,API_ENDPOINT,$filter,commonQuery){
 
             $scope.conf = {};
-            $scope.conf.startDate = '';
-            $scope.conf.endDate = '';
-            $scope.conf.putin_storehouse_code = '';
-            $scope.conf.putin_code = '';
-            $scope.conf.putin_user_name = '';
-
-            //仓库查询
-            $scope.paramquery = function(){
-                indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
-                    if(data.success=="true"){
-                        $scope.paramqueryArr = data.returndata.rows;
-                    }
-                });
-            };
-            $scope.paramquery();
-            //点击鼠标显示下拉菜单
-            $scope.showMenu = function(){
-                $scope.isShowMenu = true;
-            };
-            //点击下拉的将上面的值替换掉
-            $scope.changevalue = function(name,key){
-                $scope.conf.jy_material_name = name;
-                $scope.conf.jy_material_id = key;
-                $scope.isShowMenu = false;
-            };
-            //点击其他地方关闭下拉框
-            $scope.notShow = function(){
-                $scope.isShowMenu = false;
-            };
-            //清除所选
-            $scope.removeName = function(){
-                $scope.conf.jy_material_name = '';
-                $scope.conf.jy_material_id = '';
-            };
-            //所有物资下拉列表
-            $scope.getALLMaterialList = function(){
-                $scope.promise = indexService.getALLMaterialList({exeid:'MS0000EQ006'}).success(function(data){
-                    if(data.success=="true"){
-                        $scope.ALLMaterialList = data.returndata;
-                    }else{
-                        ngDialog.open({
-                            template: 'views/common/alert.html',
-                            className: 'alert-error',
-                            showClose: true,
-                            scope: $scope,
-                            controller: ['$scope', function ($scope) {
-                                $scope.response = data.returnmsg;
-                            }]
-                        })
-                    }
-                });
-            };
-            $scope.getALLMaterialList();
+            $scope.message = 'Please Wait...';
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
@@ -97,11 +45,12 @@ define(['app'],function(app){
                 var requestData = {};
                 requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                 requestData.limit=$scope.pagesize;
-                requestData.exeid='JY2001EQ009';
-                requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
+                requestData.exeid='JY6001EQ002';
+                requestData.putin_type = '2';
                 requestData.putin_code = $scope.conf.putin_code;
-                requestData.putin_user_name = $scope.conf.putin_user_name;
-                requestData.jy_material_id = $scope.conf.jy_material_id;
+                requestData.cancel_user_name = $scope.conf.cancel_user_name;
+                requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
 
                 //项目信息列表查询
                 $scope.promise = commonQuery.listQuery(requestData).success(function(data){
@@ -130,27 +79,33 @@ define(['app'],function(app){
             $scope.search = function(){
                 $scope.getEmployeesPage();
             };
-            //下载文档
-            $scope.downLoad = function(ul,filename,suffix){
-                var downloadDetail = {
-                    exeid : 'JY2001EQ009',
-                    putin_storehouse_code : $scope.conf.putin_storehouse_code,
-                    putin_code : $scope.conf.putin_code,
-                    putin_user_name : $scope.conf.putin_user_name,
-                    putin_date_start : $filter('datePickerFormat')($scope.conf.startDate),
-                    putin_date_end : $filter('datePickerFormat')($scope.conf.endDate)
-                }
-                $scope.promise = indexService.downloadDetailIno(downloadDetail).success(function(data){
-                    if(data){
-                        var url=API_ENDPOINT.url+'storehousein/downloadDetail.json?'+$.param(downloadDetail);
-                        setTimeout(function(){
-                            window.open(url);
-                        },1000)
+            //确认入库
+            $scope.inboundGoodsConfirmation = function(id){
+                $scope.promise = indexService.materialbackconfirm({id:id}).success(function(data){
+                    if(data.success=="true"){
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                                $scope.getEmployeesPage();
+                            }]
+                        })
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
                     }
-                }).error(function(){
-                    window.location.href = 'views/common/error.html';
-                })
-            }
+                });
+            };
         }
     ]);
 });

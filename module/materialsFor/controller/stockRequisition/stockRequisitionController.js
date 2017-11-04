@@ -83,7 +83,7 @@ define(['app'],function(app){
                         if(data.success=="true"){
                             $scope.houseCodeList = data.returndata;
                             if($scope.houseCodeList.length>0){
-                                $scope.storageModel.apply_storehouse_code = $scope.houseCodeList[0];
+                                $scope.storageModel.apply_storehouse_code = $scope.houseCodeList[0].key;
                             }
                         }else{
                             ngDialog.open({

@@ -99,7 +99,7 @@ define(['app'],function(app){
                     var requestData = {};
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
-                    requestData.exeid='JY5001EQ002';
+                    requestData.exeid='JY5001EQ001';
                     requestData.date_start = $filter('datePickerFormat2')($scope.conf.startDate);
                     requestData.date_end = $filter('datePickerFormat2')($scope.conf.endDate);
                     requestData.jy_material_id = $scope.conf.jy_material_id;
