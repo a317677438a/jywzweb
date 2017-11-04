@@ -907,6 +907,13 @@ angular.module('filter', [])
             }
         };
     })
+    .filter('useStatus', function () {
+        return function (data) {
+            if (data) {
+                if (data == '1') return "已使用";
+            }
+        };
+    })
     //yyyy-mm-dd转化成中国标准时间格式
     .filter('timeToDate', function () {
         return function (date) {

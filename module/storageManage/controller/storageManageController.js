@@ -1,7 +1,7 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','procurementStorageController','storageQueryController'],function(app){
+define(['app','procurementStorageController','storageQueryController','withdrawingMoneyController','MoveTheStorageController'],function(app){
     app.register.controller('storageManageController',
     [
         '$scope',

@@ -202,6 +202,18 @@ define(['app'],function(app){
                     //物资申领--申领查询 --  记录导出
                     downloadDetailApply : function(data){
                         return $http.post(API_ENDPOINT.url+'/apply/downloadDetail.json',data,WITH_CREDENTIALS);
+                    },
+
+                    /***
+                     *  物资使用情况
+                     */
+                    //当前用户持有某个物资库存
+                    materialOwnNumberMaterialuse : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialuse/materialOwnNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //新增物资使用信息
+                    addMaterialuse : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialuse/add.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

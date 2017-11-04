@@ -1,0 +1,48 @@
+<!-- 移库入库 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 300px;position: relative">
+                <input class="projectName" ng-model="conf.putin_code" placeholder="移库入库单号">
+                <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
+            </li>
+            <li style="width: 460px">
+                <label>移库入库日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <!--<a class="button button-blue" ng-click="addMateriel()">新增退库入库</a>-->
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>移库入库单号</th>
+                    <th>合同编号</th>
+                    <th>入库类型</th>
+                    <th>入库时间</th>
+                    <th>入库仓库</th>
+                    <th>状态</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.putin_code}}</td>
+                    <td>{{item.contract_no}}</td>
+                    <td>{{item.putin_type | putinType}}</td>
+                    <td>{{item.putin_date | timeFilter}}</td>
+                    <td>{{item.putin_storehouse_name}}</td>
+                    <td>{{item.status | StorageStatus}}</td>
+                    <td>{{item.remark}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>

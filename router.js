@@ -91,6 +91,24 @@ define(['app'],function(app){
                             }]
                     }
                 })
+                .state('operationalGuidance', {
+                    url: '/operationalGuidance',
+                    templateUrl: 'views/operationalGuidance/operationalGuidance.html',//运行管理
+                    controller: 'operationalGuidanceController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'module/operationalGuidance/operationalGuidanceController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
+                })
                 .state('checkTheStock', {
                     url: '/checkTheStock',
                     templateUrl: 'views/checkTheStock/checkTheStock.html',//仓库盘点

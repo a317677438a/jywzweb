@@ -39,16 +39,25 @@
             //入库管理
             "procurementStorageController": 'module/storageManage/controller/procurementStorage/procurementStorageController',
             "storageQueryController": 'module/storageManage/controller/storageQuery/storageQueryController',
+            "withdrawingMoneyController": 'module/storageManage/controller/withdrawingMoney/withdrawingMoneyController',
+            "MoveTheStorageController": 'module/storageManage/controller/MoveTheStorage/MoveTheStorageController',
             //出库管理 stockOutApp
             "stockOutApp" : 'module/stockOutManagement/stockOutApp',
             "forOutBoundController": 'module/stockOutManagement/controller/forOutBound/forOutBoundController',
             "stockOutQueryController": 'module/stockOutManagement/controller/stockOutQuery/stockOutQueryController',
+            "MoveLibraryOutboundController": 'module/stockOutManagement/controller/MoveLibraryOutbound/MoveLibraryOutboundController',
             //物资申领
             "materialsApp" : 'module/materialsFor/materialsApp',
             "claimsForQueryController": 'module/materialsFor/controller/claimsForQuery/claimsForQueryController',
             "materialRequisitionController": 'module/materialsFor/controller/materialRequisition/materialRequisitionController',
             "outStockRegistrationController": 'module/materialsFor/controller/outStockRegistration/outStockRegistrationController',
             "stockRequisitionController": 'module/materialsFor/controller/stockRequisition/stockRequisitionController',
+            //运行管理
+            "operationalGuidanceController": 'module/operationalGuidance/operationalGuidanceController',
+            "GoodsReturnedController": 'module/operationalGuidance/controller/GoodsReturned/GoodsReturnedController',
+            "useRegistrationController": 'module/operationalGuidance/controller/useRegistration/useRegistrationController',
+            "useRegistrationQueryController": 'module/operationalGuidance/controller/useRegistrationQuery/useRegistrationQueryController',
+            "ViewHoldController": 'module/operationalGuidance/controller/ViewHold/ViewHoldController',
             //仓库盘点
             "outBoundStatisticsController": 'module/checkTheStock/controller/outBoundStatistics/outBoundStatisticsController',
             "libraryStatisticsController": 'module/checkTheStock/controller/libraryStatistics/libraryStatisticsController',

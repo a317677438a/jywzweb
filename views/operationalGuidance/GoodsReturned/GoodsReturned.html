@@ -1,0 +1,59 @@
+<!-- 物资退回 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 460px">
+                <label>日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="addMateriel()">新增退回单</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>申请单号</th>
+                    <th>领用人</th>
+                    <th>申请日期</th>
+                    <th>审批人</th>
+                    <th>领料仓库</th>
+                    <th>申请状态</th>
+                    <th>审批意见</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.apply_code}}</td>
+                    <td>{{item.apply_user_name}}</td>
+                    <td>{{item.apply_date | timeFilter}}</td>
+                    <td>{{item.review_user_name}}</td>
+                    <td>{{item.apply_storehouse_name}}</td>
+                    <td>{{item.status | applyStatus}}</td>
+                    <td>{{item.review_remark}}</td>
+                    <td>{{item.remark}}</td>
+                    <td>
+                        <a class="button button-green operationButton" href="#/goodsDetails?code={{item.id}}&house={{item.apply_storehouse_name}}">物资明细</a>
+                        <a class="button button-green operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-show="item.status=='1' || item.status=='2'" ng-click="deleteMateriel(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-show="showAdd" ng-include="'views/operationalGuidance/GoodsReturned/addGoodsReturned.html'"></div>

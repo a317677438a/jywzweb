@@ -1,8 +1,8 @@
 /**
  * Created by huangyao on 2017/10/5.
  */
-define(['app','forOutBoundController','stockOutQueryController','MoveLibraryOutboundController'],function(app){
-    app.register.controller('stockOutManagementController',
+define(['app','GoodsReturnedController','useRegistrationController','useRegistrationQueryController','ViewHoldController'],function(app){
+    app.register.controller('operationalGuidanceController',
         [
             '$scope',
             function($scope){
