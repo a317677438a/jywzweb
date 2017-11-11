@@ -249,6 +249,22 @@ define(['app'],function(app){
                     //仓库调拨--修改调拨单
                     modifyTransfer : function(data){
                         return $http.post(API_ENDPOINT.url+'/transfer/modifyTransfer.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库调拨--删除调拨单
+                    deleteTransfer : function(data){
+                        return $http.post(API_ENDPOINT.url+'/transfer/deleteTransfer.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库调拨--确认物资调拨
+                    comfirmTransfer : function(data){
+                        return $http.post(API_ENDPOINT.url+'/transfer/comfirmTransfer.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库盘点--库存盘点
+                    materialNumber : function(data){
+                        return $http.post(API_ENDPOINT.url+'/takestock/materialNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库盘点--下载
+                    downloadTakestock : function(data){
+                        return $http.post(API_ENDPOINT.url+'/takestock/downloadTakestock.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

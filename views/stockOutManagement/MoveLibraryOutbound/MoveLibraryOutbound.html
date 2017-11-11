@@ -3,14 +3,20 @@
     <div class="forStar mgBottom20 borderB clearFix">
         <ul class="fl clearFix" style="width: 70%">
             <li style="width: 300px;position: relative">
-                <input class="projectName" ng-model="conf.contract_no" placeholder="出库单号">
+                <input class="projectName" ng-model="conf.putout_code" placeholder="出库单号">
                 <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
             </li>
             <li style="width: 460px">
                 <label>出库日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
             </li>
         </ul>
         <div class="fl">
@@ -36,7 +42,7 @@
                 <tr ng-repeat="item in data">
                     <td>{{item.putout_type | putoutType}}</td>
                     <td>{{item.putout_user_name}}</td>
-                    <td>{{item.putout_date}}</td>
+                    <td>{{item.putout_date | timeFilter}}</td>
                     <td>{{item.putout_storehouse_name}}</td>
                     <td>{{item.apply_user_name}}</td>
                     <td>{{item.status | putoutStatus}}</td>

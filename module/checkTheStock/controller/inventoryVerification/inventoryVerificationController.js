@@ -20,6 +20,7 @@ define(['app'],function(app){
                 indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
                     if(data.success=="true"){
                         $scope.paramqueryArr = data.returndata.rows;
+                        $scope.conf.putout_storehouse_code = $scope.paramqueryArr[0].key;
                     }
                 });
             };
@@ -91,19 +92,13 @@ define(['app'],function(app){
             };
             $scope.getEmployeesPage=function(){
                 var requestData = {};
-                requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
-                requestData.limit=$scope.pagesize;
-                requestData.exeid='JY2001EQ009';
-                requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
-                requestData.putin_code = $scope.conf.putin_code;
-                requestData.putin_user_name = $scope.conf.putin_user_name;
-                requestData.jy_material_id = $scope.conf.jy_material_id;
+                requestData.storehouse_code = $scope.conf.putout_storehouse_code;
+                requestData.material_id = $scope.conf.jy_material_id;
 
                 //项目信息列表查询
-                $scope.promise = commonQuery.listQuery(requestData).success(function(data){
+                $scope.promise = indexService.materialNumber(requestData).success(function(data){
                     if(data.success=="true"){
-                        $scope.data = data.returndata.rows;
-                        $scope.totalItems = data.returndata.results;
+                        $scope.data = data.returndata;
                     }else{
                         ngDialog.open({
                             template: 'views/common/alert.html',
@@ -120,8 +115,6 @@ define(['app'],function(app){
                 //    window.location.href = 'views/common/error.html'
                 //})
             };
-            //默认查询页面数据
-            $scope.getEmployeesPage();
             //查询
             $scope.search = function(){
                 $scope.getEmployeesPage();
@@ -129,16 +122,12 @@ define(['app'],function(app){
             //下载文档
             $scope.downLoad = function(ul,filename,suffix){
                 var downloadDetail = {
-                    exeid : 'JY2001EQ009',
-                    putin_storehouse_code : $scope.conf.putin_storehouse_code,
-                    putin_code : $scope.conf.putin_code,
-                    putin_user_name : $scope.conf.putin_user_name,
-                    putin_date_start : $filter('datePickerFormat')($scope.conf.startDate),
-                    putin_date_end : $filter('datePickerFormat')($scope.conf.endDate)
-                }
-                $scope.promise = indexService.downloadDetailIno(downloadDetail).success(function(data){
+                    storehouse_code : $scope.conf.putout_storehouse_code,
+                    material_id : $scope.conf.jy_material_id
+                };
+                $scope.promise = indexService.downloadTakestock(downloadDetail).success(function(data){
                     if(data){
-                        var url=API_ENDPOINT.url+'storehousein/downloadDetail.json?'+$.param(downloadDetail);
+                        var url=API_ENDPOINT.url+'takestock/downloadTakestock.json?'+$.param(downloadDetail);
                         setTimeout(function(){
                             window.open(url);
                         },1000)

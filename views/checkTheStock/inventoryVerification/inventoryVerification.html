@@ -1,7 +1,16 @@
 <!-- 库存盘点 -->
 <div class="mgTop20 bkColor contentShadow">
     <div class="forStar mgBottom20 borderB clearFix">
-        <ul class="fl clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li>
+                <label>出库仓库编码：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="conf.putout_storehouse_code"  ng-options="o.key as o.value for o in paramqueryArr" style="width: 250px;">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
             <li style="overflow: inherit">
                 <label>物资名称：</label>
                 <div class="styled-select label6-width" style="overflow: inherit;">
@@ -15,15 +24,6 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-            </li>
-            <li>
-                <label>出库仓库编码：</label>
-                <div class="styled-select label6-width">
-                    <select ng-model="conf.putout_storehouse_code"  ng-options="o.key as o.value for o in paramqueryArr" style="width: 250px;">
-                        <option></option>
-                    </select>
-                    <i class="arrow"></i>
                 </div>
             </li>
         </ul>
@@ -49,15 +49,15 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
-                    <td>{{item.putout_code}}</td>
-                    <td>{{item.putout_type | putoutType}}</td>
-                    <td>{{item.putout_storehouse_name}}</td>
-                    <td>{{item.putout_date | timeFilter}}</td>
+                    <td>{{item.putin_storehouse_name}}</td>
                     <td>{{item.material_name}}</td>
                     <td>{{item.material_code}}</td>
                     <td>{{item.material_type_name}}</td>
-                    <td>{{item.putout_number}}</td>
+                    <td>{{item.supplier}}</td>
                     <td>{{item.model}}</td>
+                    <td>{{item.putin_number}}</td>
+                    <td>{{item.putout_number}}</td>
+                    <td>{{item.store_number}}</td>
                 </tr>
             </tbody>
         </table>

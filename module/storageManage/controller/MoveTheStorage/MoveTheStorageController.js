@@ -97,11 +97,11 @@ define(['app'],function(app){
                 var requestData = {};
                 requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                 requestData.limit=$scope.pagesize;
-                requestData.exeid='JY2001EQ009';
-                requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
+                requestData.exeid='JY6001EQ002';
+                requestData.putin_type = '2';
                 requestData.putin_code = $scope.conf.putin_code;
-                requestData.putin_user_name = $scope.conf.putin_user_name;
-                requestData.jy_material_id = $scope.conf.jy_material_id;
+                requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
 
                 //项目信息列表查询
                 $scope.promise = commonQuery.listQuery(requestData).success(function(data){

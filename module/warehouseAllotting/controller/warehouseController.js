@@ -17,6 +17,8 @@ define(['app'],function(app){
                 $scope.conf = {};
                 $scope.message = 'Please Wait...';
                 $scope.storageModel = {}; //新增调拨单对象
+                $scope.userList = [];
+                $scope.add = {};
                 //调拨类型枚举
                 commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.apply.TransferType'}).success(function(data){
                     if(data.success=="true"){
@@ -24,11 +26,43 @@ define(['app'],function(app){
                         $scope.storageModel.transfer_type = $scope.TransferType[0].key;
                     }
                 });
+                //查询所有仓管员
+                $scope.promise = indexService.getUserByRole({role:2,exeid:'MS0002EQ01'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.CangUserList =  data.returndata;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+                //查询所有仓库
+                $scope.promise = indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.storehouseList =  data.returndata.rows;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
                 //新增调拨---自动生成调拨单号
                 $scope.getCode = function(){
                     $scope.promise = indexService.getCode({codeType:'DB'}).success(function(data){
                         if(data.success=="true"){
-                            $scope.storageModel.putin_code = data.returndata.code;
+                            $scope.storageModel.transfer_code = data.returndata.code;
                         }else{
                             ngDialog.open({
                                 template: 'views/common/alert.html',
@@ -67,13 +101,19 @@ define(['app'],function(app){
                 $scope.getHouseCode = function(){
                     $scope.haveStorehouseCodeList($scope.storageModel.putin_user).then(function(result){
                         $scope.getHouseCodeList =  result;
+                        if($scope.getHouseCodeList.length>0){
+                            $scope.storageModel.putin_storehouse_code = $scope.getHouseCodeList[0].key;
+                        }
                     });
                 };
                 //查询所有仓管员列表
                 $scope.getUserList = function(){
+                    var deferred=$q.defer();
+                    var promise=deferred.promise;
                     $scope.promise = indexService.getUserByRole({role:2,exeid:'MS0002EQ01'}).success(function(data){
                         if(data.success=="true"){
-                            $scope.userList =  data.returndata;
+                            //$scope.userList =  data.returndata;
+                            deferred.resolve(data.returndata);//执行成功
                         }else{
                             ngDialog.open({
                                 template: 'views/common/alert.html',
@@ -86,6 +126,7 @@ define(['app'],function(app){
                             })
                         }
                     });
+                    return promise;
                 };
                 //添加物资--所有物资下拉列表
                 $scope.getALLMaterialList = function(){
@@ -137,14 +178,20 @@ define(['app'],function(app){
                             $scope.storageModel.putout_storehouse_code = $scope.houseCodeList[0].key;
                         }
                     });
-                    $scope.getUserList();
-                    if($scope.userList.length>0){
-                        $scope.storageModel.putin_user = $scope.userList[0].key;
-                        $scope.getHouseCode();
-                        if($scope.getHouseCodeList.length>0){
-                            $scope.storageModel.putin_storehouse_code = $scope.getHouseCodeList[0].key;
+                    $scope.getUserList().then(function(result){
+                        $scope.userList = result;
+                        if($scope.userList.length>0){
+                            $scope.storageModel.putin_user = $scope.userList[0].key;
+                            $scope.getHouseCode();
                         }
-                    }
+                    });
+                    //if($scope.userList.length>0){
+                    //    $scope.storageModel.putin_user = $scope.userList[0].key;
+                    //    $scope.getHouseCode();
+                    //    if($scope.getHouseCodeList.length>0){
+                    //        $scope.storageModel.putin_storehouse_code = $scope.getHouseCodeList[0].key;
+                    //    }
+                    //}
                     $scope.getALLMaterialList();
                 };
                 //关闭新增窗口
@@ -324,9 +371,14 @@ define(['app'],function(app){
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
                     requestData.exeid='JY7001EQ002';
-                    requestData.putin_code = $scope.conf.putin_code;
+                    requestData.transfer_code = $scope.conf.transfer_code;
+                    requestData.putin_user = $scope.add.putin_user;
+                    requestData.putout_user = $scope.add.putout_user;
+                    requestData.putin_storehouse_code = $scope.add.putin_storehouse_code;
+                    requestData.putout_storehouse_code = $scope.add.putout_storehouse_code;
                     requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
                     requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
+
 
                     //项目信息列表查询
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){
@@ -500,7 +552,7 @@ define(['app'],function(app){
                 };
                 //点击删除
                 $scope.deleteMateriel = function(id){
-                    $scope.id = id;
+                    $scope.m_id = id;
                     ngDialog.open({
                         template: 'views/common/confirm.html',
                         className: 'confirm',
@@ -513,7 +565,7 @@ define(['app'],function(app){
                 };
                 //确定删除
                 $scope.BeSure = function(){
-                    $scope.promise = indexService.deleteOneStock({id:$scope.id}).success(function(data){
+                    $scope.promise = indexService.deleteTransfer({id:$scope.m_id}).success(function(data){
                         if(data.success=="true"){
                             ngDialog.close();
                             ngDialog.open({
@@ -543,17 +595,39 @@ define(['app'],function(app){
                 $scope.BeCancel = function(){
                     ngDialog.close();
                 };
+                //确认入库
+                $scope.inboundGoodsConfirmation = function(id){
+                    $scope.promise = indexService.comfirmTransfer({id:id}).success(function(data){
+                        if(data.success=="true"){
+                            $scope.getEmployeesPage();
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                    $scope.getEmployeesPage();
+                                }]
+                            })
+                        }else{
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert-error',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = data.returnmsg;
+                                }]
+                            })
+                        }
+                    });
+                };
                 //详情
                 $scope.MaterielDetails = function(id,item){
                     $scope.jy_storehouse_in_id = id;
-                    $scope.showModify = true;
+                    $scope.showDetails = true;
                     $scope.getMaterialModifyList(id);
-                    $scope.haveStorehouseCodeList($rootScope.id).then(function(result){
-                        $scope.houseCodeList = result;
-                    });
-                    $scope.getUserList();
-                    $scope.getHouseCode();
-                    $scope.getALLMaterialList();
                     $scope.storageModelModify = item;
                     $scope.storageModelModify.transfer_date = $filter('timeFilter')($scope.storageModelModify.transfer_date);
                     $scope.storageModelModify.putout_user_name = $rootScope.name;
@@ -561,7 +635,53 @@ define(['app'],function(app){
                 //关闭
                 $scope.closeMaterialModifyDetails = function(){
                     $scope.showDetails = false;
-                }
+                };
+                //领料确认
+                $scope.registrationSure = function(id){
+                    $scope.sure_id = id;
+                    $scope.showEnter = true;
+                    $scope.conf.loginname = '';
+                    $scope.conf.passwd = '';
+                };
+                //输入密码确认
+                $scope.stockSure = function(){
+                    $validator.validate($scope,'group_name').success(function() {
+                        var receiveApplyMaterial = {
+                            loginname : $scope.conf.loginname,
+                            passwd : $scope.conf.passwd,
+                            id : $scope.sure_id
+                        };
+                        $scope.promise = indexService.comfirmTransfer(receiveApplyMaterial).success(function(data){
+                            if(data.success=="true"){
+                                $scope.showEnter = false;
+                                ngDialog.open({
+                                    template: 'views/common/alert.html',
+                                    className: 'alert',
+                                    showClose: true,
+                                    scope: $scope,
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.response = data.returnmsg;
+                                        $scope.getEmployeesPage();
+                                    }]
+                                })
+                            }else{
+                                ngDialog.open({
+                                    template: 'views/common/alert.html',
+                                    className: 'alert-error',
+                                    showClose: true,
+                                    scope: $scope,
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.response = data.returnmsg;
+                                    }]
+                                })
+                            }
+                        });
+                    })
+                };
+                //关闭确认
+                $scope.closeEnter = function(){
+                    $scope.showEnter = false;
+                };
             }
         ]);
 });
