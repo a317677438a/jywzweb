@@ -13,6 +13,7 @@ define(['app'],function(app){
             function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope){
 
                 $scope.message = 'Please Wait...';
+                $scope.type = $stateParams.type;
                 //保证当前导航菜单高亮
                 var url = localStorage.getItem('url');
                 if (document.getElementById('menuList')) {

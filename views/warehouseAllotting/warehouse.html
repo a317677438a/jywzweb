@@ -1,0 +1,64 @@
+<!-- 仓库调拨 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li style="width: 300px;position: relative">
+                <input class="projectName" ng-model="conf.contract_no" placeholder="调拨单号">
+                <i class="iconfont icon-sousuo-sousuo iconFontSouSuo" ng-click="getEmployeesPage()"></i>
+            </li>
+            <li style="width: 460px">
+                <label>调拨日期时段：</label>
+                <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
+                <span class="fr span-get">到</span>
+                <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="addMateriel()">新增仓库调拨</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>调拨单号</th>
+                    <th>调拨日期</th>
+                    <th>出库人</th>
+                    <th>出库仓库</th>
+                    <th>入库人</th>
+                    <th>入库仓库</th>
+                    <th>调拨类型</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.transfer_code}}</td>
+                    <td>{{item.transfer_date | timeFilter}}</td>
+                    <td>{{item.putout_user_name}}</td>
+                    <td>{{item.putout_storehouse_name}}</td>
+                    <td>{{item.putin_user_name}}</td>
+                    <td>{{item.putin_storehouse_name}}</td>
+                    <td>{{item.transfer_type | diaoboType}}</td>
+                    <td>{{item.status | diaoboStatus}}</td>
+                    <td>
+                        <a class="button button-green operationButton" ng-if="item.status=='1'" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-green operationButton" href="#/materialsDetails?id={{item.id}}&house={{item.putout_storehouse_name}}&type=2">物资详情</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-if="showAdd" ng-include="'views/warehouseAllotting/addWareHouse.html'"></div>
+<div class="add-overlay" ng-if="showModify" ng-include="'views/warehouseAllotting/modifyWareHouse.html'"></div>
+<div class="add-overlay" ng-if="showDetails" ng-include="'views/warehouseAllotting/wareHouseDetails.html'"></div>

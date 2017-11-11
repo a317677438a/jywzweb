@@ -914,6 +914,23 @@ angular.module('filter', [])
             }
         };
     })
+    .filter('diaoboType', function () {
+        return function (data) {
+            if (data) {
+                if (data == '1') return "转库";
+                if (data == '2') return "退库";
+                if (data == '3') return "调拨";
+            }
+        };
+    })
+    .filter('diaoboStatus', function () {
+        return function (data) {
+            if (data) {
+                if (data == '1') return "待调拨";
+                if (data == '2') return "调拨完成（确认）";
+            }
+        };
+    })
     //yyyy-mm-dd转化成中国标准时间格式
     .filter('timeToDate', function () {
         return function (date) {

@@ -1,0 +1,147 @@
+<div class="bkColor pos-re addSecurities" style="margin-top: 2%">
+    <h4 class="borderB padding10 textC">修改调拨单</h4>
+    <div class="forStar clearFix" style="height: 350px;overflow-y:auto;overflow-x: hidden">
+        <ul class="fl clearFix" style="width: 36%;margin-left: 19%;">
+            <li class="form-group">
+                <label class="addStar">调拨单号：</label>
+                <input class="label4-width" ng-model="storageModelModify.transfer_code" disabled>
+            </li>
+            <li class="form-group">
+                <label class="addStar">出库人：</label>
+                <input class="label4-width" ng-model="storageModelModify.putout_user_name" disabled>
+            </li>
+            <li class="form-group">
+                <label class="addStar">出库仓库：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="storageModelModify.putout_storehouse_code" ng-options="o.key as o.value for o in houseCodeList"
+                            validator="[requiredSubmit]" validator-group="securities_name">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li>
+                <label>备注：</label>
+                <input class="label4-width" ng-model="storageModelModify.remark">
+            </li>
+            <i class="iconfont icon-jia2" style="float: left;margin: 3% 0 0 0;font-size: 20px;" ng-click="addMaterialModify()">添加物资</i>
+        </ul>
+        <ul class="fl clearFix" style="width: 45%">
+            <li class="form-group">
+                <label class="addStar">调拨类型：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="storageModelModify.transfer_type" ng-options="o.key as o.value for o in TransferType"
+                            validator="[requiredSubmit]" validator-group="securities_name" disabled>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li class="form-group">
+                <label class="addStar">调拨日期：</label>
+                <input class="label4-width" ng-model="storageModelModify.transfer_date" bs-datepicker>
+            </li>
+            <li class="form-group">
+                <label class="addStar">入库人：</label>
+                <div class="styled-select label4-width">
+                    <select ng-model="storageModelModify.putin_user" ng-options="o.key as o.value for o in userList"
+                            validator="[requiredSubmit]" validator-group="securities_name" ng-change="getHouseCode()">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li class="form-group">
+                <label class="addStar">入库仓库：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="storageModelModify.putin_storehouse_code" ng-options="o.key as o.value for o in houseCodeList"
+                            validator="[requiredSubmit]" validator-group="securities_name">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+        </ul>
+        <div class="commonTable clearFix" style="width: 64%;margin-left: 19%;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>物资编码</th>
+                        <th>物资名称</th>
+                        <th>物资类型</th>
+                        <th>规格型号</th>
+                        <th>供应商（厂家）</th>
+                        <th>调拨数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in MaterialModifyList">
+                        <td>{{item.material_code}}</td>
+                        <td>{{item.material_name}}</td>
+                        <td>{{item.material_type_name}}</td>
+                        <td>{{item.model}}</td>
+                        <td>{{item.supplier}}</td>
+                        <td>{{item.transfer_number}}</td>
+                        <td>
+                            <a class="button button-yellow operationButton" ng-click="deleteOneMaterialModify($index)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="ngdialog-close" ng-click="closeForm2()"></div>
+    <a class="button button-blue marginLButton mgBottom10 mgTop20" ng-click="modifyOneStorageSure()">修改</a>
+</div>
+<div class="add-overlay" ng-show="showAddMaterialModify">
+    <div class="uploadFiles fileImportContent">
+        <div class="forStar">
+            <ul class="mgTop20 clearFix">
+                <li class="form-group" style="overflow: inherit">
+                    <label class="addStar">选择物资</label>
+                    <div class="styled-select label6-width" style="overflow: inherit;">
+                        <input type="text" style="width: 144px;" ng-model="conf.material" placeholder="物资编码-物资名称" ng-mousedown="showMenu()"
+                               validator="[requiredSubmit]" validator-group="AddMaterial">
+                        <i class="iconfont icon-sfsiconchacha-copy poorContent" ng-click="removeName()"></i>
+                        <ul style="right: -2px;top:28px;border-radius: 4px;" ng-mouseleave="notShow()" class="add-menu" ng-show="isShowMenu==true">
+                            <li ng-repeat="item in ALLMaterialList | filter:conf.material" style="position: relative;width: 142px">
+                                <a ng-click="changevalue2(item.value,item.key)">
+                                    <input type="text" title="{{item.value}}" class="mouseFocus" style="width: 148px;overflow: hidden;border: none;cursor: pointer" ng-model="item.value">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label>物资编码</label>
+                    <input class="projectName label6-width" ng-model="conf.code" disabled>
+                </li>
+                <li>
+                    <label>物资名称</label>
+                    <input class="projectName label6-width" ng-model="conf.name" disabled>
+                </li>
+                <li>
+                    <label>物资类型</label>
+                    <input class="projectName label6-width" ng-model="conf.codename"  disabled>
+                </li>
+                <li>
+                    <label>规格型号</label>
+                    <input class="projectName label6-width" ng-model="conf.model" disabled>
+                </li>
+                <li>
+                    <label>供应商（厂家）</label>
+                    <input class="projectName label6-width" ng-model="conf.supplier" disabled>
+                </li>
+                <li class="form-group">
+                    <label>库存数量</label>
+                    <input class="projectName label6-width" ng-model="conf.storeNumber" placeholder="库存数量" disabled>
+                </li>
+                <li class="form-group">
+                    <label class="addStar">申领数量</label>
+                    <input class="projectName label6-width" ng-model="conf.transfer_number" placeholder="入库数量"
+                           validator="[requiredSubmit]" validator-group="AddMaterial">
+                </li>
+            </ul>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSureAddMaterialModify()">添加</a>
+        </div>
+        <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeAddMaterialModify()"></div>
+    </div>
+</div>

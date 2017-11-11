@@ -237,6 +237,18 @@ define(['app'],function(app){
                     //下载查看持有情况
                     downloadOwnNumber : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialown/downloadOwnNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库调拨--当前出库仓库管理员对应仓库的物资库存
+                    storeNumber : function(data){
+                        return $http.post(API_ENDPOINT.url+'/transfer/storeNumber.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库调拨--新增调拨单
+                    addTransfer : function(data){
+                        return $http.post(API_ENDPOINT.url+'/transfer/addTransfer.json',data,WITH_CREDENTIALS);
+                    },
+                    //仓库调拨--修改调拨单
+                    modifyTransfer : function(data){
+                        return $http.post(API_ENDPOINT.url+'/transfer/modifyTransfer.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

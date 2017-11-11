@@ -6,7 +6,7 @@ define(['angular'],function(){
         .config(function($stateProvider,$urlRouterProvider){
             $stateProvider
                 .state('materialsDetails',{
-                    url : '/materialsDetails?id&house',
+                    url : '/materialsDetails?id&house?type',
                     templateUrl : 'views/stockOutManagement/forOutBound/materialsDetails.html',  //物资领用详情
                     controller : 'materialsDetailsController',
                     resolve : {

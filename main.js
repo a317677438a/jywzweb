@@ -64,6 +64,8 @@
             "libraryStatisticsController": 'module/checkTheStock/controller/libraryStatistics/libraryStatisticsController',
             "inventoryVerificationController": 'module/checkTheStock/controller/inventoryVerification/inventoryVerificationController',
             "inventoryWarningController": 'module/checkTheStock/controller/inventoryWarning/inventoryWarningController',
+            //仓库调拨
+            "warehouseController": 'module/warehouseAllotting/controller/warehouseController',
             //系统管理
             "userManagementController": 'module/systemManagement/controller/userManagement/userManagementController',
             "modifyPasswordController": 'module/systemManagement/controller/modifyPassword/modifyPasswordController'

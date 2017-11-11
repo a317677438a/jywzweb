@@ -1,0 +1,5 @@
+<!-- 仓库调拨 -->
+<div class="subNav wrap topNav">
+    <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">仓库调拨</a>
+</div>
+<div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/warehouseAllotting/warehouse.html'" ng-controller="warehouseController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>

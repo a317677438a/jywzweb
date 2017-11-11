@@ -145,6 +145,24 @@ define(['app'],function(app){
                             }]
                     }
                 })
+                .state('warehouseAllotting', {
+                    url: '/warehouseAllotting?type',
+                    templateUrl: 'views/warehouseAllotting/warehouseAllotting.html',//仓库调拨
+                    controller: 'warehouseAllottingController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'module/warehouseAllotting/controller/warehouseAllottingController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
+                })
                 .state('systemManagement', {
                     url: '/systemManagement?type',
                     templateUrl: 'views/systemManagement/systemManagement.html',//系统管理
