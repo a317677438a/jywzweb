@@ -244,7 +244,7 @@ define(['app'],function(app){
                     $scope.conf.material = ''
                 };
                 //确定新增物资
-                $scope.addSureAddMaterial = function(){
+                $scope.addSuredeleteMateriel = function(){
                     for(var i=0;i<$scope.MaterialList.length;i++){
                         if($scope.conf.code == $scope.MaterialList[i].code){
                             ngDialog.open({

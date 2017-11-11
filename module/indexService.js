@@ -265,6 +265,14 @@ define(['app'],function(app){
                     //仓库盘点--下载
                     downloadTakestock : function(data){
                         return $http.post(API_ENDPOINT.url+'/takestock/downloadTakestock.json',data,WITH_CREDENTIALS);
+                    },
+                    //库存预警--新增库存预警
+                    addmaterialwarn : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialwarn/add.json',data,WITH_CREDENTIALS);
+                    },
+                    //库存预警--删除预警
+                    deletematerialwarn : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialwarn/delete.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

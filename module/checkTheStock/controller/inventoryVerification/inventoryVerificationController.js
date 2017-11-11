@@ -14,7 +14,7 @@ define(['app'],function(app){
 
             $scope.conf = {};
             $scope.conf.putin_storehouse_code = '';
-
+            $scope.message = 'Please Wait...';
             //仓库查询
             $scope.paramquery = function(){
                 indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){

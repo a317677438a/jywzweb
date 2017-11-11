@@ -1,1 +1,67 @@
 <!-- 库存预警 -->
+<div class="mgTop20 bkColor contentShadow">
+    <div class="forStar mgBottom20 borderB clearFix">
+        <ul class="fl clearFix" style="width: 70%">
+            <li>
+                <label>出库仓库编码：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="add.putout_storehouse_code"  ng-options="o.key as o.value for o in storehouseList" style="width: 250px;">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li style="overflow: inherit">
+                <label>物资名称：</label>
+                <div class="styled-select label6-width" style="overflow: inherit;">
+                    <input type="text" style="width: 157px;" ng-model="add.material" placeholder="物资编码-物资名称" ng-mousedown="showMenu()"
+                           validator="[requiredSubmit]" validator-group="AddStock">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" ng-click="removeName()"></i>
+                    <ul style="right: -2px;top:28px;border-radius: 4px;" ng-mouseleave="notShow()" class="add-menu" ng-show="isShowMenu==true">
+                        <li ng-repeat="item in ALLMaterialList | filter:add.material" style="position: relative;width: 142px">
+                            <a ng-click="changevalue(item.value,item.key)">
+                                <input type="text" title="{{item.value}}" class="mouseFocus" style="width: 148px;overflow: hidden;border: none;cursor: pointer" ng-model="item.value">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="fl">
+            <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
+            <a class="button button-blue" ng-click="addWarning()">新增</a>
+        </div>
+    </div>
+    <div class="commonTable clearFix">
+        <table>
+            <thead>
+                <tr>
+                    <th>存放仓库</th>
+                    <th>物资名称</th>
+                    <th>物资编号</th>
+                    <th>物资类型</th>
+                    <th>供应商</th>
+                    <th>规格型号</th>
+                    <th>预警数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.warn_storehouse_name}}</td>
+                    <td>{{item.material_name}}</td>
+                    <td>{{item.material_code}}</td>
+                    <td>{{item.material_type_name}}</td>
+                    <td>{{item.supplier}}</td>
+                    <td>{{item.model}}</td>
+                    <td>{{item.warn_number}}</td>
+                    <td>
+                        <a class="button button-yellow operationButton"  ng-click="deleteMateriel(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-include="'views/common/paging.html'"></div>
+    </div>
+</div>
+<div class="add-overlay" ng-show="showAdd" ng-include="'views/checkTheStock/inventoryWarning/addWarning.html'"></div>
