@@ -66,6 +66,30 @@ define(['app'],function(app){
                     }]
                 });
             }
+
+            /*************用户提醒**************/
+            $rootScope.versionDate = function(){
+                $scope.promise = commonQuery.infoquery({exeid:'JY8001EQ005'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.versionNum = data.returndata.number;
+                    }else{
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert-error',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = data.returnmsg;
+                            }]
+                        })
+                    }
+                });
+            };
+            $rootScope.versionDate();
+            //查看所有
+            $scope.readAll = function(){
+                $state.go('DurationManage')
+            }
         }
     ]);
 });

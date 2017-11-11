@@ -566,9 +566,9 @@ angular.module('filter', [])
     .filter('readOrNot', function () {
         return function (val) {
             switch (val) {
-                case '0':
-                    return '未读';
                 case '1':
+                    return '未读';
+                case '2':
                     return '已读';
             }
         };

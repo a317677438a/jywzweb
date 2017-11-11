@@ -1,0 +1,25 @@
+<div class="wrap mgTop20 bkColor contentShadow" style="margin-top: .2rem;">
+    <a class="button button-blue"  ng-click="toHaveReadAll()">全部标记为已读</a>
+    <div class="commonTable">
+        <table>
+            <thead>
+                <th>消息题目</th>
+                <th>消息内容</th>
+                <th>状态</th>
+                <th>创建日期</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in data">
+                    <td>{{item.message_title}}</td>
+                    <td>{{item.message_content}}</td>
+                    <td>{{item.status | readOrNot}}</td>
+                    <td>{{item.crt_date | timeFilter}}</td>
+                    <td>
+                        <a class="button button-blue operationButton" ng-if="item.status=='1'" ng-click="toHaveRead(item.id)">标记为已读</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

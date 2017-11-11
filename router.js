@@ -180,6 +180,24 @@ define(['app'],function(app){
                                 return deferred.promise;
                             }]
                     }
+                })
+                .state('DurationManage', {
+                    url: '/DurationManage',
+                    templateUrl: 'views/shouye/DurationManage.html',//消息提醒
+                    controller: 'DurationManageController',
+                    resolve: {
+                        loadCtrl: ['$q',
+                            function ($q) {
+                                var deferred = $q.defer();
+                                //异步加载controller／directive/filter/service
+                                require([
+                                    'views/shouye/DurationManageController.js'
+                                ], function () {
+                                    deferred.resolve();
+                                });
+                                return deferred.promise;
+                            }]
+                    }
                 });
             //解决路由异常的方法
             $urlRouterProvider.otherwise('/shouye');

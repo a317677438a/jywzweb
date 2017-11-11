@@ -60,6 +60,12 @@
                     <i class="iconfont"></i>系统管理
                 </a>
             </li>
+
+            <li>
+                <a class="" href="#/DurationManage" menu-tabs>
+                    <i class="iconfont"></i>消息提醒
+                </a>
+            </li>
         </ul>
         <ul class="userMsg">
             <li>
@@ -68,14 +74,13 @@
             <li>
                 <a style="padding: 0px" title="{{name}}"><img src="img/uname.png">{{name | nameLength}}</a>
             </li>
-            <!--<li class="adviceImgHover" ng-class="{'adviceImgClick':clock}" ng-click="goToLogJob()" style="float: left;color: #fff;width: 68px">-->
-                <!--<a class="adviceImg" style="text-decoration: none;margin-left: 6px;">-->
-                    <!--<img src="img/advice.png">-->
-                    <!--<span ng-if="itemRemindCheck>99">99+</span>-->
-                    <!--<span ng-if="itemRemindCheck>0&&itemRemindCheck<=99">{{itemRemindCheck}}</span>-->
-                    <!--<span ng-if="itemRemindCheck==0">0</span>-->
-                <!--</a>-->
-            <!--</li>-->
+            <li class="adviceImgHover" ng-click="readAll()" style="float: left;color: #fff">
+                <a class="adviceImg">
+                    <img src="img/advice.png">
+                    <span ng-if="versionNum>0">{{versionNum}}</span>
+                    <span ng-if="versionNum==0">0</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -273,6 +273,10 @@ define(['app'],function(app){
                     //库存预警--删除预警
                     deletematerialwarn : function(data){
                         return $http.post(API_ENDPOINT.url+'/materialwarn/delete.json',data,WITH_CREDENTIALS);
+                    },
+                    //消息提醒--标记为已读
+                    haveToRead : function(data){
+                        return $http.post(API_ENDPOINT.url+'/message/read.json',data,WITH_CREDENTIALS);
                     }
                 };
             }
