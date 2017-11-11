@@ -160,7 +160,7 @@ define(['app'],function(app){
                     requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     requestData.limit=$scope.pagesize;
                     requestData.exeid='JY4001EQ002';
-                    requestData.putout_type = 1;
+                    requestData.putout_type = 3;
                     requestData.putout_code = $scope.conf.putout_code;
                     requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
                     requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);

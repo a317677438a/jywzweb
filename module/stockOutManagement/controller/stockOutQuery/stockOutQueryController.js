@@ -20,6 +20,12 @@ define(['app'],function(app){
                 $scope.conf.endDate = '';
                 $scope.message = 'Please Wait...';
 
+                //出库类型
+                commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.apply.PutoutType'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.PutoutType = data.returndata;
+                    }
+                });
                 //仓库查询
                 $scope.paramquery = function(){
                     indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
@@ -102,6 +108,7 @@ define(['app'],function(app){
                     requestData.putout_code = $scope.conf.putout_code;
                     requestData.putout_storehouse_code = $scope.conf.putout_storehouse_code;
                     requestData.putout_user_name = $scope.conf.putout_user_name;
+                    requestData.putout_type = $scope.conf.putout_type;
                     requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
                     requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                     requestData.jy_material_id = $scope.conf.jy_material_id;

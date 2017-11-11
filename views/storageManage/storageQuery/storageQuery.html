@@ -17,6 +17,15 @@
                 </div>
             </li>
             <li>
+                <label>入库类型：</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="conf.putin_type"  ng-options="o.key as o.value for o in PutinType">
+                        <option></option>
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li>
                 <label>入库人:</label>
                 <input class="label5-width" ng-model="conf.putin_user_name" placeholder="入库人">
             </li>

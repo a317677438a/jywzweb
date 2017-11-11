@@ -18,6 +18,13 @@ define(['app'],function(app){
             $scope.conf.putin_code = '';
             $scope.conf.putin_user_name = '';
 
+
+            //入库类型
+            commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.apply.PutinType'}).success(function(data){
+                if(data.success=="true"){
+                    $scope.PutinType = data.returndata;
+                }
+            });
             //仓库查询
             $scope.paramquery = function(){
                 indexService.paramquery({exeid:'MS0000EQ001',param_type:'storehouse'}).success(function(data){
@@ -99,6 +106,7 @@ define(['app'],function(app){
                 requestData.exeid='JY2001EQ009';
                 requestData.putin_storehouse_code = $scope.conf.putin_storehouse_code;
                 requestData.putin_code = $scope.conf.putin_code;
+                requestData.putin_type = $scope.conf.putin_type;
                 requestData.putin_user_name = $scope.conf.putin_user_name;
                 requestData.jy_material_id = $scope.conf.jy_material_id;
 

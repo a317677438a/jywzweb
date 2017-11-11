@@ -98,7 +98,7 @@ define(['app'],function(app){
                 requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                 requestData.limit=$scope.pagesize;
                 requestData.exeid='JY6001EQ002';
-                requestData.putin_type = '2';
+                requestData.putin_type = 3;
                 requestData.putin_code = $scope.conf.putin_code;
                 requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
                 requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
