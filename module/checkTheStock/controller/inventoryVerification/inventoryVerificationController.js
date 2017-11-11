@@ -14,6 +14,7 @@ define(['app'],function(app){
 
             $scope.conf = {};
             $scope.conf.putin_storehouse_code = '';
+            $scope.conf.jy_material_id = '';
             $scope.message = 'Please Wait...';
             //仓库查询
             $scope.paramquery = function(){
@@ -120,7 +121,7 @@ define(['app'],function(app){
                 $scope.getEmployeesPage();
             };
             //下载文档
-            $scope.downLoad = function(ul,filename,suffix){
+            $scope.downLoad = function(){
                 var downloadDetail = {
                     storehouse_code : $scope.conf.putout_storehouse_code,
                     material_id : $scope.conf.jy_material_id
