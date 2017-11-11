@@ -55,7 +55,7 @@
         <li ng-if="role==2">
             <label>仓储调拨：</label>
             <div class="btn-group" role="group" aria-label="...">
-                <a type="button" class="btn btn-default">仓储调拨</a>
+                <a type="button" class="btn btn-default" href="#/warehouseAllotting">仓储调拨</a>
             </div>
         </li>
         <li>
@@ -63,6 +63,12 @@
             <div class="btn-group" role="group" aria-label="...">
                 <a type="button" class="btn btn-default" href="#/systemManagement?type=1" ng-if="role==1">用户管理</a>
                 <a type="button" class="btn btn-default" href="#/systemManagement?type=2">密码修改</a>
+            </div>
+        </li>
+        <li>
+            <label>消息提醒：</label>
+            <div class="btn-group" role="group" aria-label="...">
+                <a type="button" class="btn btn-default" href="#/DurationManage">消息提醒</a>
             </div>
         </li>
     </ul>
