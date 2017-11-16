@@ -254,6 +254,18 @@ define(['app'],function(app){
                                     return;
                                 }
                             }
+                            if($scope.conf.storeNumber=='' || $scope.conf.storeNumber==='0'){
+                                ngDialog.open({
+                                    template: 'views/common/alert.html',
+                                    className: 'alert',
+                                    showClose: true,
+                                    scope: $scope,
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.response = "该物资库存为零，不可申领!";
+                                    }]
+                                });
+                                return;
+                            }
                             $scope.MaterialList.push(
                                 {
                                     code : $scope.conf.code,
