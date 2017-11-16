@@ -444,8 +444,8 @@ define(['app'],function(app){
                     });
                 };
 
-                $scope.addSureModifyMaterial = function(){
-                    $validator.validate($scope,'ModifyStock').success(function() {//继续申领
+                $scope.addSureAddMaterialModify = function(){
+                    $validator.validate($scope,'ModifyStock').success(function() {
                         if($scope.conf.ownNumber == '0'){
                             ngDialog.open({
                                 template: 'views/common/alert.html',

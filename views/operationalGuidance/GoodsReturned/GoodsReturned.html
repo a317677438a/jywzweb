@@ -32,6 +32,7 @@
                     <th>退回日期</th>
                     <th>退回仓库</th>
                     <th>操作人</th>
+                    <th>状态</th>
                     <th>用户操作</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@
                     <td>{{item.putin_date | timeFilter}}</td>
                     <td>{{item.putin_storehouse_name}}</td>
                     <td>{{item.putin_user_name}}</td>
+                    <td>{{item.status | StorageStatus}}</td>
                     <td>
                         <a class="button button-green operationButton" href="#/GoodsReturnedDetails?id={{item.id}}&type=1">退回明细</a>
                         <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>

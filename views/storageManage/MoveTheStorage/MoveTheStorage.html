@@ -34,6 +34,7 @@
                     <th>入库仓库</th>
                     <th>状态</th>
                     <th>备注</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,9 @@
                     <td>{{item.putin_storehouse_name}}</td>
                     <td>{{item.status | StorageStatus}}</td>
                     <td>{{item.remark}}</td>
+                    <td>
+                        <a class="button button-green operationButton" href="#/GoodsReturnedDetails?id={{item.id}}&type=3">物资明细</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

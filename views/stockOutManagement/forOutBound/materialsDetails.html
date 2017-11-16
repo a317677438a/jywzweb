@@ -1,6 +1,9 @@
 <!-- 物资明细 -->
 <div class="wrap propertyPosition" ng-if="type==1">
-    当前位置：<a href="#/stockOutManagement">申领出库</a> > <a href="#/stockOutManagement">物资明细</a>
+    当前位置：<a href="#/stockOutManagement?type=1">申领出库</a> > <a href="#/stockOutManagement">物资明细</a>
+</div>
+<div class="wrap propertyPosition" ng-if="type==2">
+    当前位置：<a href="#/stockOutManagement?type=2">移库出库</a> > <a href="#/stockOutManagement">物资明细</a>
 </div>
 <div class="wrap mgBottom10 bkColor contentShadow" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
     <div class="commonTable padding10 clearFix">
@@ -13,17 +16,17 @@
                     <th>物资类型</th>
                     <th>规格型号</th>
                     <th>供应商（厂家）</th>
-                    <th>申领数量</th>
+                    <th>数量</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
-                    <td>{{item.code}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.codename}}</td>
+                    <td>{{item.material_code}}</td>
+                    <td>{{item.material_name}}</td>
+                    <td>{{item.material_type_name}}</td>
                     <td>{{item.model}}</td>
                     <td>{{item.supplier}}</td>
-                    <td>{{item.apply_number}}</td>
+                    <td>{{item.putout_number}}</td>
                 </tr>
             </tbody>
         </table>

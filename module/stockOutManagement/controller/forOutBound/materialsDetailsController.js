@@ -75,7 +75,7 @@ define(['app'],function(app){
                     var requestData = {};
                     //requestData.start=($scope.page.pagenum-1)*$scope.pagesize;
                     //requestData.limit=$scope.pagesize;
-                    requestData.exeid = 'JY3001EQ003';
+                    requestData.exeid = 'JY4001EQ003';
                     requestData.id = $stateParams.id;
                     //requestData.apply_code = $stateParams.code;
                     //requestData.apply_storehouse_code = $scope.house;

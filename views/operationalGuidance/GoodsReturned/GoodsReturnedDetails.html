@@ -1,9 +1,12 @@
 <!-- 物资明细 -->
 <div class="wrap propertyPosition" ng-if="type==1">
-    当前位置：<a href="#/operationalGuidance">物资退回</a> > <a href="#/operationalGuidance">物资明细</a>
+    当前位置：<a href="#/operationalGuidance?type=3">物资退回</a> > <a href="#/operationalGuidance">物资明细</a>
 </div>
 <div class="wrap propertyPosition" ng-if="type==2">
-    当前位置：<a href="#/storageManage">退库入库</a> > <a href="#/storageManage">物资明细</a>
+    当前位置：<a href="#/storageManage?type=2">退库入库</a> > <a href="#/storageManage">物资明细</a>
+</div>
+<div class="wrap propertyPosition" ng-if="type==3">
+    当前位置：<a href="#/storageManage?type=3">移库入库</a> > <a href="#/storageManage">物资明细</a>
 </div>
 <div class="wrap mgBottom10 bkColor contentShadow" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
     <div class="commonTable padding10 clearFix">
