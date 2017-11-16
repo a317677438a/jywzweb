@@ -11,6 +11,7 @@ define(['app'],function(app){
             'indexService',
             function($scope,$filter,commonQuery,ngDialog,indexService){
 
+                $scope.message = 'Please Wait...';
                 //输入第二个日期时检查是否大于等于第一个日期
                 $scope.checkMinDate = function(start,end){
                     var sDate = parseInt($filter('datePickerFormat')(start));

@@ -44,9 +44,9 @@
                     <td>{{item.putin_user_name}}</td>
                     <td>{{item.status | StorageStatus}}</td>
                     <td>
-                        <a class="button button-green operationButton" href="#/GoodsReturnedDetails?id={{item.id}}&type=1">退回明细</a>
-                        <a class="button button-green operationButton" ng-click="modifyMateriel(item.id,item)">修改</a>
-                        <a class="button button-yellow operationButton" ng-click="deleteMateriel(item.id)">删除</a>
+                        <a class="button button-green operationButton" ng-if="item.status!='2'" href="#/GoodsReturnedDetails?id={{item.id}}&type=1">退回明细</a>
+                        <a class="button button-green operationButton" ng-if="item.status!='2'" ng-click="modifyMateriel(item.id,item)">修改</a>
+                        <a class="button button-yellow operationButton" ng-if="item.status!='2'" ng-click="deleteMateriel(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>

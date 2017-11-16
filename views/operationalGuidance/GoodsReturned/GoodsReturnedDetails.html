@@ -10,7 +10,9 @@
 </div>
 <div class="wrap mgBottom10 bkColor contentShadow" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
     <div class="commonTable padding10 clearFix">
-        <h4 class="mgBottom20 mgTop20">领料仓库：{{house}}</h4>
+        <h4 class="mgBottom20 mgTop20" ng-if="type==1">退回仓库：{{house}}</h4>
+        <h4 class="mgBottom20 mgTop20" ng-if="type==2">退库入库仓库：{{house}}</h4>
+        <h4 class="mgBottom20 mgTop20" ng-if="type==3">移库入库仓库：{{house}}</h4>
         <table>
             <thead>
                 <tr>
@@ -19,7 +21,9 @@
                     <th>物资类型</th>
                     <th>规格型号</th>
                     <th>供应商（厂家）</th>
-                    <th>退回数量</th>
+                    <th ng-if="type==1">退回数量</th>
+                    <th ng-if="type==2">入库数量</th>
+                    <th ng-if="type==3">入库数量</th>
                 </tr>
             </thead>
             <tbody>
