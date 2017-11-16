@@ -113,17 +113,6 @@ define(['app'],function(app){
                         }
                     });
                 };
-                //点击新增退回单
-                $scope.addMateriel = function(){
-                    $scope.showAdd = true;
-                    $scope.getCode();
-                    $scope.getUserByRole();
-                    $scope.storageModel.apply_user_name = $rootScope.name;
-                    $scope.storageModel.apply_user = $rootScope.id;
-                    $scope.storageModel.storehouse_user = ''; //仓管员
-                    $scope.storageModel.apply_storehouse_code = ''; //仓库
-                    $scope.storageModel.apply_date = new Date();
-                };
                 //自动生成退回单号
                 $scope.getCode = function(){
                     $scope.promise = indexService.getCode({codeType:'TH'}).success(function(data){
@@ -163,6 +152,17 @@ define(['app'],function(app){
                             })
                         }
                     });
+                };
+                //点击新增退回单
+                $scope.addGoodReturned = function(){
+                    $scope.showAdd = true;
+                    $scope.getCode();
+                    $scope.getUserByRole();
+                    $scope.storageModel.apply_user_name = $rootScope.name;
+                    $scope.storageModel.apply_user = $rootScope.id;
+                    $scope.storageModel.storehouse_user = ''; //仓管员
+                    $scope.storageModel.apply_storehouse_code = ''; //仓库
+                    $scope.storageModel.apply_date = new Date();
                 };
                 //查询仓管员对应的仓库编码
                 $scope.haveStorehouseCode = function(id){
@@ -206,6 +206,8 @@ define(['app'],function(app){
                         $scope.conf.model = '';
                         $scope.conf.supplier = '';
                         $scope.conf.apply_number = '';
+                    }).error(function(){
+
                     });
                 };
                 //点击鼠标显示下拉菜单

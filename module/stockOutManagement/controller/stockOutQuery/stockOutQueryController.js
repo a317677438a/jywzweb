@@ -109,8 +109,8 @@ define(['app'],function(app){
                     requestData.putout_storehouse_code = $scope.conf.putout_storehouse_code;
                     requestData.putout_user_name = $scope.conf.putout_user_name;
                     requestData.putout_type = $scope.conf.putout_type;
-                    requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
-                    requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
+                    requestData.putout_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putout_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                     requestData.jy_material_id = $scope.conf.jy_material_id;
 
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){

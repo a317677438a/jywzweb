@@ -21,7 +21,7 @@
         </ul>
         <div class="fl">
             <a class="button button-blue" ng-click="getEmployeesPage()">查询</a>
-            <a class="button button-blue" ng-click="addMateriel()">新增退回单</a>
+            <a class="button button-blue" ng-click="addGoodReturned()">新增退回单</a>
         </div>
     </div>
     <div class="commonTable clearFix">
@@ -52,5 +52,5 @@
         <div ng-include="'views/common/paging.html'"></div>
     </div>
 </div>
-<div class="add-overlay" ng-show="showAdd" ng-include="'views/operationalGuidance/GoodsReturned/addGoodsReturned.html'"></div>
-<div class="add-overlay" ng-show="showModify" ng-include="'views/operationalGuidance/GoodsReturned/modifyGoodsReturned.html'"></div>
+<div class="add-overlay" ng-if="showAdd" ng-include="'views/operationalGuidance/GoodsReturned/addGoodsReturned.html'"></div>
+<div class="add-overlay" ng-if="showModify" ng-include="'views/operationalGuidance/GoodsReturned/modifyGoodsReturned.html'"></div>

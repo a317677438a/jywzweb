@@ -32,8 +32,14 @@
             <li style="width: 460px">
                 <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
             </li>
             <li style="overflow: inherit">
                 <label>物资名称：</label>
@@ -60,6 +66,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>入库单号</th>
                     <th>入库类型</th>
                     <th>入库时间</th>
                     <th>物资名称</th>
@@ -74,6 +81,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in data">
+                    <td>{{item.putin_code}}</td>
                     <td>{{item.putin_type | putinType}}</td>
                     <td>{{item.putin_date | timeFilter}}</td>
                     <td>{{item.material_name}}</td>

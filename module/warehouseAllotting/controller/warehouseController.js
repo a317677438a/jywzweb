@@ -271,6 +271,18 @@ define(['app'],function(app){
                         });
                         return;
                     }
+                    if($scope.conf.storeNumber == '' || $scope.conf.storeNumber === '0'){
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = "当前物资没有库存数量！";
+                            }]
+                        });
+                        return;
+                    }
                     $scope.MaterialList.push(
                         {
                             code : $scope.conf.code,
@@ -506,6 +518,8 @@ define(['app'],function(app){
                                 transfer_number:$scope.conf.transfer_number
                             }
                         );
+                    }).error(function(){
+
                     })
                 };
                 //删除一条

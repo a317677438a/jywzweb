@@ -30,7 +30,7 @@
                 <label class="addStar">调拨类型：</label>
                 <div class="styled-select label4-width">
                     <select ng-model="storageModel.transfer_type" ng-options="o.key as o.value for o in TransferType"
-                            validator="[requiredSubmit]" validator-group="securities_name" disabled>
+                            validator="[requiredSubmit]" validator-group="securities_name">
                     </select>
                     <i class="arrow"></i>
                 </div>
@@ -140,7 +140,7 @@
                            validator="[requiredSubmit]" validator-group="AddMaterial">
                 </li>
             </ul>
-            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSureAddMaterial()">添加</a>
+            <a class="button button-blue" style="margin: 5% 0 0 40%;" ng-click="addSuredeleteMateriel()">添加</a>
         </div>
         <div class="ngdialog-close closeBefore"  style="cursor: pointer" ng-click="closeAddMaterial()"></div>
     </div>

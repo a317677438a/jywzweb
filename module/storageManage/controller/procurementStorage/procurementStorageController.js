@@ -309,8 +309,8 @@ define(['app'],function(app){
                     requestData.limit=$scope.pagesize;
                     requestData.exeid='JY2001EQ003';
                     requestData.putin_code = $scope.conf.putin_code;
-                    requestData.putin_date_start = $scope.conf.startDate;
-                    requestData.putin_date_end = $scope.conf.endDate;
+                    requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                     requestData.putin_type = 1;
 
                     //项目信息列表查询
