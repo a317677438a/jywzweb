@@ -33,8 +33,14 @@
             <li style="width: 460px">
                 <label>日期时段：</label>
                 <input class="label10-width" ng-model="conf.endDate" bs-datepicker ng-blur="checkMinDate(conf.startDate,conf.endDate)">
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" title="清空" ng-model="conf.endDate" ensure-unique></i>
+                </div>
                 <span class="fr span-get">到</span>
                 <input class="label10-width" ng-model="conf.startDate" bs-datepicker>
+                <div class="pos-re">
+                    <i class="iconfont icon-sfsiconchacha-copy poorContent" style="right: 173px;" title="清空" ng-model="conf.startDate" ensure-unique></i>
+                </div>
             </li>
             <li style="overflow: inherit">
                 <label>物资名称：</label>
@@ -68,7 +74,6 @@
                 <th>入库数量</th>
                 <th>供应商</th>
                 <th>规格型号</th>
-                <th>入库时间</th>
                 <th>合同号</th>
                 <th>存放仓库</th>
             </tr>
@@ -82,7 +87,6 @@
                 <td>{{item.putin_number}}</td>
                 <td>{{item.supplier}}</td>
                 <td>{{item.model}}</td>
-                <td>{{item.putin_date}}</td>
                 <td>{{item.contract_no}}</td>
                 <td>{{item.putin_storehouse_name}}</td>
             </tr>

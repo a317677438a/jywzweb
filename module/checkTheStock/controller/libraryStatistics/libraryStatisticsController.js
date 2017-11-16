@@ -9,7 +9,8 @@ define(['app'],function(app){
         'ngDialog',
         'API_ENDPOINT',
         'commonQuery',
-        function($scope,indexService,ngDialog,API_ENDPOINT,commonQuery){
+        '$filter',
+        function($scope,indexService,ngDialog,API_ENDPOINT,commonQuery,$filter){
 
             $scope.conf = {};
             $scope.conf.startDate = '';
@@ -108,6 +109,8 @@ define(['app'],function(app){
                 requestData.putin_code = $scope.conf.putin_code;
                 requestData.putin_type = $scope.conf.putin_type;
                 requestData.putin_user_name = $scope.conf.putin_user_name;
+                requestData.putin_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                requestData.putin_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                 requestData.jy_material_id = $scope.conf.jy_material_id;
 
                 //项目信息列表查询
