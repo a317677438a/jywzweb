@@ -271,14 +271,14 @@ define(['app'],function(app){
                         });
                         return;
                     }
-                    if($scope.conf.storeNumber == '' || $scope.conf.storeNumber === '0'){
+                    if(parseFloat($scope.conf.storeNumber) <= 0){
                         ngDialog.open({
                             template: 'views/common/alert.html',
                             className: 'alert',
                             showClose: true,
                             scope: $scope,
                             controller: ['$scope', function ($scope) {
-                                $scope.response = "当前物资没有库存数量！";
+                                $scope.response = "该物资库存不足!";
                             }]
                         });
                         return;
