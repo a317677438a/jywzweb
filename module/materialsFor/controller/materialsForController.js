@@ -15,6 +15,8 @@ define(['app','claimsForQueryController','materialRequisitionController','outSto
                 $scope.conf.isCurrentproperty = 2;
             }else if($rootScope.role==2){
                 $scope.conf.isCurrentproperty = 3;
+            }else{
+                $scope.conf.isCurrentproperty = 1;
             }
             if($stateParams.type!=''&&$stateParams.type!=undefined){
                 $scope.conf.isCurrentproperty = $stateParams.type ;

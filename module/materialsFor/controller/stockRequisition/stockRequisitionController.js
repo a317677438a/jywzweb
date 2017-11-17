@@ -61,6 +61,7 @@ define(['app'],function(app){
                         if(data.success=="true"){
                             if(type==2){
                                 $scope.UserByRole_canguan = data.returndata;
+                                console.log($scope.UserByRole_canguan);
                             }else if(type==3){
                                 $scope.UserByRole_lingdao = data.returndata;
                             }
@@ -254,14 +255,14 @@ define(['app'],function(app){
                                     return;
                                 }
                             }
-                            if($scope.conf.storeNumber=='' || $scope.conf.storeNumber==='0'){
+                            if($scope.conf.storeNumber=='' || $scope.conf.storeNumber==='0' || $scope.conf.storeNumber<0){
                                 ngDialog.open({
                                     template: 'views/common/alert.html',
                                     className: 'alert',
                                     showClose: true,
                                     scope: $scope,
                                     controller: ['$scope', function ($scope) {
-                                        $scope.response = "该物资库存为零，不可申领!";
+                                        $scope.response = "该物资库存不足，不可申领!";
                                     }]
                                 });
                                 return;
@@ -427,6 +428,7 @@ define(['app'],function(app){
                     $scope.jy_storehouse_in_id = id;
                     $scope.showModify = true;
                     $scope.fromStockGetMaterial(id);
+                    console.log(item);
                     $scope.storageModelModify = item;
                     $scope.storageModelModify.apply_date = $filter('timeFilter')($scope.storageModelModify.apply_date);
                     $scope.getUserByRole(2);
@@ -464,6 +466,18 @@ define(['app'],function(app){
                                     });
                                     return;
                                 }
+                            }
+                            if($scope.conf.storeNumber=='' || $scope.conf.storeNumber==='0' || parseFloat($scope.conf.storeNumber)<=0){
+                                ngDialog.open({
+                                    template: 'views/common/alert.html',
+                                    className: 'alert',
+                                    showClose: true,
+                                    scope: $scope,
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.response = "该物资库存不足，不可申领!";
+                                    }]
+                                });
+                                return;
                             }
                             $scope.MaterialListModify.push(
                                 {

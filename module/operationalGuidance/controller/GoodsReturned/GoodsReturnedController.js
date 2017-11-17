@@ -457,6 +457,17 @@ define(['app'],function(app){
                                 }]
                             });
                             return;
+                        }else if(parseFloat($scope.conf.ownNumber) <= 0){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = "该物资持有量不足!";
+                                }]
+                            });
+                            return;
                         }
                         for(var i=0;i<$scope.MaterialListModify.length;i++){
                             if($scope.conf.code == $scope.MaterialListModify[i].code){
