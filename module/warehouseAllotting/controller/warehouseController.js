@@ -283,6 +283,18 @@ define(['app'],function(app){
                         });
                         return;
                     }
+                    if(parseFloat($scope.conf.storeNumber) < parseFloat($scope.conf.transfer_number)){
+                        ngDialog.open({
+                            template: 'views/common/alert.html',
+                            className: 'alert',
+                            showClose: true,
+                            scope: $scope,
+                            controller: ['$scope', function ($scope) {
+                                $scope.response = "调拨数量不可以大于库存数量!";
+                            }]
+                        });
+                        return;
+                    }
                     $scope.MaterialList.push(
                         {
                             code : $scope.conf.code,
@@ -515,6 +527,18 @@ define(['app'],function(app){
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
                                     $scope.response = "该物资库存不足!";
+                                }]
+                            });
+                            return;
+                        }
+                        if(parseFloat($scope.conf.storeNumber) < parseFloat($scope.conf.transfer_number)){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = "调拨数量不可以大于库存数量!";
                                 }]
                             });
                             return;

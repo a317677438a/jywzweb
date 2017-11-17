@@ -259,6 +259,7 @@ define(['app'],function(app){
                 //确定新增物资
                 $scope.addSureAddMaterial = function(){
                     $validator.validate($scope,'AddStock').success(function() {   //继续申领
+                        console.log($scope.conf.ownNumber);
                         if($scope.conf.ownNumber == '0'){
                             ngDialog.open({
                                 template: 'views/common/alert.html',
@@ -278,6 +279,17 @@ define(['app'],function(app){
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
                                     $scope.response = "该物资持有量不足!";
+                                }]
+                            });
+                            return;
+                        }else if(parseFloat($scope.conf.ownNumber)<parseFloat($scope.conf.putin_number)){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = "回退数量不可大于拥有数量！";
                                 }]
                             });
                             return;
@@ -476,6 +488,17 @@ define(['app'],function(app){
                                 scope: $scope,
                                 controller: ['$scope', function ($scope) {
                                     $scope.response = "该物资持有量不足!";
+                                }]
+                            });
+                            return;
+                        }else if(parseFloat($scope.conf.ownNumber)<parseFloat($scope.conf.putin_number)){
+                            ngDialog.open({
+                                template: 'views/common/alert.html',
+                                className: 'alert',
+                                showClose: true,
+                                scope: $scope,
+                                controller: ['$scope', function ($scope) {
+                                    $scope.response = "回退数量不可大于拥有数量！";
                                 }]
                             });
                             return;
