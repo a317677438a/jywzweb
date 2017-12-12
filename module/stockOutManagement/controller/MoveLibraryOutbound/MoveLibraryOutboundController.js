@@ -162,8 +162,8 @@ define(['app'],function(app){
                     requestData.exeid='JY4001EQ002';
                     requestData.putout_type = 3;
                     requestData.putout_code = $scope.conf.putout_code;
-                    requestData.date_start = $filter('datePickerFormat')($scope.conf.startDate);
-                    requestData.date_end = $filter('datePickerFormat')($scope.conf.endDate);
+                    requestData.putout_date_start = $filter('datePickerFormat')($scope.conf.startDate);
+                    requestData.putout_date_end = $filter('datePickerFormat')($scope.conf.endDate);
                     //项目信息列表查询
                     $scope.promise = commonQuery.listQuery(requestData).success(function(data){
                         if(data.success=="true"){

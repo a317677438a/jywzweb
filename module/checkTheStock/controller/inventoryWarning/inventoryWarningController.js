@@ -165,7 +165,11 @@ define(['app'],function(app){
                         });
                     }
                 })
-            }
+            };
+            //关闭新增
+            $scope.closeAddMaterial = function(){
+                $scope.showAdd = false;
+            };
             // 初始化分页
             $scope.page={};
             $scope.pagesize = 10;
