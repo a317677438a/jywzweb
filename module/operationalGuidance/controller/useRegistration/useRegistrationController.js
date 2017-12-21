@@ -13,13 +13,21 @@ define(['app'],function(app){
             '$validator',
             function($scope,ngDialog,indexService,commonQuery,$filter,$rootScope,$validator){
 
-                $scope.conf = {};
+                $scope.conf = {
+                    use_workno : ''
+                };
                 $scope.message = 'Please Wait...';
                 $scope.storageModel = {}; //新增入库单对象
                 //入库类型枚举
                 commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.material.StockType'}).success(function(data){
                     if(data.success=="true"){
                         $scope.StockType = data.returndata;
+                    }
+                });
+                //使用类型枚举
+                commonQuery.meiJuQuery({enum:'xft.workbench.backstage.base.enumeration.apply.UseTypeEnum'}).success(function(data){
+                    if(data.success=="true"){
+                        $scope.UseTypeEnum = data.returndata;
                     }
                 });
 
@@ -170,8 +178,18 @@ define(['app'],function(app){
                 $scope.addMateriel = function(){
                     $scope.showAdd = true;
                     $scope.storageModel.putin_user_name = $rootScope.name;
-                    $scope.conf.use_date = new Date();
+                    $scope.removeAName();
+                    $scope.conf.code = '';
+                    $scope.conf.name = '';
+                    $scope.conf.codename = '';
+                    $scope.conf.model = '';
+                    $scope.conf.supplier = '';
+                    $scope.conf.ownNumber = '';
+                    $scope.conf.use_type = '';
+                    $scope.conf.use_workno = '';
                     $scope.conf.remark = '';
+                    $scope.conf.use_number = '';
+                    $scope.conf.use_date = new Date();
                     $scope.getALLMaterialList();
                 };
                 //关闭新增窗口
@@ -233,7 +251,9 @@ define(['app'],function(app){
                         jy_material_id : $scope.conf.material_key,
                         use_date : $scope.conf.use_date_copy,
                         use_number : $scope.conf.use_number,
-                        remark : $scope.conf.remark
+                        remark : $scope.conf.remark,
+                        use_type : $scope.conf.use_type,
+                        use_workno : $scope.conf.use_workno
                     };
                     $validator.validate($scope,'AddMaterial').success(function() {
                         $scope.promise = indexService.addMaterialuse({materialUseInfo:getInfo}).success(function(data){

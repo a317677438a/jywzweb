@@ -971,3 +971,14 @@ angular.module('filter', [])
             }
         };
     })
+    //使用类型
+    .filter('use_Type', function () {
+        return function (val) {
+            switch (val) {
+                case "1":
+                    return '安装使用';
+                case "2":
+                    return '培训使用';
+            }
+        };
+    })

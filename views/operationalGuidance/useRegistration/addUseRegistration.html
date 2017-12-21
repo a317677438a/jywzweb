@@ -45,6 +45,21 @@
                 <label class="addStar">使用日期</label>
                 <input class="projectName label6-width" ng-model="conf.use_date" bs-datepicker validator="[requiredSubmit]" validator-group="AddMaterial">
             </li>
+            <li class="form-group">
+                <label class="addStar">使用类型</label>
+                <div class="styled-select label6-width">
+                    <select ng-model="conf.use_type" ng-options="o.key as o.value for o in UseTypeEnum"
+                            validator="[requiredSubmit]" validator-group="AddMaterial">
+                    </select>
+                    <i class="arrow"></i>
+                </div>
+            </li>
+            <li class="form-group">
+                <label ng-class="{addStar:conf.use_type=='1'}">营销系统工作单号</label>
+                <input class="projectName label8-width" ng-model="conf.use_workno"
+                       validator="[requiredSubmit]" validator-group="AddMaterial" ng-if="conf.use_type=='1'">
+                <input class="projectName label8-width" ng-model="conf.use_workno" ng-if="conf.use_type!='1'">
+            </li>
             <li>
                 <label>备注</label>
                 <input class="projectName label6-width" ng-model="conf.remark">

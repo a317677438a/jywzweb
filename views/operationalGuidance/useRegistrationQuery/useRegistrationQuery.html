@@ -38,6 +38,8 @@
         <table>
             <thead>
             <tr>
+                <th>使用类型</th>
+                <th>营销系统工作单号</th>
                 <th>使用人</th>
                 <th>使用物资名称</th>
                 <th>供应商</th>
@@ -50,6 +52,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in data">
+                <td>{{item.use_type | use_Type}}</td>
+                <td>{{item.use_workno}}</td>
                 <td>{{item.user_name}}</td>
                 <td>{{item.material_name}}</td>
                 <td>{{item.supplier}}</td>
