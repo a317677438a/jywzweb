@@ -10,6 +10,7 @@
 </div>
 <div class="wrap mgBottom10 bkColor contentShadow" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
     <div class="commonTable padding10 clearFix">
+        <a class="button button-blue operationButton" ng-click="backUrl()">返回</a>
         <h4 class="mgBottom20 mgTop20" ng-if="type==1">退回仓库：{{house}}</h4>
         <h4 class="mgBottom20 mgTop20" ng-if="type==2">退库入库仓库：{{house}}</h4>
         <h4 class="mgBottom20 mgTop20" ng-if="type==3">移库入库仓库：{{house}}</h4>

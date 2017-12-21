@@ -10,7 +10,8 @@ define(['app'],function(app){
             'ngDialog',
             '$stateParams',
             '$rootScope',
-            function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope){
+            '$state',
+            function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope,$state){
 
                 $scope.message = 'Please Wait...';
                 $scope.type = $stateParams.type;
@@ -104,6 +105,15 @@ define(['app'],function(app){
                 };
                 //默认查询页面数据
                 $scope.getEmployeesPage();
+
+                //后退一步
+                $scope.backUrl = function(){
+                    if($scope.type == 1){
+                        $state.go('stockOutManagement',{type:1})
+                    }else if($scope.type == 2){
+                        $state.go('stockOutManagement',{type:2})
+                    }
+                }
             }
         ]);
 });

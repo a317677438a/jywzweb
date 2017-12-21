@@ -10,7 +10,8 @@ define(['app'],function(app){
             'ngDialog',
             '$stateParams',
             '$rootScope',
-            function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope){
+            '$state',
+            function($scope,commonQuery,indexService,ngDialog,$stateParams,$rootScope,$state){
 
 
                 $scope.message = 'Please Wait...';
@@ -104,6 +105,11 @@ define(['app'],function(app){
                 };
                 //默认查询页面数据
                 $scope.getEmployeesPage();
+
+                //后退一步
+                $scope.backUrl = function(){
+                    $state.go('materialsFor')
+                }
             }
         ]);
 });
