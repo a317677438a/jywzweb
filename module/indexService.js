@@ -277,6 +277,10 @@ define(['app'],function(app){
                     //消息提醒--标记为已读
                     haveToRead : function(data){
                         return $http.post(API_ENDPOINT.url+'/message/read.json',data,WITH_CREDENTIALS);
+                    },
+                    //系统管理-设置物资限制
+                    modifyMaterialUselimit : function(data){
+                        return $http.post(API_ENDPOINT.url+'/materialsType/modifyMaterialUselimit.json',data,WITH_CREDENTIALS);
                     }
                 };
             }

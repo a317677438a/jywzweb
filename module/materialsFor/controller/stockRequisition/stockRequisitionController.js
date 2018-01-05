@@ -207,6 +207,7 @@ define(['app'],function(app){
                             $scope.conf.model = data.returndata.model;
                             $scope.conf.supplier = data.returndata.supplier;
                             $scope.conf.name = data.returndata.name;
+                            $scope.use_limit = data.returndata.use_limit; //物资申请限制数量
                         }else{
                             ngDialog.open({
                                 template: 'views/common/alert.html',
@@ -263,6 +264,20 @@ define(['app'],function(app){
                                     scope: $scope,
                                     controller: ['$scope', function ($scope) {
                                         $scope.response = "该物资库存不足，不可申领!";
+                                    }]
+                                });
+                                return;
+                            }
+                            console.log($scope.conf.ownNumber);
+                            console.log($scope.use_limit);
+                            if($scope.use_limit!='0' && parseFloat($scope.conf.ownNumber) >= parseFloat($scope.use_limit)){
+                                ngDialog.open({
+                                    template: 'views/common/alert.html',
+                                    className: 'alert',
+                                    showClose: true,
+                                    scope: $scope,
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.response = "当前持有物资数量" + $scope.conf.ownNumber + ",已超过限制数量"+$scope.use_limit + ",不允许再进行申领！";
                                     }]
                                 });
                                 return;

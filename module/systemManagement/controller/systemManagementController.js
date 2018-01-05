@@ -1,7 +1,7 @@
 /**
  * Created by huangyao on 2017/5/16.
  */
-define(['app','userManagementController','modifyPasswordController'],function(app){
+define(['app','userManagementController','modifyPasswordController','materialLimitController'],function(app){
     app.register.controller('systemManagementController',
     [
         '$scope',

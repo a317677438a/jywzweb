@@ -68,7 +68,8 @@
             "warehouseController": 'module/warehouseAllotting/controller/warehouseController',
             //系统管理
             "userManagementController": 'module/systemManagement/controller/userManagement/userManagementController',
-            "modifyPasswordController": 'module/systemManagement/controller/modifyPassword/modifyPasswordController'
+            "modifyPasswordController": 'module/systemManagement/controller/modifyPassword/modifyPasswordController',
+            "materialLimitController": 'module/systemManagement/controller/materialLimit/materialLimitController'
         },
         waitSeconds : 7,  //出现网络慢加载文件慢的时候  设置最长等待时间7s
         shim : {  //这里shim等于快速定义一个模块，定义模块需要的依赖

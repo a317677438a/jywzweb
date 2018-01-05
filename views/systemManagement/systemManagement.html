@@ -1,8 +1,11 @@
 <!-- 系统管理 -->
 <div class="subNav wrap topNav">
+    <a ng-if="role==1" ng-class="{true:'current',false:''}[conf.isCurrentproperty == 3]" ng-click="set(3)">物资限制</a>
+    <div class="dashed"></div>
     <a ng-if="role==1" ng-class="{true:'current',false:''}[conf.isCurrentproperty == 1]" ng-click="set(1)">用户管理</a>
     <div class="dashed"></div>
     <a ng-class="{true:'current',false:''}[conf.isCurrentproperty == 2]" ng-click="set(2)">密码修改</a>
 </div>
 <div class="wrap" ng-if="conf.isCurrentproperty==1" ng-include="'views/systemManagement/userManagement/userManagement.html'" ng-controller="userManagementController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
 <div class="wrap" ng-if="conf.isCurrentproperty==2" ng-include="'views/systemManagement/modifyPassword/modifyPassword.html'" ng-controller="modifyPasswordController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
+<div class="wrap" ng-if="conf.isCurrentproperty==3" ng-include="'views/systemManagement/materialLimit/materialLimit.html'" ng-controller="materialLimitController" cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}"></div>
