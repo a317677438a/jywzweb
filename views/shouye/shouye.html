@@ -43,13 +43,13 @@
                 <a type="button" class="btn btn-default" href="#/operationalGuidance?type=4" ng-if="role==4">查看持有情况</a>
             </div>
         </li>
-        <li ng-if="role==2">
+        <li ng-if="role==2 || role==3">
             <label>仓库盘点：</label>
             <div class="btn-group" role="group" aria-label="...">
                 <a type="button" class="btn btn-default" href="#/checkTheStock?type=1">库存盘点</a>
-                <a type="button" class="btn btn-default" href="#/checkTheStock?type=2">库存预警</a>
-                <a type="button" class="btn btn-default" href="#/checkTheStock?type=3">出库统计</a>
-                <a type="button" class="btn btn-default" href="#/checkTheStock?type=4">入库统计</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=2" ng-if="role!=3">库存预警</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=3" ng-if="role!=3">出库统计</a>
+                <a type="button" class="btn btn-default" href="#/checkTheStock?type=4" ng-if="role!=3">入库统计</a>
             </div>
         </li>
         <li ng-if="role==2">
